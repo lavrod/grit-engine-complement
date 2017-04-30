@@ -23,7 +23,8 @@ private:
         NetPacket(NetAddress& from, std::string& data_);
     };
 
-    SOCKET netSocket;
+	SOCKET netSocketServer;
+	SOCKET netSocketClient;
 
     int forcedLatency;
 
@@ -41,6 +42,9 @@ private:
 public:
     NetManager();
     virtual ~NetManager();
+
+	int process_poll_server(lua_State* L, NetAddress **from, std::string& data);
+	int process_poll_client(lua_State* L, NetAddress **from, std::string& data);
 
     void process(lua_State* L);
     void processPacket(lua_State* L, NetAddress& from, std::string& data);

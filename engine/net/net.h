@@ -136,6 +136,9 @@ void net_shutdown(lua_State *L);
 // processes network packets and sends them off to wherever they need to go
 void net_process(lua_State* L);
 
+int net_process_poll_server(lua_State* L, NetAddress **from, std::string& data);
+int net_process_poll_client(lua_State* L, NetAddress **from, std::string& data);
+
 // sends an out-of-band packet to a specified network address
 void net_send_oob(NetChannel channel, NetAddress& address, const char* format, ...);
 

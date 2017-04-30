@@ -40,12 +40,20 @@ NetManager::NetManager()
     }
 #endif
 
-    netSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    netSocketClient = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+	netSocketServer = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
     // FIXME win32 dependency
-    if (netSocket == INVALID_SOCKET)
-    {
-        GRIT_EXCEPT("socket creation failed");
+    if (netSocketServer == INVALID_SOCKET) {
+        GRIT_EXCEPT("socket server creation failed");
+    }
+
+    netSocketClient = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+    // FIXME win32 dependency
+    if (netSocketClient == INVALID_SOCKET) {
+        GRIT_EXCEPT("socket client creation failed");
     }
 
     uint16_t port = 48960;
@@ -57,7 +65,7 @@ NetManager::NetManager()
         bindEP.sin_addr.s_addr = INADDR_ANY;
         bindEP.sin_port = htons(port);
 
-        if (bind(netSocket, (sockaddr*)&bindEP, sizeof(bindEP)) != 0) {
+        if (bind(netSocketServer, (sockaddr*)&bindEP, sizeof(bindEP)) != 0) {
             if (sock_errno == ADDRESS_ALREADY_USED) {
                 port++;
                 continue;
@@ -74,14 +82,14 @@ NetManager::NetManager()
     // set non-blocking mode
     u_long nonBlocking = 1;
 
-    ioctlsocket(netSocket, FIONBIO, &nonBlocking);
+    ioctlsocket(netSocketServer, FIONBIO, &nonBlocking);
+    ioctlsocket(netSocketClient, FIONBIO, &nonBlocking);
 }
 
 NetManager::~NetManager()
 {
-    if (netSocket)
-    {
-        closesocket(netSocket);
+    if (netSocketServer) {
+        closesocket(netSocketServer);
     }
 
 #if defined(WIN32)
@@ -127,6 +135,58 @@ void NetManager::processPacket(lua_State* L, NetAddress& from, std::string& data
     STACK_CHECK;
 }
 
+int NetManager::process_poll_server(lua_State* L, NetAddress **from, std::string& data)
+{
+	int bytes = 0;
+	char buffer[16384];
+	sockaddr_storage remoteEP;
+	socklen_t remoteEPLength = sizeof(remoteEP);
+
+	if ((bytes = recvfrom(netSocketServer, buffer, sizeof(buffer), 0, (sockaddr*)&remoteEP, &remoteEPLength)) > 0)
+	{
+		//CLOG << "recvfrom " << bytes << std::endl;
+                //char hex[256];
+                //sprintf(hex,"%02x%02x%02x%02x%02x%02x",(unsigned char)buffer[0],(unsigned char)buffer[1],(unsigned char)buffer[2],(unsigned char)buffer[3],(unsigned char)buffer[4],(unsigned char)buffer[5]);
+		//CLOG << hex << std::endl;
+		data.assign(buffer, bytes);
+		NetAddress from_addr((sockaddr*)&remoteEP, remoteEPLength);
+                *from = &from_addr;
+       	}
+        else
+        {
+	     if( bytes < 0 )
+             {
+		if (sock_errno != WOULD_BLOCK && sock_errno != CONNECTION_RESET)
+		{
+			CLOG << "socket error " << sock_errno << std::endl;
+		}
+             }
+        }
+ 	return bytes;
+}
+
+int NetManager::process_poll_client(lua_State* L, NetAddress **from, std::string& data)
+{
+    int bytes = 0;
+    char buffer[16384];
+    sockaddr_storage remoteEP;
+    socklen_t remoteEPLength = sizeof(remoteEP);
+
+    if ((bytes = recvfrom(netSocketClient, buffer, sizeof(buffer), 0, (sockaddr*)&remoteEP, &remoteEPLength)) > 0) {
+        data.assign(buffer, bytes);
+        NetAddress from_addr((sockaddr*)&remoteEP, remoteEPLength);
+        *from = &from_addr;
+    }
+    else {
+        if( bytes < 0 ) {
+            if (sock_errno != WOULD_BLOCK && sock_errno != CONNECTION_RESET) {
+                CLOG << "socket error " << sock_errno << std::endl;
+            }
+        }
+    }
+    return bytes;
+}
+
 void NetManager::process(lua_State* L)
 {
     char buffer[16384];
@@ -135,7 +195,7 @@ void NetManager::process(lua_State* L)
     socklen_t remoteEPLength = sizeof(remoteEP);
 
     while (true) {
-        bytes = recvfrom(netSocket, buffer, sizeof(buffer), 0, (sockaddr*)&remoteEP,
+        bytes = recvfrom(netSocketServer, buffer, sizeof(buffer), 0, (sockaddr*)&remoteEP,
                          &remoteEPLength);
         if (bytes < 0) {
             if (sock_errno != WOULD_BLOCK && sock_errno != CONNECTION_RESET) {
@@ -203,7 +263,10 @@ void NetManager::sendPacket(NetChannel channel, NetAddress& address, std::string
 
             address.getSockAddr(&to, &toLen);
 
-            sendto(netSocket, data.c_str(), data.size(), 0, (sockaddr*)&to, toLen);
+            if( channel != NetChan_ClientToServer )
+                sendto(netSocketServer, data.c_str(), data.size(), 0, (sockaddr*)&to, toLen);
+            else
+                sendto(netSocketClient, data.c_str(), data.size(), 0, (sockaddr*)&to, toLen);
         }
     }
 }
@@ -215,7 +278,7 @@ void NetManager::sendPacketInternal(NetAddress& netAddress, std::string& packet)
 
     netAddress.getSockAddr(&to, &toLen);
 
-    sendto(netSocket, packet.c_str(), packet.size(), 0, (sockaddr*)&to, toLen);
+    sendto(netSocketServer, packet.c_str(), packet.size(), 0, (sockaddr*)&to, toLen);
 }
 
 void NetManager::sendLoopbackPacket(NetChannel channel, std::string& packet)

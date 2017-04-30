@@ -23,7 +23,7 @@ NetMessage::NetMessage(const char* data, uint32_t length)
     this->maxBit = length * 8;
     this->bufferManaged = true;
 
-    memcpy(buffer, data, length);
+    memcpy(this->buffer, data, length);
 }
 
 NetMessage::~NetMessage()

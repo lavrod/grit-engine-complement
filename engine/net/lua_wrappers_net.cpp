@@ -355,6 +355,57 @@ TRY_START
 TRY_END
 }
 
+static int global_net_process_poll_server(lua_State* L)
+{
+TRY_START
+    char buffer[16384];
+    int length;
+
+    std::string data(buffer, 16384);
+    NetAddress* from;
+
+    check_args(L, 0);
+
+    length = net_process_poll_server(L,&from,data);
+
+    if( length > 0 ) {
+    	push_netmessage(L, NetMessagePtr(new NetMessage(data.c_str(), data.size())));
+        push_netaddress(L, NetAddressPtr(new NetAddress(*from)));
+    }
+    else {
+        lua_pushnil(L);
+        lua_pushnil(L);
+    }
+
+    return 2;
+TRY_END
+}
+
+static int global_net_process_poll_client(lua_State* L)
+{
+TRY_START
+    char buffer[16384];
+    int length;
+    std::string data(buffer, 16384);
+    NetAddress* from;
+
+    check_args(L, 0);
+
+    length = net_process_poll_client(L,&from,data);
+
+    if( length > 0 ) {
+        push_netmessage(L, NetMessagePtr(new NetMessage(data.c_str(), data.size())));
+        push_netaddress(L, NetAddressPtr(new NetAddress(*from)));
+    }
+    else {
+        lua_pushnil(L);
+        lua_pushnil(L);
+    }
+
+    return 2;
+TRY_END
+}
+
 static int global_net_make_message(lua_State* L)
 {
 TRY_START
@@ -496,6 +547,8 @@ TRY_END
 static const luaL_reg global[] = {
     {"net_register_callbacks", global_net_register_callbacks},
     {"net_process", global_net_process},
+    {"net_process_poll_server", global_net_process_poll_server},
+    {"net_process_poll_client", global_net_process_poll_client},
     {"net_make_message", global_net_make_message},
     {"net_get_loopback_packet", global_net_get_loopback_packet},
     {"net_send_packet", global_net_send_packet},

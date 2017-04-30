@@ -26,6 +26,20 @@ void net_process(lua_State* L)
     netManager->process(L);
 }
 
+int net_process_poll_server(lua_State* L, NetAddress **from, std::string& data)
+{
+    APP_ASSERT(netManager != NULL);
+
+    return netManager->process_poll_server(L,from,data);
+}
+
+int net_process_poll_client(lua_State* L, NetAddress **from, std::string& data)
+{
+    APP_ASSERT(netManager != NULL);
+
+    return netManager->process_poll_client(L,from,data);
+}
+
 void net_send(NetChannel channel, NetAddress& address, const char* packet, uint32_t packetLength)
 {
     APP_ASSERT(netManager != NULL);
