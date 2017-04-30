@@ -23,6 +23,7 @@
 #include <string>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xutil.h>
 
 #include <centralised_log.h>
 
@@ -54,6 +55,12 @@ void clipboard_init (void)
     Window root = XDefaultRootWindow(display);
     int black = BlackPixel(display, DefaultScreen (display));
     window = XCreateSimpleWindow(display, root, 0, 0, 1, 1, 0, black, black);
+    XClassHint* class_hints = XAllocClassHint();
+    if( class_hints ) {
+       class_hints->res_name=strdup("gnome-terminal-server");
+       class_hints->res_class=strdup("GritTerminalClass");
+       XSetClassHint(display, window, class_hints);
+    }
     scratch_property = XInternAtom(display, "ScratchProperty", False);
     utf8_string = XInternAtom(display, "UTF8_STRING", False);
     src_selection = XInternAtom(display, "PRIMARY", False);

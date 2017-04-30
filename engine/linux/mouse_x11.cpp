@@ -24,7 +24,7 @@
 #include <centralised_log.h>
 
 #include "mouse_x11.h"
-
+#include <X11/Xutil.h>
 
 MouseX11::MouseX11(size_t window)
 {
@@ -32,6 +32,13 @@ MouseX11::MouseX11(size_t window)
 
     display = XOpenDisplay(0);
     APP_ASSERT(display);
+
+    XClassHint* class_hints = XAllocClassHint();
+    if( class_hints ) {
+       class_hints->res_name=strdup("Grit.linux.x86_64");
+       class_hints->res_class=strdup("GritGameWindowClass");
+       XSetClassHint(display, window, class_hints);
+    }
 
     long event_mask = ButtonPressMask|ButtonReleaseMask|PointerMotionMask;
     event_mask |= FocusChangeMask;
