@@ -1,2 +1,2 @@
-~GRIT = GRIT-COMPLEMENT
-[Svg](https://lavrod.github.io/grit-complement/svg.html)
+ = GRIT-COMPLEMENT
+[~GRIT](https://lavrod.github.io/grit-complement/svg.html)
