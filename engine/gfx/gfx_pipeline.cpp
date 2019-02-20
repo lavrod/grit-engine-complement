@@ -1091,11 +1091,11 @@ GfxPipeline::~GfxPipeline (void) {
     // destroy MRT
     ogre_rs->destroyRenderTarget(gBuffer->getName());
     for (unsigned i=0 ; i<3 ; ++i) {
-         Ogre::TextureManager::getSingleton().remove(gBufferElements[i]->getName());
+         Ogre::TextureManager::getSingleton().remove(gBufferElements[i]);
     }
 
     for (unsigned i=0 ; i<sizeof(hdrFb)/sizeof(*hdrFb) ; ++i) {
-        Ogre::TextureManager::getSingleton().remove(hdrFb[i]->getName());
+        Ogre::TextureManager::getSingleton().remove(hdrFb[i]);
     }
 
     ogre_root->destroyRenderQueueInvocationSequence(rqisGbuffer->getName());
@@ -1242,12 +1242,14 @@ void GfxPipeline::render (const CameraOpts &cam_opts, bool additive)
     // populate gbuffer
     vp = gBuffer->addViewport(cam);
 
-    GfxShaderGlobals globs = gfx_shader_globals_cam(this);
-    for (const auto &pair : material_db) {
-        GfxMaterial *m = dynamic_cast<GfxMaterial*>(pair.second);
-        if (m == nullptr) continue;
-        // CVERB << "Rebuilding: " << m->name << std::endl;
-        m->updateOgreMaterials(globs);
+    if (gfx_option(GFX_UPDATE_MATERIALS)) {
+        GfxShaderGlobals globs = gfx_shader_globals_cam(this);
+        for (const auto &pair : material_db) {
+            GfxMaterial *m = dynamic_cast<GfxMaterial*>(pair.second);
+            if (m == nullptr) continue;
+            // CVERB << "Rebuilding: " << m->name << std::endl;
+            m->updateOgreMaterials(globs);
+        }
     }
 
     vp->setShadowsEnabled(true);

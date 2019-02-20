@@ -96,7 +96,10 @@ void gfx_debug_init (void)
     tri_op.vertexData->vertexBufferBinding->setBinding(0, tri_vbuf);
 
     std::string vertex_code = "out.position = transform_to_world(vert.position.xyz);";
-    std::string colour_code = "out.colour = vert.colour.xyz; out.alpha = vert.colour.w;";
+    std::string colour_code =
+        "out.colour = vert.colour.xyz;\n"
+        "out.alpha = vert.colour.w;\n"
+        "out.colour = out.colour * out.alpha;\n";
     shader = gfx_shader_make_or_reset("/system/Debug",
                                       vertex_code, "", colour_code, GfxGslRunParams{}, false);
 }
@@ -160,7 +163,7 @@ void gfx_debug_render (GfxPipeline *p)
             static const GfxTextureStateMap no_texs;
             static const GfxShaderBindings bindings;
             shader->bindShader(
-                GFX_GSL_PURPOSE_HUD, 0, false,  false, g, world, nullptr, 0, 1, no_texs, bindings);
+                GFX_GSL_PURPOSE_HUD, false, false,  0, g, world, nullptr, 0, 1, no_texs, bindings);
 
             // Read but don't write depth buffer.
             ogre_rs->_setDepthBufferParams(true, false, Ogre::CMPF_LESS_EQUAL);
@@ -197,7 +200,7 @@ void gfx_debug_render (GfxPipeline *p)
             static const GfxTextureStateMap no_texs;
             static const GfxShaderBindings bindings;
             shader->bindShader(
-                GFX_GSL_PURPOSE_HUD, 0, false,  false, g, world, nullptr, 0, 1, no_texs, bindings);
+                GFX_GSL_PURPOSE_HUD, false, false,  0, g, world, nullptr, 0, 1, no_texs, bindings);
 
             ogre_rs->_setCullingMode(Ogre::CULL_NONE);
             // Read but don't write depth buffer.
@@ -234,7 +237,7 @@ void gfx_debug_render (GfxPipeline *p)
             static const GfxTextureStateMap no_texs;
             static const GfxShaderBindings bindings;
             shader->bindShader(
-                GFX_GSL_PURPOSE_HUD, 0, false,  false, g, world, nullptr, 0, 1, no_texs, bindings);
+                GFX_GSL_PURPOSE_HUD, false, false,  0, g, world, nullptr, 0, 1, no_texs, bindings);
 
             ogre_rs->_setCullingMode(Ogre::CULL_CLOCKWISE);
             // Read but don't write depth buffer.
