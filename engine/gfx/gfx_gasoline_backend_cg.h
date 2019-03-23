@@ -36,9 +36,7 @@ void gfx_gasoline_unparse_cg (const GfxGslContext &ctx,
                               const GfxGslTypeSystem *frag_ts,
                               const GfxGslAst *frag_ast,
                               std::string &frag_output,
-                              const GfxGslConfigEnvironment &cfg_env,
-                              const GfxGslMaterialEnvironment &mat_env,
-                              const GfxGslMeshEnvironment &mesh_env,
+                              const GfxGslEnvironment &env,
                               bool flat_z,
                               bool das);
 
@@ -51,9 +49,7 @@ void gfx_gasoline_unparse_body_cg (const GfxGslContext &ctx,
                                    const GfxGslAst *additional_ast,
                                    std::string &vert_out,
                                    std::string &frag_out,
-                                   const GfxGslConfigEnvironment &cfg_env,
-                                   const GfxGslMaterialEnvironment &mat_env,
-                                   const GfxGslMeshEnvironment &mesh_env,
+                                   const GfxGslEnvironment &env,
                                    bool first_person,
                                    bool wireframe,
                                    bool forward_only,
@@ -66,9 +62,7 @@ void gfx_gasoline_unparse_decal_cg (const GfxGslContext &ctx,
                                     const GfxGslAst *additional_ast,
                                     std::string &vert_out,
                                     std::string &frag_out,
-                                    const GfxGslConfigEnvironment &cfg_env,
-                                    const GfxGslMaterialEnvironment &mat_env,
-                                    const GfxGslMeshEnvironment &mesh_env);
+                                    const GfxGslEnvironment &env);
 
 #endif
 

@@ -1,4 +1,4 @@
-
+Previous grit-engine version that I was using
 
 # Grit Engine
 
@@ -18,15 +18,15 @@ The subversion tree also contains prebuilt up-to-date executables (Linux & Windo
 of developers only need that. Grit can be substantially modified through Lua scripting, and this
 potential should be exhausted before modifying C++ code.
 
-Build files are provided for Linux (`Makefile` and `.../*grit.mk`) and Microsoft Visual Studio 2017 project
+Build files are provided for Linux (`Makefile` and `.../*grit.mk`) and Visual Studio 2013 project
 files. Building C++ takes about an hour on Windows and 10 minutes on Linux. Scripts are available
 for copying new executables into Subversion, if it is checked out in the `media/` directory.
 
 
 # Windows
 
-Only Microsoft Visual Studio 2017 is supported. The "Community" version is free (as in beer). Download
-it from the Microsoft site.
+Only Visual Studio Express 2013 is supported. It is free (as in beer). Download it from the
+Microsoft site.
 
 
 ## Requirements

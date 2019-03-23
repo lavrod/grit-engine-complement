@@ -340,47 +340,22 @@ namespace std {
     };
 }
 
-/** Things that affect gsl compilation and vary between different geometry using the same material.
+/** Things that affect gsl compilation.
  */
-struct GfxGslMeshEnvironment {
+struct GfxGslEnvironment {
+    // Varies depending on whether we're blending alpha or not.
+    bool fadeDither;
+    // What textures should be bound as a uniform (true) or static solid colour (false)
+    // The static solid colour is found in the params (it's the default).
+    GfxGslUnboundTextures ubt;
+    // Actual values for static params that will be inlined in the generated code.
+    GfxGslRunParams staticValues;
+
+    // Varies depending on the geometry.
     unsigned boneWeights;
     bool instanced;
 
-    GfxGslMeshEnvironment (void)
-        : boneWeights(0), instanced(false)
-    { }
-
-    bool operator== (const GfxGslMeshEnvironment &other) const
-    {
-        return other.boneWeights == boneWeights
-            && other.instanced == instanced;
-    }
-};
-namespace std {
-    template<> struct hash<GfxGslMeshEnvironment> {
-        size_t operator()(const GfxGslMeshEnvironment &a) const
-        {
-            size_t r = 0;
-            r = r * 31 + my_hash(a.boneWeights);
-            r = r * 31 + my_hash(a.instanced);
-            return r;
-        }
-    };
-}
-static inline std::ostream &operator << (std::ostream &o, const GfxGslMeshEnvironment &e)
-{
-    o << "[";
-    o << (e.instanced ? "I" : "i");
-    o << e.boneWeights;
-    o << "]";
-    return o;
-}
-
-
-/** Things that affect gsl compilation but are constant throughout the frame.
- */
-struct GfxGslConfigEnvironment {
-
+    // Varies depending on the scene / settings:
     unsigned envBoxes;
     unsigned shadowRes;
     typedef std::array<float, 3> F3;
@@ -397,14 +372,20 @@ struct GfxGslConfigEnvironment {
         SHADOW_DITHER_PLAIN
     } shadowDitherMode;
 
-    GfxGslConfigEnvironment (void)
-        : envBoxes(0), shadowRes(512), shadowDist(F3{{10, 20, 30}}), shadowSpread(F3{{1, 1, 1}}),
+    GfxGslEnvironment (void)
+        : fadeDither(false), boneWeights(0), instanced(false),
+          envBoxes(0), shadowRes(512), shadowDist(F3{{10, 20, 30}}), shadowSpread(F3{{1, 1, 1}}),
           shadowFadeStart(50), shadowFadeEnd(60), shadowFactor(5000), shadowFilterSize(1),
           shadowFilterTaps(0), shadowDitherMode(SHADOW_DITHER_NONE)
     { }
-    bool operator== (const GfxGslConfigEnvironment &other) const
+    bool operator== (const GfxGslEnvironment &other) const
     {
-        return other.envBoxes == envBoxes
+        return other.fadeDither == fadeDither
+            && other.ubt == ubt
+            && other.staticValues == staticValues
+            && other.boneWeights == boneWeights
+            && other.instanced == instanced
+            && other.envBoxes == envBoxes
             && other.shadowRes == shadowRes
             && other.shadowDist == shadowDist
             && other.shadowSpread == shadowSpread
@@ -417,10 +398,15 @@ struct GfxGslConfigEnvironment {
     }
 };
 namespace std {
-    template<> struct hash<GfxGslConfigEnvironment> {
-        size_t operator()(const GfxGslConfigEnvironment &a) const
+    template<> struct hash<GfxGslEnvironment> {
+        size_t operator()(const GfxGslEnvironment &a) const
         {
             size_t r = 0;
+            r = r * 31 + my_hash(a.fadeDither);
+            r = r * 31 + my_hash(a.ubt);
+            r = r * 31 + my_hash(a.staticValues);
+            r = r * 31 + my_hash(a.boneWeights);
+            r = r * 31 + my_hash(a.instanced);
             r = r * 31 + my_hash(a.envBoxes);
             r = r * 31 + my_hash(a.shadowRes);
             r = r * 31 + my_hash(a.shadowDist);
@@ -435,62 +421,25 @@ namespace std {
         }
     };
 }
-static inline std::ostream &operator << (std::ostream &o, const GfxGslConfigEnvironment::F3 &v)
+
+static inline std::ostream &operator << (std::ostream &o, const GfxGslEnvironment::F3 &v)
 {
     o << "(" << v[0] << "," << v[1] << "," << v[2] << ")";
     return o;
 }
-static inline std::ostream &operator << (std::ostream &o, const GfxGslConfigEnvironment &e)
+
+static inline std::ostream &operator << (std::ostream &o, const GfxGslEnvironment &e)
 {
     o << "[";
+    o << (e.fadeDither ? "F" : "f");
     o << e.envBoxes;
+    o << (e.instanced ? "I" : "i");
+    o << e.boneWeights;
+    o << e.ubt;
     o << "S(" << e.shadowRes << "," << e.shadowDist << "," << e.shadowSpread << ","
       << e.shadowFadeStart << "," << e.shadowFadeEnd << "," << e.shadowFactor << ","
       << e.shadowFilterSize << "," << e.shadowFilterTaps << "," << unsigned(e.shadowDitherMode)
       << ")";
-    o << "]";
-    return o;
-}
-
-
-/** Things that affect gsl compilation and vary from material to material.
- */
-struct GfxGslMaterialEnvironment {
-    // Varies depending on whether we're blending alpha or not.
-    bool fadeDither;
-    // What textures should be bound as a uniform (true) or static solid colour (false)
-    // The static solid colour is found in the params (it's the default).
-    GfxGslUnboundTextures ubt;
-    // Actual values for static params that will be inlined in the generated code.
-    GfxGslRunParams staticValues;
-
-    GfxGslMaterialEnvironment (void)
-        : fadeDither(false)
-    { }
-    bool operator== (const GfxGslMaterialEnvironment &other) const
-    {
-        return other.fadeDither == fadeDither
-            && other.ubt == ubt
-            && other.staticValues == staticValues;
-    }
-};
-namespace std {
-    template<> struct hash<GfxGslMaterialEnvironment> {
-        size_t operator()(const GfxGslMaterialEnvironment &a) const
-        {
-            size_t r = 0;
-            r = r * 31 + my_hash(a.fadeDither);
-            r = r * 31 + my_hash(a.ubt);
-            r = r * 31 + my_hash(a.staticValues);
-            return r;
-        }
-    };
-}
-static inline std::ostream &operator << (std::ostream &o, const GfxGslMaterialEnvironment &e)
-{
-    o << "[";
-    o << (e.fadeDither ? "F" : "f");
-    o << e.ubt;
     o << e.staticValues;
     o << "]";
     return o;
@@ -504,9 +453,7 @@ struct GfxGslMetadata {
     // What the shader needs from all materials (types).
     GfxGslRunParams params;
     // Environment
-    GfxGslConfigEnvironment cfgEnv;
-    GfxGslMaterialEnvironment matEnv;
-    GfxGslMeshEnvironment meshEnv;
+    GfxGslEnvironment env;
     bool d3d9;
     bool internal;
     bool lightingTextures;

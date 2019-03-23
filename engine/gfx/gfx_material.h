@@ -85,12 +85,6 @@ enum GfxMaterialSceneBlend {
 };
 
 class GfxMaterial : public GfxBaseMaterial {
-
-    GfxGslMaterialEnvironment matEnv;
-    GfxGslMaterialEnvironment matEnvAdditional;
-    GfxGslMeshEnvironment meshEnv;
-    GfxGslMeshEnvironment meshEnvInstanced;
-
     public: // hack
     Ogre::MaterialPtr regularMat;     // Either just forward or complete (for alpha, etc)
     Ogre::MaterialPtr additionalMat;  // Just the additional lighting as an additive pass
@@ -140,8 +134,6 @@ class GfxMaterial : public GfxBaseMaterial {
 
     void buildOgreMaterials (void);
     void updateOgreMaterials (const GfxShaderGlobals &globs);
-
-    const GfxGslMaterialEnvironment &getMaterialEnvironment (void) const { return matEnv; }
 
     friend GfxMaterial *gfx_material_add(const std::string &);
     friend class GfxBody;

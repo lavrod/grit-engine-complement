@@ -25,7 +25,6 @@ ipch
 *.user
 *.VC.db
 *.VC.opendb
-*.vs/
 
 # Blender
 exporters/blender_scripts/addons/grit_blender/GritXMLConverter.linux.x86_64

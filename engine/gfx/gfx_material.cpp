@@ -115,14 +115,10 @@ void GfxMaterial::buildOgreMaterials (void)
     bool fade_dither = sceneBlend == GFX_MATERIAL_OPAQUE;
     Ogre::Pass *p;
 
-    shader->populateMatEnv(fade_dither, textures, bindings, matEnv);
-    shader->populateMatEnv(false, textures, bindings, matEnvAdditional);
-    shader->populateMeshEnv(false, boneBlendWeights, meshEnv);
-    shader->populateMeshEnv(true, boneBlendWeights, meshEnvInstanced);
-
     // TODO: wireframe for instanced geometry?
     p = create_or_reset_material(name + ":wireframe");
-    shader->initPass(p, GFX_GSL_PURPOSE_WIREFRAME, matEnv, meshEnv, textures, bindings);
+    shader->initPass(p, GFX_GSL_PURPOSE_WIREFRAME, fade_dither, false, boneBlendWeights,
+                     textures, bindings);
     p->setCullingMode(Ogre::CULL_NONE);
     p->setPolygonMode(Ogre::PM_WIREFRAME);
     p->setDepthWriteEnabled(false);
@@ -130,7 +126,8 @@ void GfxMaterial::buildOgreMaterials (void)
 
 
     p = create_or_reset_material(name + ":cast");
-    shader->initPass(p, GFX_GSL_PURPOSE_CAST, matEnv, meshEnv, textures, bindings);
+    shader->initPass(p, GFX_GSL_PURPOSE_CAST, fade_dither, false, boneBlendWeights,
+                     textures, bindings);
     if (backfaces)
         p->setCullingMode(Ogre::CULL_NONE);
     p->getVertexProgramParameters()->setNamedConstant(
@@ -140,7 +137,8 @@ void GfxMaterial::buildOgreMaterials (void)
     castMat = Ogre::MaterialManager::getSingleton().getByName(name + ":cast", "GRIT");
 
     p = create_or_reset_material(name + ":instancing_cast");
-    shader->initPass(p, GFX_GSL_PURPOSE_CAST, matEnv, meshEnvInstanced, textures, bindings);
+    shader->initPass(p, GFX_GSL_PURPOSE_CAST, fade_dither, true, boneBlendWeights,
+                     textures, bindings);
     if (backfaces)
         p->setCullingMode(Ogre::CULL_NONE);
     p->getVertexProgramParameters()->setNamedConstant(
@@ -152,9 +150,11 @@ void GfxMaterial::buildOgreMaterials (void)
 
     p = create_or_reset_material(name + ":regular");
     if (sceneBlend == GFX_MATERIAL_OPAQUE) {
-        shader->initPass(p, GFX_GSL_PURPOSE_FORWARD, matEnv, meshEnv, textures, bindings);
+        shader->initPass(p, GFX_GSL_PURPOSE_FORWARD, fade_dither, false, boneBlendWeights,
+                         textures, bindings);
     } else {
-        shader->initPass(p, GFX_GSL_PURPOSE_ALPHA, matEnv, meshEnv, textures, bindings);
+        shader->initPass(p, GFX_GSL_PURPOSE_ALPHA, fade_dither, false, boneBlendWeights,
+                         textures, bindings);
         p->setDepthWriteEnabled(sceneBlend == GFX_MATERIAL_ALPHA_DEPTH);
         // Use pre-multiplied alpha to allow applying alpha to regular lighting pass and not to
         // emissive when both are done in the same pass.
@@ -168,10 +168,11 @@ void GfxMaterial::buildOgreMaterials (void)
 
     p = create_or_reset_material(name + ":instancing");
     if (sceneBlend == GFX_MATERIAL_OPAQUE) {
-        shader->initPass(
-            p, GFX_GSL_PURPOSE_FORWARD, matEnv, meshEnvInstanced, textures, bindings);
+        shader->initPass(p, GFX_GSL_PURPOSE_FORWARD, fade_dither, true, boneBlendWeights,
+                         textures, bindings);
     } else {
-        shader->initPass(p, GFX_GSL_PURPOSE_ALPHA, matEnv, meshEnvInstanced, textures, bindings);
+        shader->initPass(p, GFX_GSL_PURPOSE_ALPHA, fade_dither, true, boneBlendWeights,
+                         textures, bindings);
         p->setDepthWriteEnabled(sceneBlend == GFX_MATERIAL_ALPHA_DEPTH);
         // Use pre-multiplied alpha to allow applying alpha to regular lighting pass and not to
         // emissive when both are done in the same pass.
@@ -185,7 +186,7 @@ void GfxMaterial::buildOgreMaterials (void)
 
     // TODO: additional lighting for instanced geometry?
     p = create_or_reset_material(name + ":additional");
-    shader->initPass(p, GFX_GSL_PURPOSE_ADDITIONAL, matEnvAdditional, meshEnv,
+    shader->initPass(p, GFX_GSL_PURPOSE_ADDITIONAL, false, false, boneBlendWeights,
                      textures, bindings);
     if (backfaces)
         p->setCullingMode(Ogre::CULL_NONE);
@@ -198,37 +199,42 @@ void GfxMaterial::buildOgreMaterials (void)
 void GfxMaterial::updateOgreMaterials (const GfxShaderGlobals &globs)
 {
     Ogre::Pass *p;
+    bool fade_dither = sceneBlend == GFX_MATERIAL_OPAQUE;
 
     // TODO: wireframe for instanced geometry?
     p = wireframeMat->getTechnique(0)->getPass(0);
-    shader->updatePass(p, globs, GFX_GSL_PURPOSE_WIREFRAME, matEnv, meshEnv, textures, bindings);
+    shader->updatePass(p, globs, GFX_GSL_PURPOSE_WIREFRAME, fade_dither, false, boneBlendWeights,
+                       textures, bindings);
 
     p = castMat->getTechnique(0)->getPass(0);
-    shader->updatePass(p, globs, GFX_GSL_PURPOSE_CAST, matEnv, meshEnv, textures, bindings);
+    shader->updatePass(p, globs, GFX_GSL_PURPOSE_CAST, fade_dither, false, boneBlendWeights,
+                       textures, bindings);
 
     p = instancingCastMat->getTechnique(0)->getPass(0);
-    shader->updatePass(p, globs, GFX_GSL_PURPOSE_CAST, matEnv, meshEnvInstanced,
+    shader->updatePass(p, globs, GFX_GSL_PURPOSE_CAST, fade_dither, true, boneBlendWeights,
                        textures, bindings);
 
     p = regularMat->getTechnique(0)->getPass(0);
     if (sceneBlend == GFX_MATERIAL_OPAQUE) {
-        shader->updatePass(p, globs, GFX_GSL_PURPOSE_FORWARD, matEnv, meshEnv, textures, bindings);
+        shader->updatePass(p, globs, GFX_GSL_PURPOSE_FORWARD, fade_dither, false, boneBlendWeights,
+                           textures, bindings);
     } else {
-        shader->updatePass(p, globs, GFX_GSL_PURPOSE_ALPHA, matEnv, meshEnv, textures, bindings);
+        shader->updatePass(p, globs, GFX_GSL_PURPOSE_ALPHA, fade_dither, false, boneBlendWeights,
+                           textures, bindings);
     }
 
     p = instancingMat->getTechnique(0)->getPass(0);
     if (sceneBlend == GFX_MATERIAL_OPAQUE) {
-        shader->updatePass(p, globs, GFX_GSL_PURPOSE_FORWARD, matEnv, meshEnvInstanced,
+        shader->updatePass(p, globs, GFX_GSL_PURPOSE_FORWARD, fade_dither, true, boneBlendWeights,
                            textures, bindings);
     } else {
-        shader->updatePass(p, globs, GFX_GSL_PURPOSE_ALPHA, matEnv, meshEnvInstanced,
+        shader->updatePass(p, globs, GFX_GSL_PURPOSE_ALPHA, fade_dither, true, boneBlendWeights,
                            textures, bindings);
     }
 
     // TODO: additional lighting for instanced geometry?
     p = additionalMat->getTechnique(0)->getPass(0);
-    shader->updatePass(p, globs, GFX_GSL_PURPOSE_ADDITIONAL, matEnvAdditional, meshEnv,
+    shader->updatePass(p, globs, GFX_GSL_PURPOSE_ADDITIONAL, fade_dither, false, boneBlendWeights,
                        textures, bindings);
 }
 

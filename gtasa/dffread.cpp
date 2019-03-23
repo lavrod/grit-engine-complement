@@ -1743,7 +1743,7 @@ void export_mesh (const StringSet &texs,
 
     serialiser->exportMesh(&*mesh, fname);
 
-    mmgr->remove(mesh);
+    mmgr->remove(mesh->getName());
 
     delete [] vbuf;
 

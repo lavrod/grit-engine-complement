@@ -114,7 +114,7 @@ DiskResourcePtr<GfxTextureDiskResource> fade_dither_map;
 DiskResourcePtr<GfxTextureDiskResource> corona_map;
 DiskResourcePtr<GfxTextureDiskResource> shadow_pcf_noise_map;
 
-GfxGslConfigEnvironment shader_scene_env;
+GfxGslEnvironment shader_scene_env;
 
 // abuse ogre fog params to store several things
 static void set_ogre_fog (void)
@@ -715,7 +715,7 @@ void gfx_bake_env_cube (const std::string &filename, unsigned size, const Vector
     Ogre::PixelBox img_raw_box = img_raw.getPixelBox();
 
     // clean up texture
-    Ogre::TextureManager::getSingleton().remove(cube);
+    Ogre::TextureManager::getSingleton().remove(cube->getName());
     rt = NULL;
 
     // make an image that is a target for the conversion process
@@ -1054,7 +1054,7 @@ size_t gfx_init (GfxCallback &cb_)
 
         Ogre::MeshManager::getSingleton().setListener(&mesh_serializer_listener);
         Ogre::WindowEventUtilities::addWindowEventListener(ogre_win, &window_event_listener);
-        Ogre::ResourceGroupManager::getSingleton().addResourceLocation(".", "FileSystem", RESGRP, true);
+        Ogre::ResourceGroupManager::getSingleton().addResourceLocation(".","FileSystem",RESGRP,false);
         Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
         Ogre::GpuProgramManager::getSingleton().setSaveMicrocodesToCache(false);

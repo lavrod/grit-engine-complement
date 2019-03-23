@@ -42,7 +42,7 @@ class GfxTracerBody : public GfxNode {
     static const std::string className;
     bool enabled;
     DiskResourcePtr<GfxTextureDiskResource> texture;
-    float length;
+    unsigned length;
 
     Vector3 diffuseColour;
     Vector3 emissiveColour;
@@ -56,14 +56,11 @@ class GfxTracerBody : public GfxNode {
         float alpha;
         float size;
         Vector3 pos;
-        bool skip;
-        float timestamp;
-        float distance;
         Element (void) { }
         Element (const Vector3 &diffuse_colour, const Vector3 &emissive_colour,
-                 float alpha, float size, const Vector3 &pos, float timestamp)
+                 float alpha, float size, const Vector3 &pos)
           : diffuseColour(diffuse_colour), emissiveColour(emissive_colour), alpha(alpha),
-            size(size), pos(pos), timestamp(timestamp)
+            size(size), pos(pos)
         { }
     };
 
@@ -81,8 +78,6 @@ class GfxTracerBody : public GfxNode {
         uint16_t *indexPtr, *indexPtr0;
         unsigned maxElements;
         unsigned counter;
-        Vector3 lastPos;
-        float trailFade;
 
         public:
 
@@ -90,18 +85,7 @@ class GfxTracerBody : public GfxNode {
 
         void beginTrace (unsigned elements);
 
-        void addTraceElement (const Element &element, const Vector3 &rib);
-        void addOnlyTwoTraceElements (const Vector3 &cam_pos,
-                                      const Element &element0,
-                                      const Element &element1);
-        void addFirstTraceElement (const Vector3 &cam_pos,
-                                   const Element &element0,
-                                   const Element &element1);
-        void addMiddleTraceElement (const Vector3 &cam_pos,
-                                    const Element &element,
-                                    const Element &element_next);
-        void addLastTraceElement (const Vector3 &cam_pos,
-                                  const Element &element);
+        void addTraceElement (const Vector3 &cam_pos, const Element &element);
 
         void endTrace (void);
 
@@ -138,8 +122,8 @@ class GfxTracerBody : public GfxNode {
     float getSize (void) const;
     void setSize (float f);
 
-    float getLength (void) const;
-    void setLength (float v);
+    unsigned getLength (void) const;
+    void setLength (unsigned v);
 
     GfxTextureDiskResource *getTexture (void) const;
     void setTexture (const DiskResourcePtr<GfxTextureDiskResource> &v);
@@ -158,9 +142,7 @@ class GfxTracerBody : public GfxNode {
 // Called every frame.
 void gfx_tracer_body_render (GfxPipeline *p);
 
-void gfx_tracer_body_pump (float elapsed);
-
-void gfx_tracer_body_set_left_over_time (float left_over_time);
+void gfx_tracer_body_pump (void);
 
 void gfx_tracer_body_init (void);
 

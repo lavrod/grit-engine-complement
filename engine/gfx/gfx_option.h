@@ -48,7 +48,6 @@ enum GfxBoolOption {
     GFX_RENDER_HUD,
 
     GFX_RENDER_FIRST_PERSON,
-    GFX_UPDATE_MATERIALS,
 };
 
 enum GfxIntOption {

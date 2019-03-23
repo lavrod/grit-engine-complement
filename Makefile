@@ -46,9 +46,6 @@ OPENAL_LDLIBS   ?= -lopenal -lvorbisfile
 
 VORBIS_LDLIBS   ?= -lvorbisfile
 
-GOOGLE_PERF_TOOLS_DEFS ?= USE_GOOGLE_PERF_TOOLS=1
-GOOGLE_PERF_TOOLS_LDLIBS ?= -lprofiler
-
 
 
 GRIT_WEAK_C_SRCS= \
@@ -132,7 +129,6 @@ CFLAGS= \
 	$(ICU_DEFS:%=-D%) \
 	$(OPENAL_DEFS:%=-D%) \
 	$(VORBIS_DEFS:%=-D%) \
-	$(GOOGLE_PERF_TOOLS_DEFS:%=-D%) \
 	$(shell pkg-config $(PKGCONFIG_DEPS) --cflags) \
 
 LDFLAGS= \
@@ -158,7 +154,6 @@ LDLIBS= \
 	$(ICU_LDLIBS) \
 	$(OPENAL_LDLIBS) \
 	$(VORBIS_LDLIBS) \
-	$(GOOGLE_PERF_TOOLS_LDLIBS) \
 	$(shell pkg-config $(PKGCONFIG_DEPS) --libs-only-l) \
 	-lreadline \
 	-lm \
