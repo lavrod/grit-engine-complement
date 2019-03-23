@@ -18,25 +18,27 @@
         HUD class is the simplest class it is possible to write, as it has
         no user-defined behaviours.  Its one-line definition is in the
         common/hud directory, but you can also define your own.
-        Instantiate it as follows:
-
+		Instantiate it as follows: 
+		Start <def>GRIT.EXE</def>, click <def>Launch</def>, enter into the <def>Editor</def> and than press the <def><TAB></def> key.
+		Copy paste the first 8 lines of the following snippet into the lua console.
+        
         <image src="hud_example1.png" title="Basic HUD object example">
             Use of /common/hud/Rect as shown in the Lua snippet.
         </image>
 
         <lua>
-            obj = gfx_hud_object_add(`/common/hud/Rect`)
-            obj.position = vec(100, 100)  -- centre of object, from screen bottom left
-            obj.texture = `/common/hud/textures/Icon064.jpg`
-            obj.size = vec(50, 50)
-            obj.colour = vec(0, 1, 1)  -- cyan (masks texture)
-            obj.zOrder = 2
-            obj.alpha = 0.5
-            obj.orientation = 44  -- degrees (clockwise)
-            ...
-            obj:destroy()
+            obj1 = gfx_hud_object_add(`/common/hud/Rect`)
+            obj1.position = vec(100, 100)  -- centre of object, from screen bottom left
+            obj1.texture = `/common/hud/textures/Icon064.png`
+            obj1.size = vec(50, 50)
+            obj1.colour = vec(0, 1, 1)  -- cyan (masks texture)
+            obj1.zOrder = 2
+            obj1.alpha = 0.5
+            obj1.orientation = 44  -- degrees (clockwise)
+            -- ...
+            obj1:destroy()
             -- Can also initialise members with a table param:
-            obj = gfx_hud_object_add(`Rect`, {size=vec(50,50), ...})
+            obj2 = gfx_hud_object_add(`/common/hud/Rect`,{position = vec(200, 200), size=vec(50,50), zorder=2})
         </lua>
 
         The HUD object has a number of fields that define how it is
@@ -53,12 +55,12 @@
         Rect can be useful for simple things but usually we will define our own
         <def>HUD class</def>, which has fields and methods much like a game
         class.  The HUD class can be instantiated into as many <def>HUD
-        objects</def> as we want.  The following HUD class implements a
-        spinning icon:
+        objects</def> as we want. 
+ 		The following HUD class implements a spinning needle
 
         <lua>
-            hud_class `SpinningIcon` {
-                texture = `/common/hud/textures/Icon064.jpg`,
+            hud_class `SpinningNeedle`
+                texture = `/common/hud/Compass/Needle.png`,
                 speed = 20,
                 init = function (self)
                     self.needsFrameCallbacks = true
@@ -74,8 +76,8 @@
             }
         </lua>
 
-        <image src="hud_example2.png" title="Spinning Icon">
-            The icon on the right (faster_obj) spins faster than the one on the left (obj).
+        <image src="hud_example2.png" title="Spinning Needle">
+            The needle on the right (faster_obj) spins faster than the one on the left (obj).
         </image>
 
         The 3 defined methods are all callbacks, and there are other possible
@@ -92,8 +94,8 @@
         override the speed when we instantiate the object:
 
         <lua>
-            obj = gfx_hud_object_add(`SpinningIcon`, {position=vec(200,100)})
-            faster_obj = gfx_hud_object_add(`SpinningIcon`, {position=vec(300,100), speed=30})
+            obj = gfx_hud_object_add(`SpinningNeedle`, {position=vec(200,100)})
+            faster_obj = gfx_hud_object_add(`SpinningNeedle`, {position=vec(300,100), speed=30})
         </lua>
 
     </section>
@@ -126,7 +128,8 @@
         id="gfx_hud_button">button</sref> class below for a concrete example.
 
         <lua>
-            o = gfx_hud_object_add(`/common/hud/Rect`, {texture=`MyTexture.jpg`})
+            o = gfx_hud_object_add(`/common/hud/Rect`, {texture=`/common/gui/icons/checkbox_background.png`})
+			o.position = vec(300, 300) 
             o.size = vec(100, 100) -- larger than the texture
             o.cornered = true -- enable corner mapping
         </lua>
@@ -155,7 +158,7 @@
             t.position = vec(300, 300)
             t.orientation = 90
             t.zOrder = 7
-            ...
+            --  ...
             t:destroy()
         </lua>
 
@@ -243,7 +246,10 @@
             top of the text, as well as, or instead of, the bottom of the text.
             This is done by setting the scroll field, which defaults to 0.
 
-            <lua> t.scroll = 200 </lua>
+            <lua>
+			    t.orientation = 0
+				t.scroll = -200 
+			</lua>
             
             This starts rendering at 200 pixels below the top of the given
             text, i.e. represents a scrolling down of 200 pixels.
@@ -353,24 +359,30 @@
         buttons).  They are both enabled by setting needsInputCallbacks:
 
         <lua>
-            hud_class `InputDemo` {
-                init = function (self)
-                    self.needsInputCallbacks = true
-                    self.inside = false
-                end,
-                destroy = function (self)
-                    -- nothing to do
-                end,
-                mouseMoveCallback = function(self, local, screen, inside)
-                    print(local, screen, inside)
-                    self.inside = inside
-                end,
-                buttonCallback = function(self, event)
-                    if inside then
-                        print(event)
-                    end
-                end,
-            }
+			hud_class `InputDemo` {
+				texture=`/common/gui/icons/checkbox_background.png`,
+				position = vec(400, 100),
+				size = vec(100, 100),
+				zOrder=2,
+				init = function (self)
+					self.needsInputCallbacks = true
+					self.inside = false
+				end;
+				destroy = function (self)
+					-- nothing to do
+				end;
+				mouseMoveCallback = function(self, local_pos, screen_pos, inside)
+					self.inside = inside
+					print(self, local_pos, screen_pos, self.inside)
+				end;
+				buttonCallback = function(self, event)
+				-- click or type on keyboard when cursor inside checkbox
+					if self.inside then
+						print(event)
+					end
+				end;
+			}
+			l = gfx_hud_object_add(`InputDemo`)
         </lua>
 
         The mouseMoveCallback gets the cursor position local to the object
@@ -429,17 +441,18 @@
             </image>
 
             <lua>
-                b = gfx_hud_object_add(`/common/hud/Button`, {
-                    caption = "Click Me!",
-                    pressedCallback = function (self)
-                        print("You clicked me!")
-                    end,
-                })
-                -- By default, size is chosen based on the caption size.
-                b.parent = my_dialog
-                b.position = vec(40, 0) -- position within the parent
-                b:setGreyed(true) -- turn the button off, default false
-                b.enabled = false -- hide the button, default true
+				b1 = gfx_hud_object_add(`/common/hud/Button`, {
+					caption = "Click Me!";
+					size = vec(100,100);
+					pressedCallback = function (self)
+						print("You clicked me!")
+					end;
+				})
+				b1.parent = my_dialog
+				b1.zOrder = 2
+				b1.position = vec(240, 200) -- position within the parent
+				b1:setGreyed(false) -- turn the button on, default false
+				b1.enabled = true -- show the button, default true
             </lua>
 
             It is also possible to customize some of the attributes of the
@@ -450,8 +463,9 @@
             </image>
 
             <lua>
-                b = gfx_hud_object_add(`/common/hud/Button`, {
-                    size = vec(100, 40),
+                b2 = gfx_hud_object_add(`/common/hud/Button`, {
+					position = vec(240, 200), -- position within the parent
+                    size = vec(100, 200),
                     font = `/common/fonts/Impact24`,
                     caption = "Click Me!",
                     baseColour = vec(0, 0, 0),  -- Black
@@ -460,6 +474,9 @@
                     borderColour = vec(1, 1, 1),  -- White
                     captionColour = vec(1, 1, 1),
                     captionColourGreyed = vec(0.5, 0.5, 0.5),  -- Grey
+					pressedCallback = function (self)
+						print("You clicked me!")
+					end;
                 })
             </lua>
 
@@ -473,17 +490,20 @@
             dialog, including text labels.
 
             <lua>
-                label = gfx_hud_object_add(`/common/hud/Label`, {
-                    size = vec(100, 40),
+                label1 = gfx_hud_object_add(`/common/hud/Label`, {
+                    size = vec(200, 100),
+                    font = `/common/fonts/Impact24`,
+                    textColour = vec(0.3, 0.3, 0.3),
+                    greyColour = vec(0.5, 0.5, 0.5),  -- Grey
                     alignment = "LEFT",  -- Also, "CENTRE", or "RIGHT".
-                    value = "Enter number of things here: ",
-                    position = vec(30, 30),
-                    greyed = true,
+                    value = "Enter number: ",
+                    position = vec(300, 300),
+                    greyed = false,
                 })
-                label:setValue("Changed value: ")
-                label:setGreyed(false)
+				-- paste first part before then change value of text and set it to greyed
+                label1:setValue("Changed value: ")
+                label1:setGreyed(true)
             </lua>
-
         </section>
 
         <section title="Border" id="gfx_hud_border">
