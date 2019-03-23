@@ -1,3 +1,5 @@
+0.1
+
 Previous grit-engine version that I was using
 
 # Grit Engine
