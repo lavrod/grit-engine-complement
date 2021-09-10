@@ -580,17 +580,17 @@ TRY_END
 }
 
 static const luaL_reg global_agent[] = {
-    { "agent_make", agent_add },
-    { "agent_destroy", agent_remove },
-    { "agent_active", agent_active },
-    { "agent_stop", agent_stop },
-    { "agent_position", agent_position },
-    { "agent_velocity", agent_velocity },
-    { "agent_request_velocity", agent_request_velocity },
-    { "agent_move_target", agent_move_target },
-    { "agent_distance_to_goal", agent_distance_to_goal },
-    { "agent_height", agent_height },
-    { "agent_radius", agent_radius },
+    { "gge_agent_make", agent_add },
+    { "gge_agent_destroy", agent_remove },
+    { "gge_agent_active", agent_active },
+    { "gge_agent_stop", agent_stop },
+    { "gge_agent_position", agent_position },
+    { "gge_agent_velocity", agent_velocity },
+    { "gge_agent_request_velocity", agent_request_velocity },
+    { "gge_agent_move_target", agent_move_target },
+    { "gge_agent_distance_to_goal", agent_distance_to_goal },
+    { "gge_agent_height", agent_height },
+    { "gge_agent_radius", agent_radius },
     { NULL, NULL }
 };
 

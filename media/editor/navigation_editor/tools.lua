@@ -94,7 +94,7 @@ hud_class `Tools` `/common/gui/Window` {
             parent = self.tool,
             onSelect = function(self)
                 -- playing_binds:bind("middle", function() local pos = mouse_pick_pos() if pos then agent_add(pos) end end)
-                game_manager.currentMode.leftMouseClick = function() local pos = mouse_pick_pos() if pos then agent_make(pos) end end;
+                game_manager.currentMode.leftMouseClick = function() local pos = mouse_pick_pos() if pos then gge_agent_make(pos) end end;
             end,
             align = vec(-1, 0),
             offset =  vec(10, 0)
