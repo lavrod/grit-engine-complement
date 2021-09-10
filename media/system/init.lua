@@ -342,13 +342,13 @@ reset_everything()
 -- gge_include `/vehicles/init.lua`
 
 -- Should probably move to common at this point...
--- gge_include `/detached/characters/init.lua`
+-- gge_include `/common/characters/init.lua`
 
 
 -- Game modes
 gge_safe_include `/editor/init.lua`
 gge_safe_include `/sponza/init.lua`
-gge_safe_include `/navigation_demo/init.lua`
+gge_safe_include `/navigation/init.lua`
 gge_safe_include `/playground/init.lua`
 gge_safe_include `/detached/init.lua`
 gge_safe_include `/wipeout/init.lua`
