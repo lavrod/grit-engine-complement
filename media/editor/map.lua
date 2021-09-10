@@ -172,7 +172,7 @@ function EditorMap:open(filename)
     assert(self.proposed == nil)
     assert_path_file_type(filename, 'gmap')
     self:reset()
-    self.currentState = include(filename)
+    self.currentState = gge_include(filename)
     self:populateMap()
     self.filename = filename
     self.undoLevels = {}
@@ -188,7 +188,7 @@ end
 -- Save to the current filename.
 function EditorMap:save()
     if self.filename == nil then    
-        error 'Cannot call EditorMap:save() as there is no current filename.'
+        gge_error('Cannot call EditorMap:save() as there is no current filename.')
     end
     self:export(self.filename)
 end
@@ -207,7 +207,7 @@ function EditorMap:applyEnvironment()
     -- env.clockRate = self.currentState.environment.clock_rate
     env.clockRate = 0
     if self.currentState.environment.env_cycle_file ~= nil then
-        env_cycle = include(self.currentState.environment.env_cycle_file)
+        env_cycle = gge_include(self.currentState.environment.env_cycle_file)
     end
     for name, def in pairs(self.currentState.environment.sky) do
         env_sky[name] = gfx_sky_body_make(def[1], def[2])
@@ -259,7 +259,7 @@ end
 function EditorMap:setSelected(name, v)
     local obj_decl = self.currentState.objects[name]
     if obj_decl == nil then
-        error(('No such object: "%s"'):format(name))
+        gge_error(('No such object: "%s"'):format(name))
     end
 
     local index = find(self.selected, name)
@@ -419,7 +419,7 @@ function EditorMap:rename(old_name, new_name)
     assert(self.proposed == nil)
     local obj_decl = self:getCurrentObject(old_name)
     if self.currentState.objects[new_name] ~= nil then
-        error(('Already an object called: "%s"'):format(new_name))
+        gge_error(('Already an object called: "%s"'):format(new_name))
     end
     self:pushUndoLevel(table.clone(self.currentState))
     self.currentState.objects = table.clone(self.currentState.objects)
@@ -435,7 +435,7 @@ end
 function EditorMap:add(name, class, pos, data)
     local obj_decl = self:getCurrentObject(name)
     if self.currentState.objects[name] ~= nil then
-        error(('Already an object called: "%s"'):format(name))
+        gge_error(('Already an object called: "%s"'):format(name))
     end
     obj_decl = self:initProposed(name, {class, pos, data})
     -- The object, if the change is cancelled, is cleaned up by updateObjectVisualisation.
@@ -449,7 +449,7 @@ function EditorMap:delete(names)
     assert(self.proposed == nil)
     for _, name in ipairs(names) do
         if self.currentState.objects[name] == nil then
-            error(('No object called: "%s"'):format(name))
+            gge_error(('No object called: "%s"'):format(name))
         end
     end
     self:pushUndoLevel(table.clone(self.currentState))

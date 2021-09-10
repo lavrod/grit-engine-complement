@@ -72,7 +72,7 @@ local obj_off = vec(0, 0, 0)
 local obj_pos
 local function object3 (tab)
     if not class_has(curried_name) then
-        error("Trying to create an object using non-existent class \""..curried_name.."\"",2)
+        gge_error("Trying to create an object using non-existent class \""..curried_name.."\"",2)
     end
     if inside_pile then
         return { curried_name, obj_pos, tab }
@@ -92,7 +92,7 @@ local function object3 (tab)
             if tab.name then tab.name = tab.name.."_lod" end
             object_add(lod, obj_pos, tab)
         else
-            error("Class \""..curried_name.."\" referred to a lod class \""..lod.."\" that does not exist.")
+            gge_error("Class \""..curried_name.."\" referred to a lod class \""..lod.."\" that does not exist.")
         end
     end
     return hid
@@ -114,7 +114,7 @@ function offset_exec (off, f, ...)
     f(...)
     obj_off = obj_off - off
 end
-function offset_include (x,y,z, str) offset_exec(vec(x,y,z),include,str) end
+function offset_include (x,y,z, str) offset_exec(vec(x,y,z),gge_include,str) end
         
 local function physical_material2 (tab) 
     local mat = { }

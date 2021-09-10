@@ -34,7 +34,7 @@ class `TrashCanShiteLid` (ColClass) {
     placementRandomRotation = true
 }
 
-include `classes.lua`
+gge_include `classes.lua`
 
 pile `TrashCanShite` {
     renderingDistance = 100;

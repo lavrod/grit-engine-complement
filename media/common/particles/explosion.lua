@@ -2,14 +2,14 @@
 
 do
     local colour_base = 4*vector3(1,1,1)
-    local colour_curve = PlotV3 {
+    local colour_curve = gge_PlotV3 {
         [0]    = colour_base;
         [0.05] = colour_base;
         [0.15] = colour_base*vector3(1,0.8,0.8);
         [0.35] = 0.8*colour_base*vector3(1,0.6,0.6);
         [1]    = 0.1*colour_base*vector3(1,0.4,0.3);
     }
-    local alpha_curve = Plot {
+    local alpha_curve = gge_Plot {
         [0] = 1;
         [0.3] = 0.3;
         [0.5] = 0.2;
@@ -119,7 +119,7 @@ function explosion (pos, radius, force, num_flames)
         local damage_impulse = -impulse_scalar*norm
         local owner = body.owner
         local impact_time = r/1000
-        future_event(impact_time, function ()
+        gge_future_event(impact_time, function ()
             if owner.destroyed then return end
             if not owner.activated then return end
             if owner.instance.activationSkipped then return end

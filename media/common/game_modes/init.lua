@@ -1,3 +1,3 @@
-include `base.lua`
-include `first_person.lua`
-include `third_person.lua`
+gge_include `base.lua`
+gge_include `first_person.lua`
+gge_include `third_person.lua`

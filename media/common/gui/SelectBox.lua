@@ -69,7 +69,7 @@ hud_class `selectmenuitem` {
     end;
 	
     setSelection = function (self)
-        -- print("Selected: "..self.value.." "..self.id)
+        -- gge_print("Selected: "..self.value.." "..self.id)
 		local itm = {}
 		itm.name = self.value
 		itm.id = self.id

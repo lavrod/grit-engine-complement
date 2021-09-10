@@ -144,7 +144,7 @@ hud_class `.` {
     end;
     
     onChange = function (self)
-        print("Colour: "..self:getColourRGB().."  Alpha: "..self:getAlpha())
+        gge_print("Colour: "..self:getColourRGB().."  Alpha: "..self:getAlpha())
     end;
     
 }

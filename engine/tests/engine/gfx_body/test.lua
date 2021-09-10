@@ -28,9 +28,9 @@ register_material(`Money`, {
 })
 
 
-print "Loading Money_d.dds" 
+gge_print("Loading Money_d.dds")
 disk_resource_load(`Money_d.dds`)
-print "Loading Money.mesh" 
+gge_print("Loading Money.mesh")
 disk_resource_load(`Money.mesh`)
 
 

@@ -27,9 +27,9 @@ hud_class `Ticker` {
         self:redraw()
     end,
 
-    print = function (self, str)
+    ticker_print = function (self, str)
         table.insert(self.buffer,1,str)
-        table.insert(self.timeBuffer,1,seconds())
+        table.insert(self.timeBuffer,1,gge_seconds())
         if #self.buffer>self.bufferSize then
                 table.remove(self.buffer)
                 table.remove(self.timeBuffer)
@@ -49,7 +49,7 @@ hud_class `Ticker` {
         local i = 1
         while i <= count do
             local time = self.timeBuffer[i]
-            if seconds() - time > self.messageTime then
+            if gge_seconds() - time > self.messageTime then
                 needs_redraw = true
                 table.remove(self.buffer,i)
                 table.remove(self.timeBuffer,i)

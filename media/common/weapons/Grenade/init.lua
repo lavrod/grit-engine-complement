@@ -103,12 +103,12 @@ WeaponEffectManager:set("Grenade", {
     reloadSec = 0.5;
     
     fire = function (self, p, q)
-        self.lastFire = seconds()
+        self.lastFire = gge_seconds()
         object `Grenade` (p) { velocity=q*vec(0, 25, 0) }
     end;
     
     checkFire = function (self, p, q)
-        if seconds() > self.lastFire + self.reloadSec then
+        if gge_seconds() > self.lastFire + self.reloadSec then
             self:fire(p, q)
         end
     end;

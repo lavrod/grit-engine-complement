@@ -25,7 +25,7 @@ hud_class `BrowserIcon` {
         self.text = hud_text_add(`/common/fonts/TinyFont`)
         self.text.text = self.name
         if self.text.size.x >= self.size.x then
-            -- print("long name: "..self.name)
+            -- gge_print("long name: "..self.name)
             self.text.text = self.name:reverse():sub(-9):reverse().."..."
             --self.name:reverse():gsub(".....", "...", 1):reverse()
         end
@@ -77,13 +77,13 @@ hud_class `BrowserIcon` {
             self.mouseDown = self.draggable
             self.draggingPos = mouse_pos_abs
             self:updateColour()
-            if self.lastClick ~= nil and seconds() - self.lastClick <= 1 then
+            if self.lastClick ~= nil and gge_seconds() - self.lastClick <= 1 then
                 self.lastClick = nil
                 -- Can destroy the icon.
                 self:doubleClick()
                 return
             end
-            self.lastClick = seconds()
+            self.lastClick = gge_seconds()
 
         elseif ev == "-left" then
             self.dragging = false

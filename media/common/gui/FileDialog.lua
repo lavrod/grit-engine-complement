@@ -81,7 +81,7 @@ hud_class `BrowserIcon` {
 		self.text = hud_text_add(`/common/fonts/TinyFont`)
 		self.text.text = self.name
 		if self.text.size.x >= self.size.x then
-			-- print("long name: "..self.name)
+			-- gge_print("long name: "..self.name)
 			-- self.text.text = self.name:reverse():sub(-9):reverse().."..."
 			self.text.text = break_line(self.name)
 			--self.name:reverse():gsub(".....", "...", 1):reverse()
@@ -120,11 +120,11 @@ hud_class `BrowserIcon` {
 			self.colour = self.clickColour
 			self.text.colour = self.textClickColour
 			self.alpha = 1
-			if self.lastClick ~= nil and seconds() - self.lastClick <= 1 then
+			if self.lastClick ~= nil and gge_seconds() - self.lastClick <= 1 then
 				self:doubleClick()
 				return
 			end
-			self.lastClick = seconds()
+			self.lastClick = gge_seconds()
         elseif ev == "-left" then
             if self.dragging and not self.greyed then
 				if self.inside then

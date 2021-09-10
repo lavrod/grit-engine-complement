@@ -67,16 +67,16 @@ hud_class `WindowTitleBar` {
 
     -- Returns the base position, offsets from which are signalled via updateWindowPosition.
     grabbedWindow = function(self)
-        error 'Must override grabbedWindow'
+        gge_error('Must override grabbedWindow')
         return vec(0, 0)
     end,
 
     updateWindowPosition = function(self, pos)
-        error 'Must override updateWindowFunction'
+        gge_error('Must override updateWindowFunction')
     end,
 
     closeClicked = function(self)
-        error 'Must override closeClicked'
+        gge_error('Must override closeClicked')
     end,
 
     mouseMoveCallback = function(self, local_pos, screen_pos, inside)

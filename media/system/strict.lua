@@ -31,7 +31,7 @@ do
                 if not mt.__declared[n] then
                         local w = (debug.getinfo(2, "S") or {}).what
                         if w ~= "main" and w ~= "C" then
-                                error("assign to undeclared variable '"..tostring(n).."'", 2)
+                                gge_error("assign to undeclared variable '"..tostring(n).."'", 2)
                         end
                         mt.__declared[n] = true
                 end
@@ -43,7 +43,7 @@ do
                 if not mt.__declared[n] then
                         local w = (debug.getinfo(2, "S") or {}).what
                         if w ~= "main" and w ~= "C" then
-                                error("variable '"..tostring(n).."' is not declared", 2)
+                                gge_error("variable '"..tostring(n).."' is not declared", 2)
                         end
                 end
                 return rawget(_G, n)

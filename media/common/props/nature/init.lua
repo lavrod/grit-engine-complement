@@ -15,4 +15,4 @@ class `rock` (ColClass) {
 
 material `Log` { diffuseMap = `Log_d.dds` }
 
-include `classes.lua`
+gge_include `classes.lua`

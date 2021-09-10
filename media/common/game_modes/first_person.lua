@@ -335,7 +335,7 @@ local FpsPlayerClass = extends (ColClass) {
                     if dot(floor_normal, walk_vect) > 0 or math.deg(math.acos(floor_normal.z)) <= self.maxGradient then
                         curr_foot = cast_foot + vector3(0,0, actual_step_height)
                     else
-                        --print(dot(floor_normal, walk_vect), math.deg(math.acos(floor_normal.z)))
+                        --gge_print(dot(floor_normal, walk_vect), math.deg(math.acos(floor_normal.z)))
                     end
                 end
 
@@ -396,7 +396,7 @@ local FpsPlayerClass = extends (ColClass) {
             if instance.timeSinceLastJump < jump_len then
                 -- user has pressed the jump key, better play out that anim
 
-                -- fade in the anim over 0.1 seconds
+                -- fade in the anim over 0.1 gge_seconds
                 local mask = math.min(1, instance.timeSinceLastJump / 0.1)
                 regular_movement = regular_movement * (1 - mask)
                 glide_mask = 0
@@ -537,7 +537,7 @@ local FpsPlayerClass = extends (ColClass) {
 		local vehicle_vel = body.linearVelocity
 		local vehicle_vel_xy_speed = #(vehicle_vel * vector3(1,1,0))
 
-		if user_cfg.vehicleCameraTrack and obj.cameraTrack and seconds() - game_manager.currentMode.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
+		if user_cfg.vehicleCameraTrack and obj.cameraTrack and gge_seconds() - game_manager.currentMode.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
 
 			game_manager.currentMode.camPitch = lerp(game_manager.currentMode.camPitch, game_manager.currentMode.playerCamPitch + vehicle_pitch, elapsed_secs * 2)
 
@@ -564,7 +564,7 @@ local FpsPlayerClass = extends (ColClass) {
 		local ray_dir = main.camQuat * V_BACKWARDS
 		local ray_start = instance.camAttachPos + ray_skip * ray_dir
         if obj.boomLengthMin == nil or obj.boomLengthMax == nil then
-            error('Controlling %s of class %s, needed boomLengthMin and boomLengthMax, got: %s, %s'
+            gge_error('Controlling %s of class %s, needed boomLengthMin and boomLengthMax, got: %s, %s'
                   % {obj, obj.className, obj.boomLengthMin, obj.boomLengthMax})
         end
         local ray_len = game_manager.currentMode:boomLength(obj.boomLengthMin, obj.boomLengthMax) - ray_skip
@@ -663,7 +663,7 @@ function FirstPersonGameMode:init()
 	
     self.camYaw = 90;
     self.playerCamPitch = 0;  -- Without vehicle pitch offset
-    self.lastMouseMoveTime = seconds()
+    self.lastMouseMoveTime = gge_seconds()
 	notify("WASD = move, X = toggle third/first person camera", rgb(0, 0, 0))
 	
 	gfx_option("FOV", 60)

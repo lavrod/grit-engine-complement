@@ -46,7 +46,7 @@ local function flame_behaviour (particle, elapsed)
                 --emit_debug_marker(hit_pos, vector3(0,0,1), 1, 0.4)
                 victim = victim.owner -- from rbody to object
                 --create new particle on the next tick
-                future_event(0, function()
+                gge_future_event(0, function()
                     -- victim might be dead by now
                     if not victim.destroyed and victim.activated then
                         victim:ignite(particle.name, hit_pos, physmat, particle.fertileLife-particle.age)
@@ -144,7 +144,7 @@ local function engine_flame_behaviour (particle, elapsed)
                 --emit_debug_marker(hit_pos, vector3(0,0,1), 1, 0.4)
                 victim = victim.owner -- from rbody to object
                 --create new particle on the next tick
-                future_event(0, function()
+                gge_future_event(0, function()
                     -- victim might be dead by now
                     if not victim.destroyed and victim.activated then
                         victim:ignite(particle.name, hit_pos, physmat, particle.fertileLife-particle.age)
@@ -215,7 +215,7 @@ particle `EngineFire` {
 	angle = 0;
 	diffuse = vec(0, 0, 0);
 	spreadDist = 1;
-    colourCurve = PlotV3 {
+    colourCurve = gge_PlotV3 {
         [0.00] = vector3(0.40, 0.18, 0.14);
         [0.10] = vector3(1.00, 0.44, 0.26);
         [0.42] = vector3(1.00, 0.45, 0.24);

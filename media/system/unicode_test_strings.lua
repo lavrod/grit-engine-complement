@@ -1,4 +1,4 @@
-print("Initialising unicode test strings")
+gge_print("Initialising unicode test strings")
 
 test_korean = "안녕 세상아!"
 

@@ -63,14 +63,14 @@ hud_class `Expand_List_Item` {
     end;
     
     frameCallback = function (self)
-        --local state = (seconds() % 5) / 0.5
+        --local state = (gge_seconds() % 5) / 0.5
         
-        -- self.time_since_last_update = seconds() - self.time_since_last_update
+        -- self.time_since_last_update = gge_seconds() - self.time_since_last_update
         -- self.tt = self.tt + self.time_since_last_update
         if(self.tt == nil) then
-            self.tt = seconds()
+            self.tt = gge_seconds()
         end
-        if (seconds() - self.tt >= self.rdt) then
+        if (gge_seconds() - self.tt >= self.rdt) then
             self.colour=random_colour()
             if (self.colour.x+self.colour.y+self.colour.z  >= 1.5) then
                 self.title.colour = vec(0, 0, 0)
@@ -87,7 +87,7 @@ hud_class `Expand_List_Item` {
             -- self.value.colour = vec(blackorwhite, blackorwhite, blackorwhite)
             
             self.value.colour = math.abs(self.colour -1)
-            self.tt = seconds()
+            self.tt = gge_seconds()
             self.rdt = math.random(10)
         end
     end;
@@ -211,7 +211,7 @@ hud_class `Expand_List` {
     
     mouseMoveCallback = function (self, local_pos, screen_pos, inside)
         self.inside = inside
-        --if inside then print("px") end
+        --if inside then gge_print("px") end
     end;
 
     btcallbacks = function(self)

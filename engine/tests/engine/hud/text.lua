@@ -1,4 +1,4 @@
-include `font_impact50.lua`
+gge_include `font_impact50.lua`
 gfx_colour_grade(`neutral.lut.png`)
 gfx_option('POST_PROCESSING', false)
 t = gfx_hud_text_add(`Impact50`)

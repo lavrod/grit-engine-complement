@@ -55,7 +55,7 @@ hud_class `Console` {
 
     end;
 
-    print = function (self, str)
+    console_print = function (self, str)
         table.insert(self.buffer,1,str)
         if #self.buffer>self.bufferSize then
                 table.remove(self.buffer)
@@ -85,11 +85,11 @@ hud_class `Console` {
     end;
 
     poll = function (self)
-        local str = console_poll()
+        local str = gge_console_poll()
         if #str > 0 then
             str = str:sub(1,-2) -- cut off \n
-            self:print(str)
-            ticker:print(str)
+            self:console_print(str)
+            ticker:ticker_print(str)
         end
     end;
 
@@ -98,7 +98,7 @@ hud_class `Console` {
         if hud_focus ~= self then
             self.cursor.enabled = false
         else
-            local state = (seconds() % 0.5) / 0.5
+            local state = (gge_seconds() % 0.5) / 0.5
             self.cursor.enabled = state < 0.66
         end
 
@@ -174,7 +174,7 @@ hud_class `Console` {
             self:recordCommand()
             self:execute()
             -- the above can execute arbitrary code, which can involve destroying the console... test for that!
-            -- note, this is especially common with things like include "common/init.lua"
+            -- note, this is especially common with things like gge_include "common/init.lua"
             if self.destroyed then return end
 
             self.cmdBufferPos = 0
@@ -194,19 +194,19 @@ hud_class `Console` {
                 self.promptBefore = self.promptBefore .. self.promptAfter:sub(1,1)
                 self.promptAfter = self.promptAfter:sub(2)
             end
-        elseif input_filter_pressed("Ctrl") and ev2 == "d" then
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "d" then
             self.promptAfter = self.promptAfter:sub(2)
-        elseif input_filter_pressed("Ctrl") and ev2 == "a" then
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "a" then
             self.promptBefore, self.promptAfter = "", self.promptBefore..self.promptAfter
-        elseif input_filter_pressed("Ctrl") and ev2 == "e" then
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "e" then
             self.promptBefore, self.promptAfter = self.promptBefore..self.promptAfter, ""
-        elseif input_filter_pressed("Ctrl") and ev2 == "w" then
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "w" then
             self.promptBefore = self.promptBefore:gsub(" [^ ]* ?$"," ")
-        elseif input_filter_pressed("Ctrl") and ev2 == "k" then
-            set_clipboard(self.promptAfter)
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "k" then
+            gge_set_clipboard(self.promptAfter)
             self.promptAfter = ""
-        elseif input_filter_pressed("Ctrl") and (ev2 == "y" or ev2 == "v") then
-            local str = get_clipboard()
+        elseif gge_input_filter_pressed("Ctrl") and (ev2 == "y" or ev2 == "v") then
+            local str = gge_get_clipboard()
             self.promptBefore = self.promptBefore .. str
         elseif ev:sub(1,1) == ":" then
             self.cmdBufferPos = 0
@@ -255,7 +255,7 @@ hud_class `Console` {
                 self.text.scroll = math.ceil(self.text.bufferHeight - self.text.size.y)
                 self.pinToBottom = true
             end
-        elseif input_filter_pressed("Ctrl") and ev2 == "Space" then
+        elseif gge_input_filter_pressed("Ctrl") and ev2 == "Space" then
             self:autocomplete()
             reset_completions = false
         end
@@ -276,13 +276,13 @@ hud_class `Console` {
     execute = function (self, str)
         str = str or self:cmd()
 
-        print(self.promptPrefix .. str)
+        gge_print(self.promptPrefix .. str)
         self:poll()
 
         -- Parses and compile the string.
         -- Note that using '@' as the chunk name means an empty filename, i.e. '@' indicates a file,
         -- and the lack of anything afterwards makes it the empty filename.
-        -- This causes current_dir() to think it's a lua file in the root directory, which is what
+        -- This causes gge_current_dir() to think it's a lua file in the root directory, which is what
         -- we want for strings typed on the console!
         local f, err
         f = loadstring("return "..str, '@')
@@ -294,7 +294,7 @@ hud_class `Console` {
             if err:sub(1,4) == ":1: " then
                 err = err:sub(5)
             end
-            print(BOLD..YELLOW.."Syntax error: "..err)
+            gge_print(BOLD..YELLOW.."Syntax error: "..err)
             return
         end
         -- to execute, use coroutine to remove irrelevent lines from stacktrace
@@ -305,10 +305,10 @@ hud_class `Console` {
                 if status then
                     -- call was successful
                     if select("#",...) > 0 then
-                        print(...)
+                        gge_print(...)
                     end
                 end
-            end)(xpcall(f,--[[error_handler]]function(msg)
+            end)(xpcall(f,--[[gge_error_handler]]function(msg)
                 local level = 0
                 if type(msg)=="table" then
                     level, msg = unpack(msg)
@@ -316,7 +316,7 @@ hud_class `Console` {
                 if msg:sub(1,4) == ":1: " then
                     msg = msg:sub(5)
                 end
-                print(BOLD..RED..msg)
+                gge_print(BOLD..RED..msg)
 
                 level = level + 1 -- error handler, i.e. this code here
                 local tb = debug.traceback(nil, level)
@@ -333,7 +333,7 @@ hud_class `Console` {
                 -- points to this console function
                 table.remove(frames, 1)
                 for _, frame in ipairs(frames) do
-                    print(RED..frame)
+                    gge_print(RED..frame)
                 end
             end))
         end)

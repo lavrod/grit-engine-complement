@@ -1,6 +1,6 @@
 -- (c) David Cunningham and the Grit Game Engine project 2013, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-include `client_input.lua` 
+gge_include `client_input.lua` 
 
 local STATE_IDLE = 1
 local STATE_CHALLENGING = 2
@@ -15,7 +15,7 @@ end
 net.client = {}
 
 net.client.clientTime = 0
-net.client.lastTime = seconds()
+net.client.lastTime = gge_seconds()
 net.client.lastMessageTime = 0
 
 net.client.timeBase = 0
@@ -30,10 +30,10 @@ net.client.process = function(self)
     end
     
     -- update time
-    local elapsedTime = seconds() - self.lastTime
+    local elapsedTime = gge_seconds() - self.lastTime
     self.clientTime = self.clientTime + elapsedTime
     
-    self.lastTime = seconds()
+    self.lastTime = gge_seconds()
     
     -- check for state
     if self.state ~= STATE_IDLE then
@@ -53,7 +53,7 @@ net.client.checkForTimeout = function(self)
     if self.state == STATE_IDLE then return end
     
     if (self.clientTime - self.lastMessageTime) > 30 then
-        print("Server connection timed out.")
+        gge_print("Server connection timed out.")
         self.state = STATE_IDLE
         self.currentServer = nil
     end
@@ -146,7 +146,7 @@ net.client.sendCommandPacket = function(self)
 end
 
 net.client.processPacket = function(self, address, message)
-    print("client: packet from " .. tostring(address))
+    gge_print("client: packet from " .. tostring(address))
 
     local sequenceNum = message:read_int()
     
@@ -164,7 +164,7 @@ end
 net.client.processOutOfBand = function(self, address, message)
     local oobType = message:read_int(8)
     
-    print("CL OOB message: type " .. oobType)
+    gge_print("CL OOB message: type " .. oobType)
     
     if oobType == (128 + 2) then -- challenge response
         if self.state ~= STATE_CHALLENGING then
@@ -201,7 +201,7 @@ function connect(host)
     if host == nil then return end
     
     if net.runningServer then
-        print("Client and server can not be running at the same time currently")
+        gge_print("Client and server can not be running at the same time currently")
         
         return
     end

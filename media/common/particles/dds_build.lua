@@ -1,7 +1,7 @@
 #!../luaimg.linux.x86_64 -F
 
 if select('#', ...) ~= 2 then
-    error("Usage: luaimg -F dds_build.lua <in.png> <out.dds>")
+    gge_error("Usage: luaimg -F dds_build.lua <in.png> <out.dds>")
 end
 local in_file = select(1, ...)
 local out_file = select(2, ...)

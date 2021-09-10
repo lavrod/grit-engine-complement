@@ -20,7 +20,7 @@ obj2.colour = vec(1, 0, 0)
 obj2.orientation = 30
 
 
-include `font_impact50.lua`
+gge_include `font_impact50.lua`
 
 t = gfx_hud_text_add(`Impact50`)
 t.parent = obj
@@ -48,7 +48,7 @@ obj4.colour = vec(0.5, 0, 0.5)
 obj4.orientation = 32
 
 
-include `font_impact50.lua`
+gge_include `font_impact50.lua`
 
 t2 = gfx_hud_text_add(`Impact50`)
 t2.parent = obj3

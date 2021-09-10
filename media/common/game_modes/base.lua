@@ -28,7 +28,7 @@ function BaseGameMode:init()
     main.audioCentreQuat = self.spawnRot
     self.camYaw = 0
     self.camPitch = 0
-    self.lastMouseMoveTime = seconds()
+    self.lastMouseMoveTime = gge_seconds()
 
     -- Integer in range [0, 3]
     -- Actual boom length is a function of this.
@@ -50,7 +50,7 @@ end
 function BaseGameMode:loadAtLocation()
     streamer_centre_full(self.spawnPos)
 
-    if get_in_queue_size() == 0 then
+    if gge_get_in_queue_size() == 0 then
         -- Everything loaded so don't bother with the loading screen.
         return
     end
@@ -61,13 +61,13 @@ function BaseGameMode:loadAtLocation()
 
     loading_screen:pump()
 
-    local to_go = get_in_queue_size()
+    local to_go = gge_get_in_queue_size()
     local init_to_go = to_go
     while to_go > 0 do
-        to_go = get_in_queue_size()
+        to_go = gge_get_in_queue_size()
         loading_screen:setProgress((init_to_go - to_go) / init_to_go)
         loading_screen:pump()
-        give_queue_allowance(1 + to_go)
+        gge_give_queue_allowance(1 + to_go)
     end
     loading_screen:setProgress(1)
     loading_screen:setStatus('Activating objects')
@@ -110,11 +110,11 @@ function BaseGameMode:mouseMove(rel)
     main.camQuat = quat(self.camYaw, V_DOWN) * quat(self.camPitch, V_EAST)
     main.audioCentreQuat = main.camQuat
 
-    self.lastMouseMoveTime = seconds()
+    self.lastMouseMoveTime = gge_seconds()
 end
 
 function BaseGameMode:debugText(i, str)
-    print(i, str)
+    gge_print(i, str)
 end
 
 function BaseGameMode:receiveButton(button, state)

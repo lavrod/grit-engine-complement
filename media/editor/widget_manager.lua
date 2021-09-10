@@ -424,7 +424,7 @@ function widget_manager:frameCallback(elapsed_secs)
         -- Don't snap the widget?
         self.widget:updatePivot(self.widgetPos + translation, self.widgetOrt)
 
-        if input_filter_pressed("Ctrl") then
+        if gge_input_filter_pressed("Ctrl") then
             translation = math.floor(translation / self.gridSize) * self.gridSize
         end
 
@@ -467,7 +467,7 @@ function widget_manager:frameCallback(elapsed_secs)
             elseif self.pivotPoint == 'centre point' then
                 origin = self.widgetPos
             else
-                error('Unrecognised pivotPoint: ' .. self.pivotPoint)
+                gge_error('Unrecognised pivotPoint: ' .. self.pivotPoint)
             end
 
             editor.mapFile:proposeOrientation(obj, transform * editor.mapFile:getOrientation(obj))

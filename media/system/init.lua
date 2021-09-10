@@ -12,15 +12,15 @@ getmetatable("").__mod = function(str, n)
     end
 end
 function printf(str, ...)
-    print(str % {...})
+    gge_print(str % {...})
 end
 
 
 -- Disable them as we boot the engine.
-core_option("FOREGROUND_WARNINGS", false)
+gge_core_option("FOREGROUND_WARNINGS", false)
 
 
-print "Initialising script..."
+gge_print("Initialising script...")
 io.stdout:setvbuf("no") -- no output buffering
 collectgarbage("setpause",110) -- begin a gc cycle after blah% increase in ram use
 collectgarbage("setstepmul",150) -- collect at blah% the rate of new object creation
@@ -29,18 +29,18 @@ gfx_shadow_pcf_noise_map `HiFreqNoiseGauss.64.png`
 gfx_fade_dither_map `stipple.png`
 gfx_env_cube(0, `env_cube_noon.envcube.tiff`)
 
-include `strict.lua` 
+gge_include `strict.lua` 
 
-include `abbrev.lua` 
+gge_include `abbrev.lua` 
 
-include `util.lua` 
+gge_include `util.lua` 
 
-include `unicode_test_strings.lua` 
+gge_include `unicode_test_strings.lua` 
 
 main = {
     shouldQuit = false;
     frameCallbacks = CallbackReg.new();
-    frameTime = seconds();
+    frameTime = gge_seconds();
 
     streamerCentre = vec(0, 0, 0);
 
@@ -113,7 +113,7 @@ mouse_pos_abs = V_ZERO
 
 
 function physics_step (elapsed_secs)
-    local _, initial_allocs = get_alloc_stats()
+    local _, initial_allocs = gge_get_alloc_stats()
 
     object_do_step_callbacks(elapsed_secs)
     game_manager:stepUpdate(elapsed_secs)
@@ -122,7 +122,7 @@ function physics_step (elapsed_secs)
     gfx_tracer_body_pump(elapsed_secs)
     gfx_particle_pump(elapsed_secs)
 
-    local _, final_allocs = get_alloc_stats()
+    local _, final_allocs = gge_get_alloc_stats()
     main.physicsAllocs = final_allocs - initial_allocs
 end
 
@@ -130,7 +130,7 @@ function physics_maybe_step (elapsed_secs)
     if main.physicsEnabled then
         physics_step(elapsed_secs)
     end
-    do_events(elapsed_secs)
+    gge_do_events(elapsed_secs)
 end
 
 function physics_frame_step (step_size, elapsed_secs)
@@ -166,36 +166,36 @@ function main:run (...)
     local failName = {}
 
     -- rendering loop
-    while not clicked_close() and not main.shouldQuit do
+    while not gge_clicked_close() and not main.shouldQuit do
 
-        local curr_time = seconds()
+        local curr_time = gge_seconds()
         local elapsed_secs = curr_time - main.frameTime
         main.frameTime = curr_time
 
 
         -- INPUT
-        if last_focus ~= have_focus() then
-            last_focus = have_focus()
-            input_filter_flush()
+        if last_focus ~= gge_have_focus() then
+            last_focus = gge_have_focus()
+            gge_input_filter_flush()
         end
 
-        local presses = get_keyb_presses()
-        local moved,buttons,x,y,rel_x,rel_y = get_mouse_events()
+        local presses = gge_get_keyb_presses()
+        local moved,buttons,x,y,rel_x,rel_y = gge_get_mouse_events()
         mouse_pos_abs = vec(x, y)
         mouse_pos_rel = vec(rel_x, rel_y)
 
         if moved then
-            input_filter_trickle_mouse_move(mouse_pos_rel, mouse_pos_abs)
+            gge_input_filter_trickle_mouse_move(mouse_pos_rel, mouse_pos_abs)
         end
 
         for _,key in ipairs(presses) do
-            if get_keyb_verbose() then print("Lua key event: "..key) end
-            input_filter_trickle_button(key)
+            if gge_get_keyb_verbose() then gge_print("Lua key event: "..key) end
+            gge_input_filter_trickle_button(key)
         end
 
         for _,button in ipairs(buttons) do
-            if get_keyb_verbose() then print("Lua mouse event: "..button) end
-            input_filter_trickle_button(button)
+            if gge_get_keyb_verbose() then gge_print("Lua mouse event: "..button) end
+            gge_input_filter_trickle_button(button)
         end
 
         -- PHYSICS (and game logic)
@@ -227,7 +227,7 @@ function main:run (...)
 
 
         -- STREAMING
-        give_queue_allowance(1 + 1*get_in_queue_size())
+        gge_give_queue_allowance(1 + 1*gge_get_in_queue_size())
         streamer_centre(main.streamerCentre)
 
 
@@ -237,18 +237,18 @@ function main:run (...)
 
         do -- render a frame
             if user_cfg.lowPowerMode then
-                --sleep_seconds(0.2 - elapsed_secs)
-                sleep(math.floor(1000000*(0.2 - elapsed_secs)))
-                --print("Total frame time: "..elapsed_secs)
+                --gge_sleep_seconds(0.2 - elapsed_secs)
+                gge_sleep(math.floor(1000000*(0.2 - elapsed_secs)))
+                --gge_print("Total frame time: "..elapsed_secs)
             end
-            main.gfxCount, main.gfxUnacctAllocs = get_alloc_stats()
-            reset_alloc_stats()
+            main.gfxCount, main.gfxUnacctAllocs = gge_get_alloc_stats()
+            gge_reset_alloc_stats()
             gfx_render(elapsed_secs, main.camPos, main.camQuat)
-            main.gfxCount, main.gfxAllocs = get_alloc_stats()
-            reset_alloc_stats()
+            main.gfxCount, main.gfxAllocs = gge_get_alloc_stats()
+            gge_reset_alloc_stats()
         end
-        --local post_frame_time = seconds()
-        --print("Frame render time: "..(post_frame_time - curr_time))
+        --local post_frame_time = gge_seconds()
+        --gge_print("Frame render time: "..(post_frame_time - curr_time))
 
         main.gfxShadow1[1], main.gfxShadow1[2], main.gfxShadow1[3],
         main.gfxShadow2[1], main.gfxShadow2[2], main.gfxShadow2[3],
@@ -265,28 +265,28 @@ function main:run (...)
                 failName.name = name
                 --t:reset()
                 if cb == nil then
-                        --print(RED.."Callback was nil: "..name)
+                        --gge_print(RED.."Callback was nil: "..name)
                         return true
                 end
                 local result = cb(...)
                 --local us = t.us
                 --if us>5000 and name~="GFX.frameCallback" then
-                --        print("callback \""..name.."\" took "..us/1000 .."ms ")
+                --        gge_print("callback \""..name.."\" took "..us/1000 .."ms ")
                 --end
                 return result
             end)
             failName.name = nil
 
-        end,error_handler)
+        end,gge_error_handler)
 
         if failName.name then
-            print("Removed frameCallback: " .. failName.name)
+            gge_print("Removed frameCallback: " .. failName.name)
             main.frameCallbacks:removeByName(failName.name)
         end
 
         if not gfx_window_active() then
-            --sleep_seconds(0.2)
-            sleep(200000)
+            --gge_sleep_seconds(0.2)
+            gge_sleep(200000)
         end
 
     end
@@ -297,37 +297,37 @@ function main:run (...)
 end
 
 
-include `game_manager.lua` 
+gge_include `game_manager.lua` 
 
-include `default_shader.lua` 
+gge_include `default_shader.lua` 
 
-include `map.lua`
+gge_include `map.lua`
 
-include `directory_list.lua`
+gge_include `directory_list.lua`
 
-include `configuration.lua` 
+gge_include `configuration.lua` 
 
-include `physical_materials.lua` 
-include `procedural_objects.lua` 
-include `procedural_batches.lua` 
+gge_include `physical_materials.lua` 
+gge_include `procedural_objects.lua` 
+gge_include `procedural_batches.lua` 
 
-include `pid_ctrl.lua` 
+gge_include `pid_ctrl.lua` 
 
-include `capturer.lua` 
+gge_include `capturer.lua` 
 
-include `env.lua` 
+gge_include `env.lua` 
 
-include `audio.lua` 
+gge_include `audio.lua` 
 
-include `net.lua` 
+gge_include `net.lua` 
 
-include `navigation_system.lua`
+gge_include `navigation_system.lua`
 
-include `weapon_effect_manager.lua`
+gge_include `weapon_effect_manager.lua`
 
-include `digital_control.lua`
+gge_include `digital_control.lua`
 
-include `/common/init.lua` 
+gge_include `/common/init.lua` 
 
 function reset_everything()
     configuration_reset()
@@ -339,21 +339,21 @@ end
 reset_everything()
 
 
--- include `/vehicles/init.lua`
+-- gge_include `/vehicles/init.lua`
 
 -- Should probably move to common at this point...
--- include `/detached/characters/init.lua`
+-- gge_include `/detached/characters/init.lua`
 
 
 -- Game modes
-safe_include `/editor/init.lua`
-safe_include `/sponza/init.lua`
-safe_include `/navigation_demo/init.lua`
-safe_include `/playground/init.lua`
-safe_include `/detached/init.lua`
-safe_include `/wipeout/init.lua`
+gge_safe_include `/editor/init.lua`
+gge_safe_include `/sponza/init.lua`
+gge_safe_include `/navigation_demo/init.lua`
+gge_safe_include `/playground/init.lua`
+gge_safe_include `/detached/init.lua`
+gge_safe_include `/wipeout/init.lua`
 
-include `welcome_msg.lua`
+gge_include `welcome_msg.lua`
 
 function debug_mode(map)
     game_manager:enter('Map Editor')
@@ -366,8 +366,8 @@ end
 
 menu_show('main')
 
-safe_include `/user_script.lua`
+gge_safe_include `/user_script.lua`
 
 -- Re-enable now we're in the rendering loop.
-core_option("FOREGROUND_WARNINGS", true)
+gge_core_option("FOREGROUND_WARNINGS", true)
 main:run(...)

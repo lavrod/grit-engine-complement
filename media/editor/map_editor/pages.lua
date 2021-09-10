@@ -495,7 +495,7 @@ local map_editor_page = {
             -- {
                 -- {
                     -- callback = function()
-                        -- print("TODO")
+                        -- gge_print("TODO")
                     -- end;
                     -- name = "Edit Properties";
                 -- },
@@ -570,7 +570,7 @@ local function restart_editor_tools()
 end
 
 function restart_editor_gui()
-    safe_include `/common/gui/init.lua`
+    gge_safe_include `/common/gui/init.lua`
     editor_interface.map_editor_page:destroy()
     editor_interface.map_editor_page:init()
     editor_interface.map_editor_page:select()

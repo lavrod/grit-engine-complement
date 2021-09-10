@@ -47,7 +47,7 @@ hud_class `StackY` {
                         elseif mv == "RIGHT" then
                             alignment = 1
                         else
-                            error("Unrecognised horizontal alignment: \""..tostring(mv).."\"")
+                            gge_error("Unrecognised horizontal alignment: \""..tostring(mv).."\"")
                         end
                     elseif mk == 'content' then
                         content = mv
@@ -56,7 +56,7 @@ hud_class `StackY` {
                     elseif mk == 'expandY' then
                         expand_y = mv
                     else
-                        error("Unrecognised modifier: "..tostring(mk))
+                        gge_error("Unrecognised modifier: "..tostring(mk))
                     end
                 end
                 v = content
@@ -222,7 +222,7 @@ hud_class `StackX` {
                         elseif mv == "BOTTOM" then
                             alignment = -1
                         else
-                            error("Unrecognised vertical alignment: \""..tostring(mv).."\"")
+                            gge_error("Unrecognised vertical alignment: \""..tostring(mv).."\"")
                         end
                     elseif mk == 'content' then
                         content = mv
@@ -231,7 +231,7 @@ hud_class `StackX` {
                     elseif mk == 'expandY' then
                         expand_y = mv
                     else
-                        error("Unrecognised modifier: "..tostring(mk))
+                        gge_error("Unrecognised modifier: "..tostring(mk))
                     end
                 end
                 v = content

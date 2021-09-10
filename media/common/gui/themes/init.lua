@@ -807,9 +807,9 @@ editor_themes['Dark Magenta'] = {
 }
 
 -- it's a handwritten file
-safe_include `/editor/config/custom_themes.lua`
+gge_safe_include `/editor/config/custom_themes.lua`
 
-safe_include `/editor/config/interface.lua`
+gge_safe_include `/editor/config/interface.lua`
 
 if editor_interface_cfg ~= nil and editor_themes[editor_interface_cfg.theme] ~= nil then
 	_current_theme = editor_themes[editor_interface_cfg.theme]

@@ -104,7 +104,7 @@ hud_class `SettingEdit` {
     clickColour = vec(1, 1, 1),
 
     settingChangedCallback = function (self, v)
-        error 'No settingChangedCallback.'
+        gge_error('No settingChangedCallback.')
     end,
     
     init = function (self)
@@ -223,7 +223,7 @@ hud_class `SettingEdit` {
                 end,
             }
         else
-            error('Settings menu did not recognise setting type: ' .. self.settingType[1])
+            gge_error('Settings menu did not recognise setting type: ' .. self.settingType[1])
         end
         self.edit = self.edit or hud_object `/common/hud/Label` {
             alpha = 0,

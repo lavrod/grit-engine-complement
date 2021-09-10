@@ -6,7 +6,7 @@ do
         frames = { 640,512, 128, 128, };  frame = 0;
         initialVolume = 10; maxVolume = 200; life = 2;
         behaviour = particle_behaviour_alpha_gas_ball_diffuse;
-        alphaCurve = Plot{[0]=0.0,[0.5]=0.25,[1]=0};
+        alphaCurve = gge_Plot{[0]=0.0,[0.5]=0.25,[1]=0};
         convectionCurve = particle_convection_curve;
     }
 
@@ -15,7 +15,7 @@ do
         frames = { 896,640, 128, 128, };  frame = 0;
         initialVolume = 10; maxVolume = 200; life = 2;
         behaviour = particle_behaviour_alpha_gas_ball_diffuse;
-        alphaCurve = Plot{[0]=1,[0.2]=0.3,[0.5]=0.1,[1]=0};
+        alphaCurve = gge_Plot{[0]=1,[0.2]=0.3,[0.5]=0.1,[1]=0};
         convectionCurve = particle_convection_curve;
     }
 end
@@ -138,7 +138,7 @@ particle `EngineSmoke` {
 }
 
 -- damage is from 0 to 1
-local engine_smoke_colour = Plot {
+local engine_smoke_colour = gge_Plot {
     [0.00] = 1.0;
     [0.30] = 0.5;
     [0.70] = 0.1;
@@ -169,7 +169,7 @@ end
 
 
 
-local exhaust_smoke_alpha = Plot{
+local exhaust_smoke_alpha = gge_Plot{
     [0] = 0.3;
     [10] = 0.2;
     [20] = 0.1;
@@ -207,14 +207,14 @@ particle `ExhaustSmoke` {
     end;
 }
 
-local exhaust_smoke_life = Plot{
+local exhaust_smoke_life = gge_Plot{
     [0] = 0.3;
     [1] = 0.25;
     [5] = 0.1;
     [20] = 0.05;
     [30] = 0;
 }
-local exhaust_smoke_color = Plot{
+local exhaust_smoke_color = gge_Plot{
     [0] = 0.2;
     [03] = 0.2;
     [10] = 0;

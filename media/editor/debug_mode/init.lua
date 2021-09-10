@@ -1,1 +1,1 @@
-include `settings.lua`
+gge_include `settings.lua`

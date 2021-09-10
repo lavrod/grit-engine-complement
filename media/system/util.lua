@@ -74,8 +74,8 @@ CYAN = "\027[36m"
 WHITE = "\027[37m"
 
 function echo (...)
-    print(...)
-    print(BOLD..CYAN.."echo() is deprecated.  Please use print() instead.  Use print_stdout() for the old Lua print.")
+    gge_print(...)
+    gge_print(BOLD..CYAN.."echo() is deprecated.  Please use gge_print() instead.  Use print_stdout() for the old Lua gge_print.")
 end
 
 function none_one_or_all(tab, f)
@@ -87,20 +87,20 @@ function none_one_or_all(tab, f)
         end
 end
 
---print = print
+--gge_print = gge_print
 
 
 function time(f,...)
-        local before = seconds()
+        local before = gge_seconds()
         f(...)
-        local after = seconds()
+        local after = gge_seconds()
         return after - before
 end
 
 function time_micros(f, ...)
-        local before = micros()
+        local before = gge_micros()
         f(...)
-        local after = micros()
+        local after = gge_micros()
         return after - before
 end
 
@@ -437,7 +437,7 @@ function format_time (secs)
 end
 
 function parse_time (str)
-    local function throw() error("Invalid time: \""..str.."\"", 1) end
+    local function throw() gge_error("Invalid time: \""..str.."\"", 1) end
     if #str ~= 8 then throw() end
     for i=1,8 do
         local char = str:sub(i,i)
@@ -524,11 +524,11 @@ end
 --[[
 function check_args(types,...)
         if #types~=#{...} then
-                error("Expected "..#types.." args, got "..#{...}..".",3)
+                gge_error("Expected "..#types.." args, got "..#{...}..".",3)
         end
         for k,v in ipairs({...}) do
                 if type(v) ~= types[k] then
-                        error("Argument "..k.." expected "..types[k].." got "..type(v)..".")
+                        gge_error("Argument "..k.." expected "..types[k].." got "..type(v)..".")
                 end
         end
         return ...
@@ -631,7 +631,7 @@ function CallbackReg:execute (p1, p2, p3, p4)
         local broken_callbacks
         for _,record in ipairs(self.callBacks) do
                 local _, cb = unpack(record)
-                local status, continue = xpcall(function() return cb(p1, p2, p3, p4) end, error_handler)
+                local status, continue = xpcall(function() return cb(p1, p2, p3, p4) end, gge_error_handler)
                 if status then
                         broken_callbacks = broken_callbacks or { }
                         broken_callbacks[#broken_callbacks] = record
@@ -676,7 +676,7 @@ end
 function CallbackReg:getIndexSafe(name,...)
         local tmp = self:getIndex(name)
         if tmp==nil then
-                error("Couldn't find a callback called \""..name.."\"",3)
+                gge_error("Couldn't find a callback called \""..name.."\"",3)
         end
         return tmp
 end
@@ -765,41 +765,41 @@ function verify_input(v, spec, level)
                                 sep = sep.."or "
                         end
                 end
-                error(str,level)
+                gge_error(str,level)
         elseif spec[1] == "range" then
                 verify_input(v, {"number"}, level+1)
                 local low, high = spec[2], spec[3]
                 if v < low or v > high then
                         local str ="\""..tostring(v).."\" unacceptable, must be inside "..low.." to "..high
-                        error(str,level)
+                        gge_error(str,level)
                 end
         elseif spec[1] == "int range" then
                 verify_input(v, {"int"}, level+1)
                 local low, high = spec[2], spec[3]
                 if v < low or v > high then
                         local str ="\""..tostring(v).."\" unacceptable, must be inside "..low.." to "..high
-                        error(str,level)
+                        gge_error(str,level)
                 end
         elseif simple_types[spec[1]] ~= nil then
                 if type(v) ~= spec[1] then
                         local str ="\""..tostring(v).."\" unacceptable, must be a '" .. spec[1]
-                        error(str,level)
+                        gge_error(str,level)
                 end
         elseif spec[1] == "int" then
                 verify_input(v, {"number"}, level+1)
                 if math.floor(v) ~= v then
                         local str ="\""..tostring(v).."\" unacceptable, must be an integer"
-                        error(str, level)
+                        gge_error(str, level)
                 end
         elseif spec[1] == "table" then
                 local size = spec[2]
                 if type(v) ~= "table" then
                         local str ="\""..tostring(v).."\" unacceptable, must be a table"
-                        error(str,level)
+                        gge_error(str,level)
                 end
                 if #v ~= size then
                         local str ="array unacceptable, must have exactly "..size.." elements"
-                        error(str,level)
+                        gge_error(str,level)
                 end
                 for i=1,size do
                         if spec[2+i] then
@@ -807,7 +807,7 @@ function verify_input(v, spec, level)
                         end
                 end
         else
-                error("Unrecognised specification: "..tostring(spec[1]))
+                gge_error("Unrecognised specification: "..tostring(spec[1]))
         end
 end
 
@@ -870,7 +870,7 @@ function make_active_table(tab, verification, commit)
     setmetatable(tab, {
         __index = function (self, k)
             local v = self.committed[k]
-            if v == nil then error('No such setting: "' .. k .. '"', 2) end
+            if v == nil then gge_error('No such setting: "' .. k .. '"', 2) end
             return v
         end,
 
@@ -880,7 +880,7 @@ function make_active_table(tab, verification, commit)
                 self.committed[k] = v
             else
                 local spec = self.spec[k]
-                if spec == nil then error('No such setting: "' .. k .. '"', 2) end
+                if spec == nil then gge_error('No such setting: "' .. k .. '"', 2) end
                 verify_input(v, spec, 2)
                 self.proposed[k] = v
             end
@@ -925,11 +925,11 @@ end
 local running_map = nil
 
 function map_ghost_spawn(pos, quat)
-    if running_map ~= current_dir() then
+    if running_map ~= gge_current_dir() then
 		main.camPos = pos
 		main.camQuat = quat or Q_ID
         --warp(pos, quat or Q_ID) --Not sure what to do here, it was removed when player_ctrl was removed so I just added in the new way above.
-        running_map = current_dir()
+        running_map = gge_current_dir()
         return true
     end
 end
@@ -938,7 +938,7 @@ function valid_object(obj) if obj and obj.instance and not obj.destroyed then re
 
 dialogObjects = {}
 
-function showDialog(subject, message, options, functioncall)--showDialog("Subject", "Grit Engine", {"Red","Green","Blue"}, print)
+function showDialog(subject, message, options, functioncall)--showDialog("Subject", "Grit Engine", {"Red","Green","Blue"}, gge_print)
 	if subject == nil then subject = "Dialog" end
 	if message ~= nil and functioncall ~= nil then
 		local dialogsToDelete = {}
@@ -979,7 +979,7 @@ function showDialog(subject, message, options, functioncall)--showDialog("Subjec
 		dialogObjects[dialogWindowID].position = vec2(0,0)
 		dialogObjects[dialogWindowID].zOrder = 7
 	else
-		print("Dialog message is not valid!")
+		gge_print("Dialog message is not valid!")
 	end
 end
 

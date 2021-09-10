@@ -64,7 +64,7 @@ hud_class `.` {
         elseif control.className == `/common/hud/controls/ValueControl` then
             self.colourPicker:setValue(control.value, control.maxValue)
         else
-            print("Did not expect: "..control.caption)
+            gge_print("Did not expect: "..control.caption)
         end
     end;
     
@@ -101,7 +101,7 @@ hud_class `.` {
             self.marker.position = vec(0, control.size.y+4/2)
             self.marker.enabled = true
         else
-            error("Unknown type of control.")
+            gge_error("Unknown type of control.")
         end
     end;
 
@@ -128,7 +128,7 @@ hud_class `.` {
             self:currentInstant()[name] = tonumber(control.value)
             env_recompute()
         else
-            error("Unrecognised control classname: "..control.className)
+            gge_error("Unrecognised control classname: "..control.className)
         end
     end;
 
@@ -158,7 +158,7 @@ hud_class `.` {
             self:currentInstant()[name] = control:getTextValue():upper()
             env_recompute()
         else
-            error("Unrecognised control classname: "..control.className)
+            gge_error("Unrecognised control classname: "..control.className)
         end
         env_recompute()
     end;
@@ -396,7 +396,7 @@ hud_class `.` {
     end;
 
     setClosestToTime = function (self, hours)
-        if hours < 0 or hours >= 24 then error("Invalid time in hours: "..hours) end
+        if hours < 0 or hours >= 24 then gge_error("Invalid time in hours: "..hours) end
         -- TODO: write me
         local the_env = nil
         local hours_dist = 13
@@ -456,33 +456,33 @@ hud_class `.` {
     end;
 
     frameCallback = function (self, elapsed)
-        self.marker.alpha = math.sin(math.rad(seconds()*360*2)) + 1
+        self.marker.alpha = math.sin(math.rad(gge_seconds()*360*2)) + 1
     end;
 
     load = function (self)
         xpcall(function()
             local filename = self.fileName.value
-            env_cycle = include(filename)
-            print("Read env cycle from \""..filename.."\"")
+            env_cycle = gge_include(filename)
+            gge_print("Read env cycle from \""..filename.."\"")
             self:updateFromEnvCycle()
             env_recompute()
-        end, error_handler)
+        end, gge_error_handler)
     end;
 
     save = function (self)
         xpcall(function()
             local filename = self.fileName.value
             if filename:sub(1,1) ~= "/" then
-                error("Filename must be absolute path.")
+                gge_error("Filename must be absolute path.")
             end
             filename = filename:sub(2)
             local f = io.open(filename, "w")
-            if f==nil then error("Could not open file", 1) end
+            if f==nil then gge_error("Could not open file", 1) end
             f:write("env_cycle = ")
             f:write(dump(env_cycle, false))
             f:close()
-            print("Wrote env cycle to \"/"..filename.."\"")
-        end, error_handler)
+            gge_print("Wrote env cycle to \"/"..filename.."\"")
+        end, gge_error_handler)
     end;
         
 }

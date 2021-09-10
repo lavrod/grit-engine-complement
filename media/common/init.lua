@@ -1,35 +1,35 @@
 -- (c) David Cunningham 2009, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-include `paint_shader.lua`
-include `heightmap_texture_blend_shader.lua`
+gge_include `paint_shader.lua`
+gge_include `heightmap_texture_blend_shader.lua`
 
-include `map_classes.lua`
-include `sound_emitter_class.lua`
-include `MoveSpinClass.lua`
+gge_include `map_classes.lua`
+gge_include `sound_emitter_class.lua`
+gge_include `MoveSpinClass.lua`
 
-include `game_modes/init.lua`
+gge_include `game_modes/init.lua`
 
-include `fonts/init.lua`
-include `sounds/init.lua`
+gge_include `fonts/init.lua`
+gge_include `sounds/init.lua`
 
-include `hud/init.lua`
-include `gui/init.lua`
+gge_include `hud/init.lua`
+gge_include `gui/init.lua`
 
-include `particles/init.lua`
+gge_include `particles/init.lua`
 
-include `pmat/init.lua`
+gge_include `pmat/init.lua`
 
-include `mat/init.lua`
+gge_include `mat/init.lua`
 
-include `weapons/init.lua`
+gge_include `weapons/init.lua`
 
-include `decals/init.lua`
+gge_include `decals/init.lua`
 
-include `carcols.lua`
+gge_include `carcols.lua`
 
-include `props/init.lua`
-include `veg/init.lua`
-include `ramps/init.lua`
+gge_include `props/init.lua`
+gge_include `veg/init.lua`
+gge_include `ramps/init.lua`
 
 
 --[=[
@@ -63,11 +63,11 @@ local tab = {
 }
 
 if common_binds ~= nil then common_binds:destroy() end
-common_binds = InputFilter(100, `common_binds`)
+common_binds = gge_InputFilter(100, `common_binds`)
 
 
 for k,v in pairs(tab) do
-    common_binds:bind(k, function() print(v) ; introduce_obj(v) end, nil, function() print(v) ; introduce_obj(v,true) end)
+    common_binds:bind(k, function() gge_print(v) ; introduce_obj(v) end, nil, function() gge_print(v) ; introduce_obj(v,true) end)
 end
 
 common_binds:bind("k", function() place(`ramps/Small`) end)

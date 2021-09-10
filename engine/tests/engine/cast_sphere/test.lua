@@ -20,7 +20,7 @@ end
 
 function assert_small(v)
     if #v > 0.0001 then
-        error("Difference between sphere cast and ray cast is too great: " .. v)
+        gge_error("Difference between sphere cast and ray cast is too great: " .. v)
     end
 end
 

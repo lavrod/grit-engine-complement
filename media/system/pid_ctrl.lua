@@ -18,10 +18,10 @@ end
 
 -- Compute a value indicating how to influence an object to correct its position to the reference value
 function pid_ctrl:control(ref, pos)
-    --print "PID controlling"
-    -- compute error (how far we are from target value)
+    --gge_print("PID controlling")
+    -- compute gge_error(how far we are from target value)
     local err = ref - pos
-    --print("err "..err)
+    --gge_print("err "..err)
     
     -- compute accumulated error over time
     if self.iState == nil then
@@ -39,19 +39,19 @@ function pid_ctrl:control(ref, pos)
         --self.iState = clamp_v(self.iState, self.iMin, self.iMax)
     end
     
-    --print("iState "..self.iState)
+    --gge_print("iState "..self.iState)
     -- compute rate of change of error
     self.dState = pos - self.lastPos
-    --print("dState "..self.dState)
+    --gge_print("dState "..self.dState)
     self.lastPos = pos
-    --print("lastPos "..self.lastPos)
+    --gge_print("lastPos "..self.lastPos)
         
-    --print("pGain "..self.pGain)
-    --print("iGain "..self.iGain)
-    --print("dGain "..self.dGain)
+    --gge_print("pGain "..self.pGain)
+    --gge_print("iGain "..self.iGain)
+    --gge_print("dGain "..self.dGain)
     
     -- compute response
     --local response = self.pGain*err + self.iGain*self.iState + self.dGain*self.dState;
-    --print("response "..response)
+    --gge_print("response "..response)
     return self.pGain*err + self.iGain*self.iState + self.dGain*self.dState;
 end

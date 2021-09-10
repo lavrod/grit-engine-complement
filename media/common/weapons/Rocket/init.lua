@@ -94,12 +94,12 @@ WeaponEffectManager:set("Rocket", {
     reloadSec = 0.5;
     
     fire = function (self, p, q)
-        self.lastFire = seconds()
+        self.lastFire = gge_seconds()
         object `Rocket` (p) { rot=q }
     end;
     
     checkFire = function (self, p, q)
-        if seconds() > self.lastFire + self.reloadSec then
+        if gge_seconds() > self.lastFire + self.reloadSec then
             self:fire(p, q)
         end
     end;

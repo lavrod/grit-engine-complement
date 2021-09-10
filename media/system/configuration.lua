@@ -1,13 +1,13 @@
 -- (c) David Cunningham 2009, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-safe_include `/user_cfg.lua`
+gge_safe_include `/user_cfg.lua`
 
 
 -- Sanitize "given" table, apply default values.
 local function process_user_table(name, given, default)
     for k, v in pairs(given) do
         if default[k] == nil then
-            print(("%s contained unrecognised field \"%s\", ignoring."):format(name, k))
+            gge_print(("%s contained unrecognised field \"%s\", ignoring."):format(name, k))
             given[k] = nil
         end
     end
@@ -74,7 +74,7 @@ local function commit(committed, proposed, force)
 
     gfx_option("AUTOUPDATE",false)
     physics_option("AUTOUPDATE",false)
-    core_option("AUTOUPDATE",false)
+    gge_core_option("AUTOUPDATE",false)
     audio_option("AUTOUPDATE",false)
 
     for k, v in pairs(proposed) do
@@ -87,20 +87,20 @@ local function commit(committed, proposed, force)
             elseif k == "fullscreen" then
                 gfx_option("FULLSCREEN",v)
             elseif k == "visibility" then
-                core_option("VISIBILITY",v)
+                gge_core_option("VISIBILITY",v)
         
             elseif k == "graphicsRAM" then
                 gfx_option("RAM",v)
                 --set_texture_budget(v*1024*1024)
                 --set_mesh_budget(0)
             elseif k == "lockMemory" then
-                if v then mlockall() else munlockall() end
+                if v then gge_mlockall() else gge_munlockall() end
 
             elseif k == "physicsWireFrame" then
-                print("Physics wire frame: "..(v and "on" or "off"))
+                gge_print("Physics wire frame: "..(v and "on" or "off"))
                 physics_option("DEBUG_WIREFRAME", v)
             elseif k == "physicsDebugWorld" then
-                print("Physics debug world: "..(v and "on" or "off"))
+                gge_print("Physics debug world: "..(v and "on" or "off"))
                 main.physicsDebugWorld = v
             elseif k == "mouseSensitivity" then
                 -- next mouse movement picks this up
@@ -125,14 +125,14 @@ local function commit(committed, proposed, force)
                 audio_option("MASTER_VOLUME",v)
             elseif k == "vehicleCameraTrack" then
             else
-                error("Unexpected: "..k)
+                gge_error("Unexpected: "..k)
             end
         end
     end
 
     gfx_option("AUTOUPDATE",true)
     physics_option("AUTOUPDATE",true)
-    core_option("AUTOUPDATE",true)
+    gge_core_option("AUTOUPDATE",true)
     audio_option("AUTOUPDATE",true)
 
 end
@@ -143,7 +143,7 @@ user_cfg.autoUpdate = true
 
 function configuration_reset()
     physics_option_reset()
-    core_option_reset()
+    gge_core_option_reset()
     gfx_option_reset()
     audio_option_reset()
     user_cfg:reset()
@@ -184,7 +184,7 @@ local default_user_system_bindings = {
 process_user_table("user_system_bindings", user_system_bindings, default_user_system_bindings)
 local function system_receive_button(button, state)
     if button == "console" and state == '+' then
-        if input_filter_pressed("Ctrl") then
+        if gge_input_filter_pressed("Ctrl") then
             system_layer:setEnabled(true)
             system_layer:selectConsole(true)
             hud_focus_grab(console)
@@ -337,7 +337,7 @@ function save_user_cfg(filename)
     filename = filename or 'user_cfg.lua'
     local f = io.open(filename, 'w')
     f:write([[
-print('Reading user_cfg.lua')
+gge_print('Reading user_cfg.lua')
 
 -- This file is output automatically by Grit.
 -- You may edit it, but stick to the basic format.

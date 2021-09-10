@@ -58,7 +58,7 @@ function ThirdPersonGameMode:playerRespawn()
     self.camYaw = 90;
     self.camPitch = 0;
     self.playerCamPitch = 0;  -- Without vehicle pitch offset
-    self.lastMouseMoveTime = seconds()
+    self.lastMouseMoveTime = gge_seconds()
 
     self:mouseMove(vec(0, 0))
     self:stepCallback(0)
@@ -261,7 +261,7 @@ function ThirdPersonGameMode:frameCallback(elapsed_secs)
         local vehicle_vel_xy_speed = #(vehicle_vel * vector3(1,1,0))
 
         -- modify the self.camPitch and self.camYaw to track the direction a vehicle is travelling
-        if user_cfg.vehicleCameraTrack and obj.cameraTrack and seconds() - self.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
+        if user_cfg.vehicleCameraTrack and obj.cameraTrack and gge_seconds() - self.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
 
             self.camPitch = lerp(self.camPitch, self.playerCamPitch + vehicle_pitch, elapsed_secs * 2)
 
@@ -297,7 +297,7 @@ function ThirdPersonGameMode:frameCallback(elapsed_secs)
         local ray_dir = main.camQuat * V_BACKWARDS
         local ray_start = instance.camAttachPos + ray_skip * ray_dir
         if obj.boomLengthMin == nil or obj.boomLengthMax == nil then
-            error('Controlling %s of class %s, needed boomLengthMin and boomLengthMax, got: %s, %s'
+            gge_error('Controlling %s of class %s, needed boomLengthMin and boomLengthMax, got: %s, %s'
                   % {obj, obj.className, obj.boomLengthMin, obj.boomLengthMax})
         end
         local ray_len = self:boomLength(obj.boomLengthMin, obj.boomLengthMax) - ray_skip

@@ -34,11 +34,11 @@ function Capturer:singleScreenShot(movie)
                 fd:close()
         end
         gfx_screenshot(name)
-        print("Wrote: "..name)
+        gge_print("Wrote: "..name)
 end
 
 function Capturer:frameCallback()
-        local secs = seconds()
+        local secs = gge_seconds()
         local elapsed = self.frameTime - secs
         if elapsed < self.rate then
                 return
@@ -59,18 +59,18 @@ function Capturer:toggle()
 end
 
 function Capturer:record()
-        if self.recording then error("Already recording.") end
-        print ("Started recording")
+        if self.recording then gge_error("Already recording.") end
+        gge_print("Started recording")
         main.frameCallbacks:insert("Capturer.frameCallback",function (...) self:frameCallback(...) end)
         self.recording = true
         self.frameCounter = 0
-        self.frameTime = seconds()
+        self.frameTime = gge_seconds()
 end
 function Capturer:stop()
-        if not self.recording then error("Not recording.") end
+        if not self.recording then gge_error("Not recording.") end
         main.frameCallbacks:removeByName("Capturer.frameCallback")
         self.recording = false
-        print ("Recorded: "..self.frameCounter.." frames in "..(seconds()-self.frameTime).." seconds ("..self.frameCounter/self.frameTime.." fps)")
+        gge_print("Recorded: "..self.frameCounter.." frames in "..(gge_seconds()-self.frameTime).." seconds ("..self.frameCounter/self.frameTime.." fps)")
 end
 
 function Capturer:destroy()

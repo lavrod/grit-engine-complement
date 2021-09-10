@@ -102,7 +102,7 @@ hud_class `ImageButton` (extends(_gui.class)
     end;
 
     pressedCallback = function (self)
-        print "Button has no associated action."
+        gge_print("Button has no associated action.")
     end;
 	
     select = function (self, m)

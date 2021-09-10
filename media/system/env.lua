@@ -1,6 +1,6 @@
 -- (c) David Cunningham 2012, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-include `sky.lua`
+gge_include `sky.lua`
 
 
 function env_recompute()
@@ -192,7 +192,7 @@ setmetatable(env, {
     __index = function (self, k)
         local v = self.c[k]
         if v == nil then
-            error('No such setting: "%s"' % k, 2)
+            gge_error('No such setting: "%s"' % k, 2)
         end
         return v
     end,
@@ -223,7 +223,7 @@ setmetatable(env, {
             ensure_range(v,0,360)
             self.p[k] = v
         else
-            error("Unrecognised env setting: "..tostring(k))
+            gge_error("Unrecognised env setting: "..tostring(k))
         end
 
         if not self.c.autoUpdate then return end
@@ -244,12 +244,12 @@ setmetatable(env, {
 })
 
 
-local last_time = seconds()
+local last_time = gge_seconds()
 
 main.frameCallbacks:insert("Environment", function()
     local clock_rate = env.clockRate
 
-    local curr_time = seconds()
+    local curr_time = gge_seconds()
     local elapsed = curr_time - last_time
     last_time = curr_time
     
@@ -275,7 +275,7 @@ env_cube_dark = env_cube_dark or nil
 env_sky = env_sky or nil
 
 function env_reset()
-    env_cycle = include `env_cycle.lua`
+    env_cycle = gge_include `env_cycle.lua`
 
     env_saturation_mask = 1
 

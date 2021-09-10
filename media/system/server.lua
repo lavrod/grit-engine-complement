@@ -18,17 +18,17 @@ net.server.stateID = 1
 net.server.serverTime = 0
 net.server.remainingTime = 0
 
-net.server.lastTime = seconds()
+net.server.lastTime = gge_seconds()
 
 net.server.process = function(self)
     if not net.runningServer then
         return
     end
     
-    local elapsedTime = seconds() - self.lastTime
+    local elapsedTime = gge_seconds() - self.lastTime
     self.remainingTime = self.remainingTime + elapsedTime
     
-    self.lastTime = seconds()
+    self.lastTime = gge_seconds()
     
     while self.remainingTime > (1 / 20) do
         self.remainingTime = self.remainingTime - (1 / 20)
@@ -60,11 +60,11 @@ net.server.sendSnapshot = function(self, client)
 end
 
 net.server.processPacket = function(self, address, message)
-    print("server: packet from " .. tostring(address))
+    gge_print("server: packet from " .. tostring(address))
     
     local sequenceNum = message:read_int()
     
-    print("seq: " .. sequenceNum)
+    gge_print("seq: " .. sequenceNum)
     
     if sequenceNum == -1 then
         return self:processOutOfBand(address, message)
@@ -86,7 +86,7 @@ end
 net.server.commandHandlers = {}
 
 net.server.processClientMessage = function(self, client, message)
-    client.lastMessageReceivedAt = seconds()
+    client.lastMessageReceivedAt = gge_seconds()
     client.lastAcknowledgedMessage = message:read_int()
     client.reliableAcknowledged = message:read_int()
     
@@ -109,7 +109,7 @@ net.server.processClientMessage = function(self, client, message)
             if self.commandHandlers[command] ~= nil then
                 self.commandHandlers[command](self, client, message)
             else
-                print("unknown command type " .. tostring(command))
+                gge_print("unknown command type " .. tostring(command))
                 return
             end
         
@@ -121,13 +121,13 @@ net.server.processClientMessage = function(self, client, message)
                 level,msg = unpack(msg)
         end
         level = level + 1 -- error handler
-        level = level + 1 -- the first line is included in the message so don't print it again
+        level = level + 1 -- the first line is included in the message so don't gge_print it again
         local tb = debug.traceback(msg,level+1) -- error handler
         tb = tb:gsub("\n[^\n]*\n[^\n]*$","")
         tb = tb:gsub("^[^\n]*\n","") -- msg
         tb = tb:gsub("^[^\n]*\n","") -- "stack trace:"
-        print(BOLD..RED..msg)
-        if tb ~= "stack traceback:" then print(RED..tb) end
+        gge_print(BOLD..RED..msg)
+        if tb ~= "stack traceback:" then gge_print(RED..tb) end
         
         self:dropClient(client, "Error while processing client message.")
     end)
@@ -138,7 +138,7 @@ net.server.challenges = {}
 net.server.processOutOfBand = function(self, address, message)
     local oobType = message:read_int(8)
     
-    print("OOB message: type " .. oobType)
+    gge_print("OOB message: type " .. oobType)
     
     -- get server info
     if oobType == 1 then

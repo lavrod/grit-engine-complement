@@ -87,7 +87,7 @@ hud_class `MenuItem` {
     end;
 
     pressedCallback = function (self)
-        print (RED.."Menu item has no associated action.")
+        gge_print(RED.."Menu item has no associated action.")
     end;	
 	
 	endPressedCallback = function (self)
@@ -316,7 +316,7 @@ hud_class `MenuBarButton` {
     end;
 
     pressedCallback = function (self)
-        error "Button has no associated action."
+        gge_error("Button has no associated action.")
     end;
 }
 

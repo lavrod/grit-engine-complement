@@ -5,7 +5,7 @@ ActiveObjectShell = extends (ColClass) {
 
     init = function (self)
         ColClass.init(self)
-        print("Creating "..self.name.." of class "..self.className.." with additionalState="..self.additionalState)
+        gge_print("Creating "..self.name.." of class "..self.className.." with additionalState="..self.additionalState)
     end;
 
     activate = function (self, instance)
@@ -15,7 +15,7 @@ ActiveObjectShell = extends (ColClass) {
                 return true
         end
 
-        print("Activating "..self.name)
+        gge_print("Activating "..self.name)
 
         -- initialise any state for streamed in object here (this state does not persist when streamed out)
         instance.timeSinceActivation = 0
@@ -60,7 +60,7 @@ ActiveObjectShell = extends (ColClass) {
 
     deactivate = function (self)
         local instance = self.instance
-        print("Deactivating "..self.name)
+        gge_print("Deactivating "..self.name)
 
         -- request that stepCallback be called every physics tick
         self.needsStepCallbacks = false
@@ -75,46 +75,46 @@ ActiveObjectShell = extends (ColClass) {
 
     -- these are needed if you set instance.canDrive = true
     setPush = function (self, v)
-        print(self.name..":  push set to "..tostring(v))
+        gge_print(self.name..":  push set to "..tostring(v))
     end;
     setPull = function (self, v)
-        print(self.name..":  pull set to "..tostring(v))
+        gge_print(self.name..":  pull set to "..tostring(v))
     end;
     setShouldSteerLeft = function (self, v)
-        print(self.name..":  steer left set to "..tostring(v))
+        gge_print(self.name..":  steer left set to "..tostring(v))
     end;
     setShouldSteerRight = function (self, v)
-        print(self.name..":  steer right set to "..tostring(v))
+        gge_print(self.name..":  steer right set to "..tostring(v))
     end;
     setHandbrake = function (self, v)
-        print(self.name..":  handbrake right set to "..tostring(v))
+        gge_print(self.name..":  handbrake right set to "..tostring(v))
     end;
     setSpecialUp = function (self, v)
-        print(self.name..":  special up set to "..tostring(v))
+        gge_print(self.name..":  special up set to "..tostring(v))
     end;
     setSpecialDown = function (self, v)
-        print(self.name..":  special down set to "..tostring(v))
+        gge_print(self.name..":  special down set to "..tostring(v))
     end;
     setSpecialLeft = function (self, v)
-        print(self.name..":  special left set to "..tostring(v))
+        gge_print(self.name..":  special left set to "..tostring(v))
     end;
     setSpecialRight = function (self, v)
-        print(self.name..":  special right set to "..tostring(v))
+        gge_print(self.name..":  special right set to "..tostring(v))
     end;
     setAltUp = function (self, v)
-        print(self.name..":  alt up set to "..tostring(v))
+        gge_print(self.name..":  alt up set to "..tostring(v))
     end;
     setAltDown = function (self, v)
-        print(self.name..":  alt down set to "..tostring(v))
+        gge_print(self.name..":  alt down set to "..tostring(v))
     end;
     setAltLeft = function (self, v)
-        print(self.name..":  alt left set to "..tostring(v))
+        gge_print(self.name..":  alt left set to "..tostring(v))
     end;
     setAltRight = function (self, v)
-        print(self.name..":  alt right set to "..tostring(v))
+        gge_print(self.name..":  alt right set to "..tostring(v))
     end;
     special = function (self)
-        print(self.name..":  special pressed")
+        gge_print(self.name..":  special pressed")
     end;
 
 }

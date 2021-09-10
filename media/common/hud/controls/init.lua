@@ -23,13 +23,13 @@ hud_class `DragIcon` {
         self.enabled = true
         self.needsInputCallbacks = true
         self.colour = c:getDragColour()
-        input_filter_set_cursor_hidden(true)
+        gge_input_filter_set_cursor_hidden(true)
     end;
     stopDrag = function (self)
         control_being_dragged = nil
         self.enabled = false
         self.needsFrameCallbacks = false
-        input_filter_set_cursor_hidden(false)
+        gge_input_filter_set_cursor_hidden(false)
     end
 }
 safe_destroy(control_beaker)
@@ -208,7 +208,7 @@ hud_class `ValueControl` (extends(Control) {
     end;
     -- from outside in
     setValue = function (self, v)
-        if type(v) ~= "number" then error("Not a number: "..tostring(type(v))) end
+        if type(v) ~= "number" then gge_error("Not a number: "..tostring(type(v))) end
         if v > self.maxValue then v = self.maxValue end
         self.value = v
         self.valueDisplay:setValue(self:formatValue(v))
@@ -217,7 +217,7 @@ hud_class `ValueControl` (extends(Control) {
         return self.format:format(v)
     end;
     onEditting = function (self, editting)
-        print("ValueControl.onEditting")
+        gge_print("ValueControl.onEditting")
     end;
     receiveDrag = function (self, other)
         if other.className ~= self.className then return end

@@ -99,7 +99,7 @@ function particle_behaviour_alpha_gas_ball_diffuse (tab, elapsed)
     end
 end
 
-particle_convection_curve = PlotV3 {
+particle_convection_curve = gge_PlotV3 {
     [0] = vector3(0,0,.25);
     [0.25] = vector3(0,0,.25);
     [1] = vector3(0,0,0);

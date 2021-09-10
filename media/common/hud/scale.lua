@@ -256,6 +256,6 @@ hud_class `Scale` {
     end;
     
     onChange = function (self, v)
-        print("Changed to: "..v)
+        gge_print("Changed to: "..v)
     end;
 }

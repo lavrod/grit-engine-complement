@@ -1,7 +1,7 @@
-include `object_editor/init.lua`
-include `map_editor/init.lua`
-include `navigation_editor/init.lua`
-include `debug_mode/init.lua`
+gge_include `object_editor/init.lua`
+gge_include `map_editor/init.lua`
+gge_include `navigation_editor/init.lua`
+gge_include `debug_mode/init.lua`
 
 hud_class `EditorInterface` `/common/gui/windownotebook` {
     init = function(self)

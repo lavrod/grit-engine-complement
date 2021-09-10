@@ -1,3 +1,3 @@
-include `Glock/init.lua`
-include `Rocket/init.lua`
-include `Grenade/init.lua`
+gge_include `Glock/init.lua`
+gge_include `Rocket/init.lua`
+gge_include `Grenade/init.lua`

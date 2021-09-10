@@ -76,6 +76,6 @@ hud_class `Stats` {
     end;
     
     onClick = function (self)
-        error("No onClick function defined.");
+        gge_error("No onClick function defined.");
     end;
 }

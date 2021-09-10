@@ -1,32 +1,32 @@
 -- (c) David Cunningham 2013, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-include `base.lua`
+gge_include `base.lua`
 
-include `line.lua`
+gge_include `line.lua`
 
-include `stack.lua`
+gge_include `stack.lua`
 
-include `LoadingScreen/init.lua`
-include `button.lua`
-include `enum_button.lua`
-include `check_box.lua`
-include `label.lua`
-include `editbox.lua`
-include `scale.lua`
-include `EnvCycleEditor/init.lua`
-include `ColourPicker/init.lua`
-include `controls/init.lua`
-include `console/init.lua`
-include `menu/init.lua`
-include `system_layer.lua`
+gge_include `LoadingScreen/init.lua`
+gge_include `button.lua`
+gge_include `enum_button.lua`
+gge_include `check_box.lua`
+gge_include `label.lua`
+gge_include `editbox.lua`
+gge_include `scale.lua`
+gge_include `EnvCycleEditor/init.lua`
+gge_include `ColourPicker/init.lua`
+gge_include `controls/init.lua`
+gge_include `console/init.lua`
+gge_include `menu/init.lua`
+gge_include `system_layer.lua`
 
-include `LensFlare/init.lua`
-include `Compass/init.lua`
-include `speedo.lua`
-include `clock.lua`
-include `stats.lua`
+gge_include `LensFlare/init.lua`
+gge_include `Compass/init.lua`
+gge_include `speedo.lua`
+gge_include `clock.lua`
+gge_include `stats.lua`
 
-include `MusicPlayer/init.lua`
+gge_include `MusicPlayer/init.lua`
 
 loading_screen = loading_screen or nil
 ticker = ticker or nil
@@ -136,9 +136,9 @@ function common_hud_reset()
                         host_ram_available(),
                         gfx_gpu_ram_used(),
                         gfx_gpu_ram_available(),
-                        get_in_queue_size(),
-                        get_out_queue_size_host(),
-                        get_out_queue_size_gpu());
+                        gge_get_in_queue_size(),
+                        gge_get_out_queue_size_host(),
+                        gge_get_out_queue_size_gpu());
             end;
             
             shadow = function()

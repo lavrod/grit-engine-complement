@@ -1,39 +1,39 @@
 -- (c) David Cunningham 2015, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
 if system_binds ~= nil then system_binds:destroy() end
-system_binds = InputFilter(2, `system_binds`)
+system_binds = gge_InputFilter(2, `system_binds`)
 
 if menu_binds ~= nil then menu_binds:destroy() end
-menu_binds = InputFilter(5, `menu_binds`)
+menu_binds = gge_InputFilter(5, `menu_binds`)
 
 
 if playing_binds ~= nil then playing_binds:destroy() end
-playing_binds = InputFilter(170, `playing_binds`)
+playing_binds = gge_InputFilter(170, `playing_binds`)
 
 if playing_actor_binds ~= nil then playing_actor_binds:destroy() end
-playing_actor_binds = InputFilter(171, `playing_actor_binds`)
+playing_actor_binds = gge_InputFilter(171, `playing_actor_binds`)
 
 if playing_vehicle_binds ~= nil then playing_vehicle_binds:destroy() end
-playing_vehicle_binds = InputFilter(172, `playing_vehicle_binds`)
+playing_vehicle_binds = gge_InputFilter(172, `playing_vehicle_binds`)
 
 
 if editor_binds ~= nil then editor_binds:destroy() end
-editor_binds = InputFilter(45, `editor_binds`)
+editor_binds = gge_InputFilter(45, `editor_binds`)
 
 if editor_edit_binds ~= nil then editor_edit_binds:destroy() end
-editor_edit_binds = InputFilter(46, `editor_edit_binds`)
+editor_edit_binds = gge_InputFilter(46, `editor_edit_binds`)
 
 if editor_cam_binds ~= nil then editor_cam_binds:destroy() end
-editor_cam_binds = InputFilter(47, `editor_cam_binds`)
+editor_cam_binds = gge_InputFilter(47, `editor_cam_binds`)
 
 if editor_object_binds ~= nil then editor_object_binds:destroy() end
-editor_object_binds = InputFilter(48, `editor_object_binds`)
+editor_object_binds = gge_InputFilter(48, `editor_object_binds`)
 
 if editor_debug_binds ~= nil then editor_debug_binds:destroy() end
-editor_debug_binds = InputFilter(49, `editor_debug_binds`)
+editor_debug_binds = gge_InputFilter(49, `editor_debug_binds`)
 
 if editor_debug_play_binds ~= nil then editor_debug_play_binds:destroy() end
-editor_debug_play_binds = InputFilter(50, `editor_debug_play_binds`)
+editor_debug_play_binds = gge_InputFilter(50, `editor_debug_play_binds`)
 
 
 function reset_binds()
@@ -74,17 +74,17 @@ game_manager = {
     enter = function (self, name)
         local new_mode = self.gameModes[name]
         if new_mode == nil then
-            error('No such game mode: "' .. name .. '"')
+            gge_error('No such game mode: "' .. name .. '"')
         end
 
-        core_option("FOREGROUND_WARNINGS", false)
+        gge_core_option("FOREGROUND_WARNINGS", false)
         if self.currentMode ~= nil then
             self:exit()
         end
         self.currentMode = make_instance({}, new_mode)
         self.currentMode:init()
         self:setPause(false)
-        core_option("FOREGROUND_WARNINGS", true)
+        gge_core_option("FOREGROUND_WARNINGS", true)
         menu_show(nil)
     end;
 
@@ -103,8 +103,8 @@ game_manager = {
 
     frameUpdate = function (self, elapsed_secs)
         if self.currentMode ~= nil then
-            if not xpcall(self.currentMode.frameCallback, error_handler, self.currentMode, elapsed_secs) then
-                print('During game mode\'s frameCallback, exiting gamemode')
+            if not xpcall(self.currentMode.frameCallback, gge_error_handler, self.currentMode, elapsed_secs) then
+                gge_print('During game mode\'s frameCallback, exiting gamemode')
                 self:exit()
             end
         end
@@ -112,8 +112,8 @@ game_manager = {
 
     stepUpdate = function (self, elapsed_secs)
         if self.currentMode ~= nil then
-            if not xpcall(self.currentMode.stepCallback, error_handler, self.currentMode, elapsed_secs) then
-                print('During game mode\'s stepCallback, exiting gamemode')
+            if not xpcall(self.currentMode.stepCallback, gge_error_handler, self.currentMode, elapsed_secs) then
+                gge_print('During game mode\'s stepCallback, exiting gamemode')
                 self:exit()
             end
         end

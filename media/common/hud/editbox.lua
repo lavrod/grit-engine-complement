@@ -150,7 +150,7 @@ EditBoxClass = {
         self:refreshState()
 		
 		if self.clickPos then
-			-- print("clpos "..self.clickPos.." localpos "..local_pos.x-self.text.position.x)
+			-- gge_print("clpos "..self.clickPos.." localpos "..local_pos.x-self.text.position.x)
 			if (self.clickPos == #self.value and local_pos.x-self.text.position.x > self.text.size.x/2) or 
 			(self.clickPos == 0 and local_pos.x-self.text.position.x < -self.text.size.x/2) then
 				self:unselectAll()
@@ -158,7 +158,7 @@ EditBoxClass = {
 				local pos = text_char_pos(self.font, self.value, local_pos.x + self.size.x/2 - self.padding)
 				if pos ~= self.clickPos then
 					self:select(self.clickPos, pos)
-					-- print("pos: "..pos)
+					-- gge_print("pos: "..pos)
 				end
 			end
 		end
@@ -196,7 +196,7 @@ EditBoxClass = {
 				if not self.clickPos then
 					self.clickPos = pos
 					self:unselectAll()
-					-- print("init pos: "..pos)
+					-- gge_print("init pos: "..pos)
 				end
                 self.before = txt:sub(1, pos)
                 self.after = txt:sub(pos+1)
@@ -248,23 +248,23 @@ EditBoxClass = {
 						self:updateText()
 					end
 				end
-			elseif input_filter_pressed("Ctrl") and ev == "+v" then
-				local str = get_clipboard()
+			elseif gge_input_filter_pressed("Ctrl") and ev == "+v" then
+				local str = gge_get_clipboard()
 				if #self.selection > 0 then
 					self:removeSelectedText()
 				end
 				self.before = self.before..str
 				self:updateText()
-			elseif input_filter_pressed("Ctrl") and ev == "+c" then
+			elseif gge_input_filter_pressed("Ctrl") and ev == "+c" then
 				if #self.selection > 0 then
-					set_clipboard(self:getSelectedText())
+					gge_set_clipboard(self:getSelectedText())
 				end
-			elseif input_filter_pressed("Ctrl") and ev == "+x" then
+			elseif gge_input_filter_pressed("Ctrl") and ev == "+x" then
 				if #self.selection > 0 then
-					set_clipboard(self:getSelectedText())
+					gge_set_clipboard(self:getSelectedText())
 					self:removeSelectedText()
 				end
-			elseif input_filter_pressed("Ctrl") and ev == "+a" then
+			elseif gge_input_filter_pressed("Ctrl") and ev == "+a" then
 				self:selectAll()
             elseif ev:sub(1,1) == ":" then
                 if self.maxLength == nil or #self.value < self.maxLength then
@@ -285,7 +285,7 @@ EditBoxClass = {
     end;
     
     frameCallback = function (self)
-        local state = (seconds() % 0.5) / 0.5
+        local state = (gge_seconds() % 0.5) / 0.5
         self.caret.enabled = state < 0.66
     end;
 
@@ -356,7 +356,7 @@ EditBoxClass = {
 			self.selectionBG.position = vec(crposx-tw/2, 0)
 		end
 		self.selectionBG.size = vec(tw, self.text.size.y)
-		-- print(self:getSelectedText())
+		-- gge_print(self:getSelectedText())
     end;
 	
     getSelectedText = function (self)

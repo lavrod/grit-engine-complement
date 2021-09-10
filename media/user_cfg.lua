@@ -1,4 +1,4 @@
-print('Reading user_cfg.lua')
+gge_print('Reading user_cfg.lua')
 
 -- This file is output automatically by Grit.
 -- You may edit it, but stick to the basic format.

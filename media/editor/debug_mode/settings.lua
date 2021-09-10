@@ -18,10 +18,10 @@ hud_class `Settings` `/common/gui/Window` {
             align = vec(-1, 1);
             offset = vec(10, -7),
             onCheck = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end,
             onUncheck = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end,
         })
         self.content.general_panel.teleport = gui.text({
@@ -365,7 +365,7 @@ hud_class `Settings` `/common/gui/Window` {
         })
         local wpscbx = function(self)
                 WeaponCreate.spin = self.value
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end
         self.content.object_panel.X = hud_object `/common/gui/window_editbox` {
             parent = self.content.object_panel;
@@ -382,7 +382,7 @@ hud_class `Settings` `/common/gui/Window` {
         }
         local wpscby = function(self)
                 WeaponCreate.spin = self.value
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end        
         self.content.object_panel.Y = hud_object `/common/gui/window_editbox` {
             parent = self.content.object_panel;
@@ -399,7 +399,7 @@ hud_class `Settings` `/common/gui/Window` {
         }
         local wpscbz = function(self)
                 WeaponCreate.spin = self.value
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end        
         self.content.object_panel.Z = hud_object `/common/gui/window_editbox` {
             parent = self.content.object_panel;
@@ -464,7 +464,7 @@ hud_class `Settings` `/common/gui/Window` {
             offset = vec(10, -55);
             align = vec(-1, 1);
             pressedCallback = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
         })        
         
@@ -478,7 +478,7 @@ hud_class `Settings` `/common/gui/Window` {
             align = vec(-1, 1);
             offset = vec(10, -7),
             onCheck = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
                 
                 self.parent.direction.text.alpha = 0.5
                 self.parent.X.alpha = 0.5
@@ -489,7 +489,7 @@ hud_class `Settings` `/common/gui/Window` {
                 self.parent.Z:setGreyed(true)
             end,
             onUncheck = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             
                 self.parent.direction.text.alpha = 1
                 self.parent.X.alpha = 1
@@ -513,10 +513,10 @@ hud_class `Settings` `/common/gui/Window` {
             value = "0";
             alignment = "LEFT";
             enterCallback = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
             onStopEditing = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
             size = vec(50, 20);
             align = vec(-1, 1);
@@ -531,10 +531,10 @@ hud_class `Settings` `/common/gui/Window` {
             value = "0";
             alignment = "LEFT";
             enterCallback = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
             onStopEditing = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;            
             size = vec(50, 20);
             align = vec(-1, 1);
@@ -549,10 +549,10 @@ hud_class `Settings` `/common/gui/Window` {
             value = "0";
             alignment = "LEFT";
             enterCallback = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
             onStopEditing = function(self)
-                print(GREEN.."TODO")
+                gge_print(GREEN.."TODO")
             end;
             
             size = vec(50, 20);

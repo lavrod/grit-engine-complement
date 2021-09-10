@@ -1,18 +1,18 @@
-include `map.lua`
+gge_include `map.lua`
 
 -- Loads all editor configuration.  You can delete files in config/ and fall back to the default
 -- configuration.
-include `default_config/config.lua`
-safe_include `config/config.lua`
-include `default_config/interface.lua`
-safe_include `config/interface.lua`
-include `default_config/recent.lua`
-safe_include `config/recent.lua`
+gge_include `default_config/config.lua`
+gge_safe_include `config/config.lua`
+gge_include `default_config/interface.lua`
+gge_safe_include `config/interface.lua`
+gge_include `default_config/recent.lua`
+gge_safe_include `config/recent.lua`
 
-include `widget_manager.lua`
-include `init_editor_interface.lua`
+gge_include `widget_manager.lua`
+gge_include `init_editor_interface.lua`
 
-include `game_mode.lua`
+gge_include `game_mode.lua`
 
 -- Temporary
 -- Test navmesh

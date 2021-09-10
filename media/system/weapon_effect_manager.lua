@@ -42,11 +42,11 @@ WeaponEffectManager = {
 
     select = function (self, name)
         local w = self:get(name)
-        if w == nil then error("No such weapon: " .. name) end
+        if w == nil then gge_error("No such weapon: " .. name) end
         self:primaryDisengage()
         self:secondaryDisengage()
         self.selectedName = name
-        print("Current weapon: " .. name)
+        gge_print("Current weapon: " .. name)
     end;
 
     stepCallback = function (self, elapsed_secs, src, quat)
@@ -206,7 +206,7 @@ WeaponCreate = {
         elseif self.rotation == 'FIXED' then
             return Q_ID
         else
-            error('Unknown rotation value "' .. self.rotation .. '"')
+            gge_error('Unknown rotation value "' .. self.rotation .. '"')
         end
     end;
 

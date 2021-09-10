@@ -152,7 +152,7 @@ hud_class `Button` {
     end;
 
     pressedCallback = function (self)
-        error "Button has no associated action."
+        gge_error("Button has no associated action.")
     end;
 
     stateChangeCallback = function (self, hover)

@@ -53,7 +53,7 @@ BaseClass = {
                 instance.activationSkipped = true
                 return true
             end
-            --print("Activating: "..self.name.." ("..self.className..")")
+            --gge_print("Activating: "..self.name.." ("..self.className..")")
             local gfxMesh = self.gfxMesh or self.className..".mesh"
             local mm
             if self.materialMap then
@@ -86,7 +86,7 @@ BaseClass = {
                     l.parent = instance.gfx
                     if tab.flickering then
                         -- simulate a broken flourescent tube
-                        future_event(0, function()
+                        gge_future_event(0, function()
                             if l.destroyed then return end
                             local off = math.random() < 0.33
                             instance.lightFlickedOff[k] = off
@@ -136,7 +136,7 @@ BaseClass = {
             end
         end;
         setRandomColour=function(self)
-            if not self.activated then error("not activated") end
+            if not self.activated then gge_error("not activated") end
             local cs = self.colourSpec
             local prob_total = 0
             for k,v in ipairs(cs) do
@@ -153,7 +153,7 @@ BaseClass = {
             end
         end;
         setRandomColourFromSet=function(self, colset, indexes)
-            if not self.activated then error("not activated") end
+            if not self.activated then gge_error("not activated") end
             local cs = self.colourSpec
             if type(colset) == "number" then
                     colset = cs[colset]
@@ -180,21 +180,21 @@ BaseClass = {
             self:setColour(cols)
         end;
         setColour=function(self, cols)
-            if not self.activated then error("not activated") end
+            if not self.activated then gge_error("not activated") end
             assert(type(cols)=="table")
             for i=1,4 do -- 4 colours to choose
                 local col = cols[i]
                 if col ~= nil then
                     if type(col) ~= "table" and type(col) ~= "string" then
-                        error("Expecting table or string for coloured part "..i..", class \""..self.className.."\"")
+                        gge_error("Expecting table or string for coloured part "..i..", class \""..self.className.."\"")
                     end
                     while type(col) == "string" do
                         local col2 = carcols[col]
                         if col2==nil then
-                            error("Class \""..self.className.."\" could not find colour \""..col.."\"")
+                            gge_error("Class \""..self.className.."\" could not find colour \""..col.."\"")
                         end
                         if type(col2) ~= "table" and type(col2) ~= "string" then
-                            error("Expecting table or string looking up car colour table with name\""..col.."\"")
+                            gge_error("Expecting table or string looking up car colour table with name\""..col.."\"")
                         end
                         col = col2
                     end
@@ -219,7 +219,7 @@ BaseClass = {
         end;
         deactivate=function(self)
             local instance = self.instance
-            --print("Deactivating: "..self.name.." ("..self.className..")")
+            --gge_print("Deactivating: "..self.name.." ("..self.className..")")
             self.pos = self.spawnPos
             instance.gfx = safe_destroy(instance.gfx)
             if instance.lights then
@@ -244,10 +244,10 @@ BaseClass = {
 
             local tot_triangles, tot_batches = gfx.triangles, gfx.batches
 
-            print("Mesh: "..gfx.meshName)
+            gge_print("Mesh: "..gfx.meshName)
 
-            print(" Triangles: "..gfx.triangles)
-            print(" Batches: "..gfx.batches)
+            gge_print(" Triangles: "..gfx.triangles)
+            gge_print(" Batches: "..gfx.batches)
 
             return tot_triangles, tot_batches
         end;
@@ -276,7 +276,7 @@ function regular_chase_cam_update(self)
     local vehicle_vel_xy_speed = #(vehicle_vel * vector3(1,1,0))
 
     -- modify the player_ctrl.camPitch and player_ctrl.camYaw to track the direction a vehicle is travelling
-    if user_cfg.vehicleCameraTrack and self.cameraTrack and seconds() - player_ctrl.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
+    if user_cfg.vehicleCameraTrack and self.cameraTrack and gge_seconds() - player_ctrl.lastMouseMoveTime > 1  and vehicle_vel_xy_speed > 5 then
     
         player_ctrl.camPitch = lerp(player_ctrl.camPitch, player_ctrl.playerCamPitch + vehicle_pitch, 0.1)
         
@@ -342,9 +342,9 @@ ColClass = extends (BaseClass) {
         receiveImpulse = function (self, impulse, wpos)
             if self.health and self.impulseDamageThreshold then
                 --if impulse > 0 then
-                --        --print(self.name, impulse, pos, poso)
+                --        --gge_print(self.name, impulse, pos, poso)
                 --        if (not other.owner.destroyed) and other.owner.className == "/vehicles/Evo" then
-                --                --print("BOUNCE!", impulse, norm, poso)
+                --                --gge_print("BOUNCE!", impulse, norm, poso)
                 --                --other:impulse(-impulse * norm, pos)
                 --                self:receiveDamage(20000)
                 --        end
@@ -368,7 +368,7 @@ ColClass = extends (BaseClass) {
                     return true
                 end
                 local colMesh = self.colMesh or self.className..".gcol"
-                --print("adding: "..tostring(self).." with "..colMesh)
+                --gge_print("adding: "..tostring(self).." with "..colMesh)
                 local rot = self.rot or quat(1,0,0,0)
                 local body = physics_body_make(
                     colMesh,
@@ -402,7 +402,7 @@ ColClass = extends (BaseClass) {
                         for _, proc_obj_name in ipairs(pmat.proceduralObjects) do
                             local proc_obj = physics:getProceduralObjectClass(proc_obj_name)
                             if proc_obj == nil then
-                                    error ("Physical material \""..pmatname.."\" references unknown procedural object \""..proc_obj_name.."\"")
+                                    gge_error("Physical material \""..pmatname.."\" references unknown procedural object \""..proc_obj_name.."\"")
                             end
                             local t = body:scatter(
                                 pmatname,
@@ -435,7 +435,7 @@ ColClass = extends (BaseClass) {
                 for _,pmatname in ipairs(body.procObjMaterials) do
                     local pmat = physics:getMaterial(pmatname)
                     if pmat == nil then
-                        error("Could not find physical material: \""..pmatname.."\"")
+                        gge_error("Could not find physical material: \""..pmatname.."\"")
                     end
                     if pmat.proceduralBatches ~= nil then
                         for i, proc_bat_name in ipairs(pmat.proceduralBatches) do
@@ -500,10 +500,10 @@ ColClass = extends (BaseClass) {
 
             if instance.pbats then
                 for proc_bat_name, pbat in pairs(instance.pbats) do
-                    print("  Procedural batch: "..proc_bat_name)
-                    print("    Instances: "..pbat.instances)
-                    print("    Triangles: "..pbat.triangles)
-                    print("    Batches: "..pbat.batches)
+                    gge_print("  Procedural batch: "..proc_bat_name)
+                    gge_print("    Instances: "..pbat.instances)
+                    gge_print("    Triangles: "..pbat.triangles)
+                    gge_print("    Batches: "..pbat.batches)
                     tot_triangles = tot_triangles + pbat.triangles
                     tot_batches = tot_batches + pbat.batches
                 end
@@ -513,15 +513,15 @@ ColClass = extends (BaseClass) {
         end;
 
         getSpeed = function (self)
-            if not self.activated then error("Not activated: "..self.self.name) end
+            if not self.activated then gge_error("Not activated: "..self.self.name) end
             local rb = self.instance.body
             return #rb.linearVelocity
         end;
         toggleProceduralBatches = function (self)
-            if not self.activated then error("Not activated: "..self.name) end
+            if not self.activated then gge_error("Not activated: "..self.name) end
             local pbats = self.instance.pbats
             if pbats == nil then return end
-            print("Procedural batches of \""..tostring(self).."\" toggled ")
+            gge_print("Procedural batches of \""..tostring(self).."\" toggled ")
             for k,pbat in pairs(pbats) do
                 pbat.enabled = v
             end
@@ -534,7 +534,7 @@ ColClass = extends (BaseClass) {
             local new_health = self.instance.health - damage
             if self.instance.health <= 0 then return end
             if verbose_receive_damage then
-                print(self.name.." says OW! "..damage.." ["..new_health.." / "..self.health.." = "..math.floor(100*new_health/self.health).."%]")
+                gge_print(self.name.." says OW! "..damage.." ["..new_health.." / "..self.health.." = "..math.floor(100*new_health/self.health).."%]")
             end
             self.instance.health = new_health
             if self.instance.health <= 0 then
@@ -542,7 +542,7 @@ ColClass = extends (BaseClass) {
             end
         end;
         receiveBlast = function (self, impulse, wpos, damage_impulse)
-            --print(self.name.." caught in explosion", impulse, wpos)
+            --gge_print(self.name.." caught in explosion", impulse, wpos)
             damage_impulse = damage_impulse or impulse
             self.instance.body:impulse(impulse, wpos)
             self:receiveImpulse(damage_impulse, wpos)
@@ -568,7 +568,7 @@ ColClass = extends (BaseClass) {
             if self.explodeInfo then self:explode() end
         end;
         ignite=function(self, pname, pos, mat, fertile_life)
-            --print("igniting: "..tostring(self))
+            --gge_print("igniting: "..tostring(self))
             if self.instance.body.mass==0 then
                 flame_ignite(pname, pos, mat, fertile_life)
             end
@@ -579,10 +579,10 @@ PileClass = {
     renderingDistance=400;
     init = function (self)
         -- iterate over the guys i will spawn to see what their "advance prepares" should be
-        --print("Initialising: "..self.name.." ("..self.className..")")
+        --gge_print("Initialising: "..self.name.." ("..self.className..")")
     end;
     activate=function (self, instance)
-        --print("Activating: "..self.name.." ("..self.className..")")
+        --gge_print("Activating: "..self.name.." ("..self.className..")")
         instance.children = {}
         for k,v in ipairs(self.class.dump) do
             local oclass, opos, otab = unpack(v)
@@ -596,7 +596,7 @@ PileClass = {
         end
     end;
     deactivate=function(self)
-        --print("Deactivating: "..self.name.." ("..self.className..")")
+        --gge_print("Deactivating: "..self.name.." ("..self.className..")")
         -- nothing to do i think
         local instance = self.instance
         for k,v in ipairs(instance.children) do
@@ -611,11 +611,11 @@ ProcPileClass = {
     renderingDistance=400;
     init = function (self)
         -- iterate over the guys i will spawn to see what their "advance prepares" should be
-        --print("Initialising: "..self.name.." ("..self.className..")")
+        --gge_print("Initialising: "..self.name.." ("..self.className..")")
     end;
     spawnObjects = function() end;
     activate=function (self, instance)
-        --print("Activating: "..self.name.." ("..self.className..")")
+        --gge_print("Activating: "..self.name.." ("..self.className..")")
         instance.children = {}
         local counter = 1
         self:spawnObjects(function(oclass,opos,otab)
@@ -630,7 +630,7 @@ ProcPileClass = {
         end)
     end;
     deactivate=function(self)
-        --print("Deactivating: "..self.name.." ("..self.className..")")
+        --gge_print("Deactivating: "..self.name.." ("..self.className..")")
         -- nothing to do i think
         local instance = self.instance
         for k,v in ipairs(instance.children) do

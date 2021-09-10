@@ -1,2 +1,2 @@
-include `ticker.lua`
-include `console.lua`
+gge_include `ticker.lua`
+gge_include `console.lua`

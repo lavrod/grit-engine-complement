@@ -1,2 +1,2 @@
-include `pages.lua`
+gge_include `pages.lua`
 

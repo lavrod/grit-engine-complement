@@ -1,7 +1,7 @@
-include `icons/init.lua`
-include `world_icons.lua`
-include `widget.lua`
-include `pages.lua`
-include `settings.lua`
-include `content_browser.lua`
-include `map_properties.lua`
+gge_include `icons/init.lua`
+gge_include `world_icons.lua`
+gge_include `widget.lua`
+gge_include `pages.lua`
+gge_include `settings.lua`
+gge_include `content_browser.lua`
+gge_include `map_properties.lua`

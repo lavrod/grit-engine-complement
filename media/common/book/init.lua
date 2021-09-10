@@ -5,18 +5,18 @@ new_class `Turret` {
     initialBarrelAngle = 0;
     
     init = function (self)
-        print("Initialising " + self)
+        gge_print("Initialising " + self)
         self:addDiskResource(`Base.gcol`)
         self:addDiskResource(`Base.mesh`)
         self:addDiskResource(`Barrel.mesh`)
     end;
 
     destroy = function (self)
-        print("Destroying " + self)
+        gge_print("Destroying " + self)
     end;
 
     activate = function (self, instance)
-        print("Activating " + self)
+        gge_print("Activating " + self)
         self.needsStepCallbacks = true
         instance.barrelAngle = self.initialBarrelAngle
         instance.gfxBase = gfx_body_make(`Base.mesh`)
@@ -28,7 +28,7 @@ new_class `Turret` {
     end;
 
     deactivate = function (self)
-        print("Deactivating " + self)
+        gge_print("Deactivating " + self)
         self.needsStepCallbacks = false
     end;
 

@@ -1,5 +1,5 @@
-include `/common/languages/english.lua`
-include `/common/languages/french.lua`
+gge_include `/common/languages/english.lua`
+gge_include `/common/languages/french.lua`
 
 language = languageEnglish
 
@@ -17,7 +17,7 @@ gettext = function(str,...)
 		     end
 		  end
      else
-        print(select(1,...))
+        gge_print(select(1,...))
         return language[select(1, ...)]
      end
      return str

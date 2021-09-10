@@ -65,7 +65,7 @@ end
 
 client_input.createCommand = function(self)
     local command = {}
-    command.serverTime = seconds() + net.client.timeBase
+    command.serverTime = gge_seconds() + net.client.timeBase
     
     command.keys = {}
     

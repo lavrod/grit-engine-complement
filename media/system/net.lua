@@ -16,7 +16,7 @@ function NetChannel:send(message)
     net_send_packet_sequenced(self.channel, self.address, message, self.sequenceOut)
     
     if net.showPackets then
-        print(string.format("sending %db, seq=%d", message.length, self.sequenceOut))
+        gge_print(string.format("sending %db, seq=%d", message.length, self.sequenceOut))
     end
 end
 
@@ -39,8 +39,8 @@ end
 
 net.runningClient = true
 
-include `server.lua`
-include `client.lua`
+gge_include `server.lua`
+gge_include `client.lua`
 
 net.loopbackAddress = net_resolve_address("localhost:0")
 
