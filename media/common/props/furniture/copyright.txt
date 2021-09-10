@@ -1,0 +1,8 @@
+WorkBench.max
+WorkBench.tcol
+WorkBench.mesh: (c) Dave Cunningham 2010 licensed under the MIT license
+
+WorkBench.dds
+WorkBenchN.dds
+WorkBench.png
+WorkBenchS.dds: (c) Mayang Murni Adnin, 2001-2006 licensed under the Mayang License http://www.mayang.com/textures/ (with modifications)

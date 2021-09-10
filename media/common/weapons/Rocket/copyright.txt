@@ -1,0 +1,4 @@
+rocket.blend
+Rocket.mesh
+rocket.png
+rocket_nm.png : -- (c) Augusto P. Moura 2015, licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php

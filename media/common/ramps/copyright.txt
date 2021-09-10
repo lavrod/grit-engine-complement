@@ -1,0 +1,12 @@
+Atlas_D.dds
+Atlas_N.dds
+Atlas_S.dds: (c) CG Textures 2010 licensed under the terms of the CG Textures license http://www.cgtextures.com/content.php?action=license  (with modifications)
+
+HalfPipeLarge.mesh
+HalfPipeLarge.tcol
+HalfPipeSmall.mesh
+HalfPipeSmall.tcol
+Large.mesh
+Large.tcol
+Small.mesh
+Small.tcol: (c) JostVice 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php

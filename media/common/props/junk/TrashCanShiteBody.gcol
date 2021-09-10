@@ -1,0 +1,36 @@
+TCOL1.0
+
+attributes {
+    mass 5.0;
+}
+
+compound {
+    cylinder {
+        material "/common/pmat/Plastic";
+        margin 0.0268374;
+        centre 0.0 0.0 0.291948;
+        dimensions 0.64 0.64 0.10735;
+        orientation 1.0 0.0 0.0 0.0;
+    }
+    cylinder {
+        material "/common/pmat/Plastic";
+        margin 0.04;
+        centre 0.0 0.0 -0.0430116;
+        dimensions 0.54 0.54 0.637349;
+        orientation 1.0 0.0 0.0 0.0;
+    }
+    box {
+        material "/common/pmat/Plastic";
+        margin 0.0125;
+        centre -0.00163556 -0.316878 0.283802;
+        dimensions 0.09 0.05 0.107227;
+        orientation 0.99221 -0.124574 0.0 0.0;
+    }
+    box {
+        material "/common/pmat/Plastic";
+        margin 0.0125;
+        centre -0.00163553 0.319131 0.283903;
+        dimensions 0.09 0.05 0.107227;
+        orientation 0.992682 0.120761 0.0 0.0;
+    }
+}

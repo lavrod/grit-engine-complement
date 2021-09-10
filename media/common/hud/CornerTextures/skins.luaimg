@@ -1,0 +1,76 @@
+#!/usr/bin/luaimg -F
+
+function make_texture(name, alpha)
+    local rad = string.format("%02d",((alpha.height+1)/2))
+    alpha:save(("%s%02d.png"):format(name, rad))
+end
+
+sq_border_mask = make(vec(3,3), 1, {
+    1, 1, 1,
+    1, 0, 1,
+    1, 1, 1
+})
+
+sq_border_mask.fX:save("SquareBorderWhite.png");
+
+(sq_border_mask.fX .. 0).xF:save("SquareFilledBlackBorder.png");
+(sq_border_mask.eX .. 1).xF:save("SquareFilledWhiteBorder.png");
+
+
+border_mask2 = make(vec(3,3), 1, {
+    0, 1, 0,
+    1, 0, 1,
+    0, 1, 0
+})
+
+function border_mask(n, l)
+    return make(2*vec(n,n) - 1, 1, function(p)
+        local d = #(p - (vec(n,n)-1))
+        return l - abs(n - l - d)
+    end)
+end
+
+
+make_texture("Border", border_mask2.fX)
+make_texture("Border", border_mask( 4, 1).fX)
+make_texture("Border", border_mask( 8, 1).fX)
+make_texture("Border", border_mask(16, 1).fX)
+make_texture("Border", border_mask(32, 1).fX)
+
+
+filled_mask2 = make(vec(3,3), 1, {
+    0, 1, 0,
+    1, 1, 1,
+    0, 1, 0
+})
+
+function filled_mask(n)
+    return make(2*vec(n,n) - 1, 1, function(p)
+        local d = #(p - (vec(n,n)-1))
+        return n - d
+    end)
+end
+
+make_texture("Filled", filled_mask2.fX)
+make_texture("Filled", filled_mask( 4, 1).fX)
+make_texture("Filled", filled_mask( 8, 1).fX)
+make_texture("Filled", filled_mask(16, 1).fX)
+make_texture("Filled", filled_mask(32, 1).fX)
+
+function filled_mask_line(n, l)
+    return make(2*vec(n,n) - 1, 1, function(p)
+        local d = #(p - (vec(n,n)-1))
+        return n - l/2 - d
+    end)
+end
+
+make_texture("FilledBlackBorder", border_mask2.eX..filled_mask2)
+make_texture("FilledBlackBorder", border_mask( 4, 1).fX .. filled_mask_line( 4, 1).eX)
+make_texture("FilledBlackBorder", border_mask( 8, 1).fX .. filled_mask_line( 8, 1).eX)
+make_texture("FilledBlackBorder", border_mask(16, 1).fX .. filled_mask_line(16, 1).eX)
+make_texture("FilledBlackBorder", border_mask(32, 1).fX .. filled_mask_line(32, 1).eX)
+
+make_texture("FilledWhiteBorder", border_mask2.eX..filled_mask2)
+make_texture("FilledWhiteBorder", border_mask( 4, 1).eX .. filled_mask_line( 4, 1).fX)
+make_texture("FilledWhiteBorder", border_mask( 8, 1).eX .. filled_mask_line( 8, 1).fX)
+make_texture("FilledWhiteBorder", border_mask(32, 1).eX .. filled_mask_line(32, 1).fX)

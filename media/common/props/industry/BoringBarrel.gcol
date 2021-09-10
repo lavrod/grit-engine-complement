@@ -1,0 +1,14 @@
+TCOL1.0
+
+attributes {
+    mass 100;
+}
+
+compound {
+    cylinder {
+        material "/common/pmat/Metal";
+        margin 0.04;
+        centre 0 0 0.12;
+        dimensions 0.6 0.6 0.942;
+    }
+}

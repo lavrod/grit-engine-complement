@@ -1,0 +1,3 @@
+Tyre.blend
+Tyre.mesh
+Tyre.tcol: (c) Dave Cunningham 2009 licensed under the MIT license http://www.opensource.org/licenses/mit-license.php

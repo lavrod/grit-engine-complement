@@ -1,0 +1,38 @@
+local num = 7
+local size = vec(1024, 1024)
+
+
+local frame_size = size.x / num
+local iters = num * num
+local current_frame = {}
+
+local img = make(size, 3, 0)
+
+local current_line = num
+local current_column = 1
+
+for i = 1, iters do
+	local x, y
+	
+	print(current_column.." "..current_line)
+	
+	current_frame = open("./fixed/"..i..".png")
+	current_frame = current_frame:scale(vec2(frame_size, frame_size), "BICUBIC")
+	
+	x = (current_column-1) * frame_size
+	y = (current_line-1) * frame_size
+	
+	img:drawImage(current_frame, vec2(x, y), true, true)
+	
+	if (current_column) < num then
+		current_column = current_column + 1
+	else
+		current_column = 1
+		current_line = current_line - 1
+	end
+	
+end
+
+local finaltex = make(size, 3, true, function(p) return vec4((img(p).xyz*0.85) ^ 2.2, ((img(p).x+img(p).y+img(p).z)/3) * 0.5) end)
+
+finaltex:save("flames_anim.png")

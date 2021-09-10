@@ -1,0 +1,4 @@
+Corona.bmp
+Corona.xcf: (c) Dave Cunningham 2009 licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
+
+The explosion parts of GenericParticleSheet.dds are (c) OpenArena, GPL license v2.

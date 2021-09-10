@@ -1,0 +1,20 @@
+TCOL1.0
+
+attributes {
+    mass 162.0;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 1.0;
+    angular_sleep_threshold 0.800000011920929;
+}
+
+compound {
+    // Cube.001
+    box {
+        material "../../../pmat/Metal";
+        centre 0.0 0.0 0.0;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.6000000238418579 0.6000000238418579 0.6000000238418579;
+        margin 0.03999999910593033;
+    }
+}

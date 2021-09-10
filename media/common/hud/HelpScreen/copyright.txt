@@ -1,0 +1,15 @@
+The following from Common Creative Open Art Clip 2.0 files under http://packages.ubuntu.com/precise/all/openclipart-svg/download)
+doctormo_BTC6100C_UK_Compact_Keyboard.svg
+grumbel_Xbox360_Gamepad.svg
+grumbel_Playstation3_Gamepad.svg
+
+The following
+keyboard.png:
+from (c) Francois Dorval 2017 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
+(Derivative work from doctormo_BTC6100C_UK_Compact_Keyboard.svg and, Common Creative Open Art Clip 2.0 files under http://packages.ubuntu.com/precise/all/openclipart-svg/download)
+
+grumbel_Xbox360_Gamepad_grit.svg:
+from (c) Francois Dorval 2017 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php (Derivative work from grumbel_Xbox360_Gamepad.svg and, Common Creative Open Art Clip 2.0 files under http://packages.ubuntu.com/precise/all/openclipart-svg/download)
+
+gamepad.png:
+from (c) Francois Dorval 2017 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php (Derivative work from grumbel_Xbox360_Gamepad.svg and, Common Creative Open Art Clip 2.0 files under http://packages.ubuntu.com/precise/all/openclipart-svg/download)

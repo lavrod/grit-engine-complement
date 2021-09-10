@@ -1,0 +1,20 @@
+TCOL1.0
+
+attributes {
+    mass 2.7200000286102295;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 1.0;
+    angular_sleep_threshold 0.800000011920929;
+}
+
+compound {
+    // Cube.002
+    box {
+        material "../../pmat/Stone";
+        centre -4.76837158203125e-07 0.0 0.0;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.10000000149011612 0.21000000834465027 0.05999999865889549;
+        margin 0.009999999776482582;
+    }
+}

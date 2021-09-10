@@ -1,0 +1,28 @@
+TCOL1.0
+
+attributes {
+    mass 1.0;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 1.0;
+    angular_sleep_threshold 0.800000011920929;
+}
+
+compound {
+    // Cube.003
+    cylinder {
+        material "../../pmat/PolishedStone";
+        centre -4.1127202621282777e-07 0.0 0.00783345103263855;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.07872509956359863 0.07591141760349274 0.22123844921588898;
+        margin 0.019999999552965164;
+    }
+    // Cube.004
+    cylinder {
+        material "../../pmat/PolishedStone";
+        centre -4.1127202621282777e-07 0.0 0.09253263473510742;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.02775229886174202 0.026760414242744446 0.22123844921588898;
+        margin 0.004999999888241291;
+    }
+}

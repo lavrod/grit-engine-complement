@@ -1,0 +1,36 @@
+TCOL1.0
+
+attributes {
+    static;
+}
+
+compound {
+}
+trimesh {
+    vertexes {
+        -2.29072 -2.29072 0.0;
+        2.29072 -2.29072 0.0;
+        -2.29072 2.29072 2.29072;
+        2.29072 2.29072 2.29072;
+        -2.29072 2.29072 0.0;
+        2.29072 2.29072 0.0;
+        -2.29072 0.0 0.957759;
+        2.29072 0.0 0.957759;
+        -2.29072 0.0 0.0;
+        2.29072 0.0 0.0;
+    }
+    faces {
+        6 7 3 "/common/pmat/Wood";
+        3 2 6 "/common/pmat/Wood";
+        2 3 5 "/common/pmat/Wood";
+        5 4 2 "/common/pmat/Wood";
+        4 8 6 "/common/pmat/Wood";
+        6 2 4 "/common/pmat/Wood";
+        1 9 7 "/common/pmat/Wood";
+        0 1 7 "/common/pmat/Wood";
+        7 6 0 "/common/pmat/Wood";
+        8 0 6 "/common/pmat/Wood";
+        5 3 7 "/common/pmat/Wood";
+        7 9 5 "/common/pmat/Wood";
+    }
+}

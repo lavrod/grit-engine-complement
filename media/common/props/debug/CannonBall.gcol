@@ -1,0 +1,18 @@
+TCOL1.0
+
+attributes {
+        mass 100;
+        linear_sleep_threshold 0.01;
+        angular_sleep_threshold 0.01;
+        ccd_motion_threshold 0.15;
+        // you actually get quite unrealistic behaviour if the swept sphere is too small
+        ccd_swept_sphere_radius 0.0;
+}
+
+compound {
+        sphere {
+                material "/common/pmat/Metal";
+                centre 0 0 0;
+                radius .15
+        }
+}

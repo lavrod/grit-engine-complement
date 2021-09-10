@@ -1,0 +1,19 @@
+TCOL1.0
+
+attributes {
+    mass 75;
+}
+
+compound {
+    cylinder {
+        material "/common/pmat/Plastic";
+        dimensions 0.65 0.65 1.07;
+        centre 0 0 0.16;
+    }
+    cone {
+        material "/common/pmat/Plastic";
+        radius 0.41;
+        height 0.22;
+        centre 0 0 -0.23;
+    }
+}

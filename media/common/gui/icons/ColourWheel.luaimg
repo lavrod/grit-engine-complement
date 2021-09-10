@@ -1,0 +1,32 @@
+#!/usr/bin/luaimg -F
+
+local radius = 64
+local size = radius * 2;
+
+local sz = vec(size, size)
+local tone = 1
+local fade = 0.99
+
+colour_wheel = make(sz, 3, true, function (p)
+	local x, y = p.x - radius, p.y - radius
+	
+	-- Check if pixel lies within circle
+	if(x * x + y * y < (radius*radius)) then
+		local c = vec4(0, 0, 0, 0)
+		local hue = (math.atan2(y, x) + math.pi)/(math.pi*2)
+		local saturation = math.sqrt(x * x + y * y) / radius
+		
+		c = vec4(HSVtoRGB(vec(hue, saturation, tone)), 1)
+
+		-- Smooth edges
+		if(saturation > fade) then
+			c = c + vec4(0, 0 , 0, -(1 / (1 - fade)) * 1 * (saturation - fade))
+		end
+		
+		return c
+	end
+	return vec4(0, 0, 0, 0)
+end
+)
+
+colour_wheel:save("ColourWheel.png")

@@ -1,0 +1,24 @@
+The following (c) David Cunningham 2011, Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+Corona.bmp
+Corona.xcf
+Crosshair.bmp
+debug_stipple.bmp
+HiFreqNoiseDisc.32.bmp
+HiFreqNoiseDisc.64.bmp
+HiFreqNoiseGauss.32.bmp
+HiFreqNoiseGauss.64.bmp
+HiFreqNoiseRing.32.bmp
+HiFreqNoiseRing.64.bmp
+MicroFlakes.dds
+PerlinNoise.bmp
+PerlinNoiseN.bmp
+SkyCube.mesh
+SkyShapes.blend
+starfield.dds
+stipple.bmp
+WhiteNoiseDisc.32.bmp
+WhiteNoiseDisc.64.bmp
+WhiteNoiseGauss.32.bmp
+WhiteNoiseGauss.64.bmp
+WhiteNoiseRing.32.bmp
+WhiteNoiseRing.64.bmp

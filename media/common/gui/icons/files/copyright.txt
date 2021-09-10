@@ -1,0 +1,4 @@
+edicons.svg
+lua.png
+gmap.png
+object.png: (c) Augusto P. Moura 2015 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php

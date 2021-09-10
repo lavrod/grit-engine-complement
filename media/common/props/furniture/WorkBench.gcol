@@ -1,0 +1,141 @@
+TCOL1.0
+
+attributes {
+    mass 100.0;
+}
+
+compound {
+    hull {
+        material "/common/pmat/Wood";
+        margin 0.04;
+        vertexes {
+            -0.404478 -1.14536 -0.182192;
+            -0.404478 -0.793576 0.172684;
+            -0.404478 -1.14577 -0.0799466;
+            -0.404478 -0.895821 0.173085;
+            -0.450771 -1.14536 -0.182192;
+            -0.450771 -0.793576 0.172684;
+            -0.450771 -1.14577 -0.0799466;
+            -0.450771 -0.895821 0.173085;
+        }
+    }
+    hull {
+        material "/common/pmat/Wood";
+        margin 0.02;
+        vertexes {
+            -0.450771 1.15884 -0.182191;
+            -0.450771 0.807048 0.172684;
+            -0.450771 1.15924 -0.0799465;
+            -0.450771 0.909293 0.173085;
+            -0.404478 1.15884 -0.182192;
+            -0.404478 0.807048 0.172684;
+            -0.404478 1.15924 -0.0799465;
+            -0.404478 0.909293 0.173085;
+        }
+    }
+    hull {
+        material "/common/pmat/Wood";
+        margin 0.02;
+        vertexes {
+            0.397468 1.15884 -0.182191;
+            0.397468 0.807048 0.172684;
+            0.397468 1.15924 -0.0799465;
+            0.397468 0.909293 0.173085;
+            0.44376 1.15884 -0.182192;
+            0.443761 0.807048 0.172684;
+            0.44376 1.15924 -0.0799465;
+            0.443761 0.909293 0.173085;
+        }
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.0111989;
+        centre -0.00464967 -1.16957 -0.125256;
+        dimensions 0.0447955 0.0984109 0.898293;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.0125;
+        centre -0.0079166 0.0149054 0.296635;
+        dimensions 2.4 0.05 0.9;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.011338;
+        centre 0.419407 0.0149053 0.223346;
+        dimensions 2.39591 0.103601 0.045352;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.011338;
+        centre -0.429896 0.0149053 0.223346;
+        dimensions 2.39591 0.103601 0.045352;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.0111989;
+        centre -0.0046497 1.18652 0.220086;
+        dimensions 0.0447955 0.0984109 0.801369;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.0111989;
+        centre -0.00464982 -1.16263 0.220086;
+        dimensions 0.0447955 0.0984109 0.801369;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.0111989;
+        centre -0.00464967 1.18652 -0.125256;
+        dimensions 0.0447955 0.0984109 0.898293;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    hull {
+        material "/common/pmat/Wood";
+        margin 0.02;
+        vertexes {
+            0.44376 -1.14536 -0.182192;
+            0.44376 -0.793575 0.172684;
+            0.44376 -1.14577 -0.0799466;
+            0.44376 -0.89582 0.173085;
+            0.397468 -1.14536 -0.182192;
+            0.397468 -0.793575 0.172684;
+            0.397468 -1.14577 -0.0799466;
+            0.397468 -0.89582 0.173085;
+        }
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.025;
+        centre -0.354698 -1.0967 -0.176658;
+        dimensions 0.1 0.9 0.1;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.025;
+        centre -0.354698 1.10886 -0.176658;
+        dimensions 0.1 0.9 0.1;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.025;
+        centre 0.346307 -1.0967 -0.176658;
+        dimensions 0.1 0.9 0.1;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+    box {
+        material "/common/pmat/Wood";
+        margin 0.025;
+        centre 0.346307 1.10886 -0.176658;
+        dimensions 0.1 0.9 0.1;
+        orientation 0.5 0.5 -0.5 -0.5;
+    }
+}

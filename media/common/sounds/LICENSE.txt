@@ -1,0 +1,12 @@
+collision.wav file taken from here http://www.freesound.org/people/qubodup/sounds/147660/
+Licensed under CC BY 3.0, http://creativecommons.org/licenses/by/3.0/
+original author of the work is http://www.freesound.org/people/qubodup/
+------------------------------------------------------------------------------------------
+explosion.wav taken from http://www.freesound.org/people/steveygos93/sounds/80401/
+Licensed under CC BY 3.0, http://creativecommons.org/licenses/by/3.0/
+original author http://www.freesound.org/people/steveygos93/
+------------------------------------------------------------------------------------------
+Waterfall.wav taken from http://www.freesound.org/people/volivieri/sounds/38390/
+Licensed under CC BY 3.0, http://creativecommons.org/licenses/by/3.0/
+original author http://www.freesound.org/people/volivieri/
+------------------------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+TCOL1.0
+
+attributes {
+    static;
+}
+
+compound {
+        box {
+                material "/common/pmat/Metal";
+                centre 0 0 1.5;
+                dimensions 2 2 3;
+                orientation 1 0 0 0;
+        }
+}

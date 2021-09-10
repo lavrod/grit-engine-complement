@@ -1,0 +1,9 @@
+rockmap1_n.png
+rockmap1.png
+rockmap1_s.png: (c) CG Textures 2010 licensed under the terms of the CG Textures license http://www.cgtextures.com/content.php?action=license  (with modifications)
+
+rocks.max
+rock.mesh
+rock.tcol
+whines.png: (c) Brian 'mortalhuman' Sooy 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
+

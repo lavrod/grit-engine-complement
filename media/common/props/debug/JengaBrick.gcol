@@ -1,0 +1,20 @@
+TCOL1.0
+
+attributes {
+    mass 20.0;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 1.0;
+    angular_sleep_threshold 0.800000011920929;
+}
+
+compound {
+    // Cube
+    box {
+        material "../../pmat/PolishedWood";
+        centre 0.0 0.0 0.0;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.9041371941566467 0.29457035660743713 0.2371688187122345;
+        margin 0.03999999910593033;
+    }
+}

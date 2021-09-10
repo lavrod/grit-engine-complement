@@ -1,0 +1,29 @@
+TCOL1.0
+
+attributes {
+    mass 5.0;
+}
+
+compound {
+    box {
+        material "/common/pmat/Frictionless";
+        margin 0.04;
+        centre 0.0414722 -0.0369377 -0.286468;
+        dimensions 0.639532 0.620488 0.17953;
+        orientation 1.0 0.0 0.0 0.0;
+    }
+    box {
+        material "/common/pmat/Frictionless";
+        margin 0.0277198;
+        centre 0.0 0.0 1.12524;
+        dimensions 0.346339 0.110879 0.258232;
+        orientation 1.0 0.0 0.0 0.0;
+    }
+    box {
+        material "/common/pmat/Frictionless";
+        margin 0.00771977;
+        centre 0.0 0.0 0.381898;
+        dimensions 0.0363387 0.0308791 1.33453;
+        orientation 1.0 0.0 0.0 0.0;
+    }
+}

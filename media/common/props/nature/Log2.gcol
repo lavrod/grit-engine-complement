@@ -1,0 +1,20 @@
+TCOL1.0
+
+attributes {
+    mass 250.0;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 1.0;
+    angular_sleep_threshold 0.800000011920929;
+}
+
+compound {
+    // Log2Cylinder
+    cylinder {
+        material "../../pmat/Wood";
+        centre 0.0 0.003168344497680664 0.060225941240787506;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 0.27511996030807495 0.27511996030807495 2.305441379547119;
+        margin 0.03999999910593033;
+    }
+}

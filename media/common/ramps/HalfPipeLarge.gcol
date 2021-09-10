@@ -1,0 +1,62 @@
+TCOL1.0
+
+attributes {
+    static;
+}
+
+compound {
+}
+trimesh {
+    vertexes {
+        2.29072 -2.29072 0.0;
+        2.29072 -1.14536 0.469703;
+        2.29072 0.0 1.07084;
+        2.29072 1.09759 1.98723;
+        2.28163 3.86502 0.0;
+        2.29072 2.50727 5.11323;
+        2.25302 2.52819 6.47456;
+        2.25302 3.88797 6.47456;
+        -2.32843 3.88917 6.47456;
+        2.29072 2.11978 3.43609;
+        -2.32843 3.86502 0.0;
+        -2.29072 -2.29072 0.0;
+        -2.29072 -1.14536 0.469703;
+        -2.29072 0.0 1.07084;
+        -2.29072 1.09759 1.98723;
+        -2.29072 2.50727 5.11323;
+        -2.32843 2.52819 6.47456;
+        -2.29072 2.11978 3.43609;
+    }
+    faces {
+        10 13 14 "/common/pmat/Wood";
+        4 2 1 "/common/pmat/Wood";
+        10 11 12 "/common/pmat/Wood";
+        10 12 13 "/common/pmat/Wood";
+        4 3 2 "/common/pmat/Wood";
+        1 0 4 "/common/pmat/Wood";
+        16 6 7 "/common/pmat/Wood";
+        7 8 16 "/common/pmat/Wood";
+        5 7 6 "/common/pmat/Wood";
+        15 16 8 "/common/pmat/Wood";
+        7 5 9 "/common/pmat/Wood";
+        15 8 17 "/common/pmat/Wood";
+        8 7 4 "/common/pmat/Wood";
+        4 10 8 "/common/pmat/Wood";
+        7 9 4 "/common/pmat/Wood";
+        17 8 10 "/common/pmat/Wood";
+        10 14 17 "/common/pmat/Wood";
+        9 3 4 "/common/pmat/Wood";
+        0 1 12 "/common/pmat/Wood";
+        12 11 0 "/common/pmat/Wood";
+        1 2 13 "/common/pmat/Wood";
+        13 12 1 "/common/pmat/Wood";
+        2 3 14 "/common/pmat/Wood";
+        14 13 2 "/common/pmat/Wood";
+        3 9 17 "/common/pmat/Wood";
+        17 14 3 "/common/pmat/Wood";
+        5 6 16 "/common/pmat/Wood";
+        16 15 5 "/common/pmat/Wood";
+        9 5 15 "/common/pmat/Wood";
+        15 17 9 "/common/pmat/Wood";
+    }
+}

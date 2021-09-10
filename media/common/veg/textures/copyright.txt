@@ -1,0 +1,17 @@
+flowerbed_dif.tga
+flowerbed_nrm.tga
+generic_bark_nrm.tga
+generic_bark.tga
+GrassMap1.dds
+GrassTuft1_D.dds
+tree_aelm.dds
+tree_aelm_N.dds
+tree_aelm_SSS.dds
+TropGroup1.dds
+TropGroup1_N.dds
+TropGroup1.psd
+TropGroup1_SSS.dds
+TropPlant1_D.dds
+TropPlant1_N.dds
+TropPlant1_T.tga
+: (c) CG Textures 2010 licensed under the terms of the CG Textures license http://www.cgtextures.com/content.php?action=license  (with modifications)

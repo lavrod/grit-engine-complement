@@ -1,0 +1,18 @@
+PizzaBox.blend
+PizzaBox.dds
+PizzaBox.mesh
+PizzaBox.tcol: (c) Dave Cunningham 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
+
+trashcan_shite.mesh
+trashcan_shite.png
+trashcan_shite.tcol
+trashcan_shlid.mesh
+whines.png:
+trashcan_shlid.tcol: (c) Brian 'mortalhuman' Sooy 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
+
+whine1.mesh
+whine1.tcol
+whine2.mesh
+whine2.tcol: (c) Dieter Beckers 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
+
+whined.png: (c) Brian 'mortalhuman' Sooy and Dieter Beckers 2010 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php

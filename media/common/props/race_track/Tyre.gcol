@@ -1,0 +1,20 @@
+TCOL1.0
+
+attributes {
+    mass 80.0;
+    linear_damping 0.5;
+    angular_damping 0.5;
+    linear_sleep_threshold 0.10000000149011612;
+    angular_sleep_threshold 0.10000000149011612;
+}
+
+compound {
+    // Cube
+    cylinder {
+        material "/common/pmat/Rubber";
+        centre 0.0 0.0 0.0;
+        orientation 1.0 0.0 0.0 0.0;
+        dimensions 1.0411880016326904 1.0411880016326904 0.38757258653640747;
+        margin 0.03999999910593033;
+    }
+}

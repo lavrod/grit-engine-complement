@@ -1,0 +1,69 @@
+TCOL1.0
+
+attributes {
+    static;
+}
+
+compound {
+}
+trimesh {
+    vertexes {
+        0.460584 0.134111 0.0;
+        -0.0293557 0.353721 0.0;
+        -0.248317 0.207596 0.0;
+        -0.358887 -0.150079 0.0;
+        -0.111754 -0.32185 0.0;
+        0.215208 -0.336357 0.0;
+        0.201 0.002157 2.27325;
+        0.103413 0.171183 2.27325;
+        -0.0917616 0.171183 2.27325;
+        -0.189349 0.00215697 2.27325;
+        -0.0917616 -0.166869 2.27325;
+        0.103413 -0.166869 2.27325;
+        0.292601 0.0989139 5.05694;
+        0.0682828 0.150692 5.05694;
+        0.0739717 -0.0939514 5.05694;
+        0.269146 -0.0939514 5.05694;
+        0.278975 0.0324589 6.83496;
+        0.13791 0.0650202 6.83496;
+        0.141488 -0.0888267 6.83496;
+        0.264226 -0.0888267 6.83496;
+        0.364608 0.00109559 8.19191;
+    }
+    faces {
+        0 1 7 "/common/pmat/Wood";
+        7 6 0 "/common/pmat/Wood";
+        1 2 8 "/common/pmat/Wood";
+        8 7 1 "/common/pmat/Wood";
+        2 3 9 "/common/pmat/Wood";
+        9 8 2 "/common/pmat/Wood";
+        3 4 10 "/common/pmat/Wood";
+        10 9 3 "/common/pmat/Wood";
+        4 5 11 "/common/pmat/Wood";
+        11 10 4 "/common/pmat/Wood";
+        5 0 6 "/common/pmat/Wood";
+        6 11 5 "/common/pmat/Wood";
+        6 7 12 "/common/pmat/Wood";
+        7 8 13 "/common/pmat/Wood";
+        13 12 7 "/common/pmat/Wood";
+        8 9 13 "/common/pmat/Wood";
+        9 10 14 "/common/pmat/Wood";
+        14 13 9 "/common/pmat/Wood";
+        10 11 15 "/common/pmat/Wood";
+        15 14 10 "/common/pmat/Wood";
+        11 6 12 "/common/pmat/Wood";
+        12 15 11 "/common/pmat/Wood";
+        12 13 17 "/common/pmat/Wood";
+        17 16 12 "/common/pmat/Wood";
+        13 14 18 "/common/pmat/Wood";
+        18 17 13 "/common/pmat/Wood";
+        14 15 19 "/common/pmat/Wood";
+        19 18 14 "/common/pmat/Wood";
+        15 12 16 "/common/pmat/Wood";
+        16 19 15 "/common/pmat/Wood";
+        16 17 20 "/common/pmat/Wood";
+        17 18 20 "/common/pmat/Wood";
+        18 19 20 "/common/pmat/Wood";
+        19 16 20 "/common/pmat/Wood";
+    }
+}

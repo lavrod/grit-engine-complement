@@ -1,0 +1,3 @@
+collision_hard.wav
+collision_soft.wav
+collision_soft2.wav: (c) Augusto P. Moura 2016 licensed under the terms of the MIT license http://www.opensource.org/licenses/mit-license.php
