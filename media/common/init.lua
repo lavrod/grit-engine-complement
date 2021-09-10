@@ -30,7 +30,7 @@ gge_include `carcols.lua`
 gge_include `props/init.lua`
 gge_include `veg/init.lua`
 gge_include `ramps/init.lua`
-
+gge_include `characters/init.lua`
 
 --[=[
 -- Object placement bindings...
