@@ -352,7 +352,7 @@ ColClass = extends (BaseClass) {
                 local damage = #impulse
                 if damage > self.impulseDamageThreshold then
                     local volume = damage / self.impulseDamageThreshold - 1
-                    audio_play("/common/sounds/collisions/collision_soft.wav", volume, 1+math.random()*0.3, wpos, 3, 1)
+                    gge_audio_play("/common/sounds/collisions/collision_soft.wav", volume, 1+math.random()*0.3, wpos, 3, 1)
                     self:receiveDamage(damage)
                 end
             end

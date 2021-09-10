@@ -223,7 +223,7 @@ function main:run (...)
 		navigation_update_debug(elapsed_secs)		
 
         -- AUDIO
-        audio_update(main.audioCentrePos, main.audioCentreVel, main.audioCentreQuat)
+        gge_audio_update(main.audioCentrePos, main.audioCentreVel, main.audioCentreQuat)
 
 
         -- STREAMING

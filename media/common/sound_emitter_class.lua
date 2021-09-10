@@ -19,7 +19,7 @@ SoundEmitterClass = {
     end,
 
     activate = function(self, instance)
-        instance.audio = audio_body_make(self.audioFile or self.className..".wav")
+        instance.audio = gge_audio_body_make(self.audioFile or self.className..".wav")
         instance.audio.looping = true
         instance.audio.position = self.spawnPos
         if self.pitch then

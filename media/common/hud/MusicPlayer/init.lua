@@ -28,7 +28,7 @@ hud_class `.` {
         self.trackname.colour = vec(0, 0, 0)
         self.trackname.text = playlist[self.trackID]
         -- TODO: maybe load should be a no-op?  or add ensure_loaded?
-        --self.audiosource = audio_body_make_ambient(playlist[self.trackID]);
+        --self.audiosource = gge_audio_body_make_ambient(playlist[self.trackID]);
         self.texture = `body.png`
         
         self.showHideButton = hud_object `/common/hud/Button` {
@@ -53,7 +53,7 @@ hud_class `.` {
         self.playPauseButton.position = vec(0, -90)
         self.playPauseButton.pressedCallback = function(this)
 			if(firstTime)then
-					self.audiosource = audio_body_make_ambient(playlist[self.trackID])
+					self.audiosource = gge_audio_body_make_ambient(playlist[self.trackID])
 					firstTime=false
 			end
             if self.audiosource.playing then
@@ -78,7 +78,7 @@ hud_class `.` {
             self.audiosource:destroy()
             self.trackID = (self.trackID - 1 < 1) and #playlist or self.trackID - 1
             self.trackname.text = playlist[self.trackID]
-            self.audiosource = audio_body_make_ambient(playlist[self.trackID]);
+            self.audiosource = gge_audio_body_make_ambient(playlist[self.trackID]);
             if self.isplaying then
                 self.audiosource:play()
             end
@@ -95,7 +95,7 @@ hud_class `.` {
             self.audiosource:destroy()
             self.trackID = (self.trackID + 1 > #playlist) and 1 or self.trackID + 1
             self.trackname.text = playlist[self.trackID]
-            self.audiosource = audio_body_make_ambient(playlist[self.trackID]);
+            self.audiosource = gge_audio_body_make_ambient(playlist[self.trackID]);
             if self.isplaying then
                 self.audiosource:play()
             end

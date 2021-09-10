@@ -87,7 +87,7 @@ function explosion (pos, radius, force, num_flames)
     
     local pitch = 5/radius
     local volume = radius / 5
-    audio_play(`/common/sounds/explosion.wav`, volume, pitch, pos, radius*3, 0.75)
+    gge_audio_play(`/common/sounds/explosion.wav`, volume, pitch, pos, radius*3, 0.75)
 
     
     for i=1,num_debris do

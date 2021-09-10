@@ -75,7 +75,7 @@ local function commit(committed, proposed, force)
     gfx_option("AUTOUPDATE",false)
     physics_option("AUTOUPDATE",false)
     gge_core_option("AUTOUPDATE",false)
-    audio_option("AUTOUPDATE",false)
+    gge_audio_option("AUTOUPDATE",false)
 
     for k, v in pairs(proposed) do
         if force or committed[k] ~= v then
@@ -122,7 +122,7 @@ local function commit(committed, proposed, force)
             elseif k == "metricUnits" then
                 --
             elseif k == "audioMasterVolume" then
-                audio_option("MASTER_VOLUME",v)
+                gge_audio_option("MASTER_VOLUME",v)
             elseif k == "vehicleCameraTrack" then
             else
                 gge_error("Unexpected: "..k)
@@ -133,7 +133,7 @@ local function commit(committed, proposed, force)
     gfx_option("AUTOUPDATE",true)
     physics_option("AUTOUPDATE",true)
     gge_core_option("AUTOUPDATE",true)
-    audio_option("AUTOUPDATE",true)
+    gge_audio_option("AUTOUPDATE",true)
 
 end
 
@@ -145,7 +145,7 @@ function configuration_reset()
     physics_option_reset()
     gge_core_option_reset()
     gfx_option_reset()
-    audio_option_reset()
+    gge_audio_option_reset()
     user_cfg:reset()
 end
 

@@ -271,13 +271,13 @@ TRY_END
 }
 
 static const luaL_reg global[] = {
-    {"audio_body_make",global_audio_body_make},
-    {"audio_body_make_ambient",global_audio_body_make_ambient},
-    {"audio_play",global_audio_play},
-    {"audio_play_ambient",global_audio_play_ambient},
-    {"audio_update",global_audio_update},
-    {"audio_option",global_audio_option},
-    {"audio_option_reset",global_audio_option_reset},
+    {"gge_audio_body_make",global_audio_body_make},
+    {"gge_audio_body_make_ambient",global_audio_body_make_ambient},
+    {"gge_audio_play",global_audio_play},
+    {"gge_audio_play_ambient",global_audio_play_ambient},
+    {"gge_audio_update",global_audio_update},
+    {"gge_audio_option",global_audio_option},
+    {"gge_audio_option_reset",global_audio_option_reset},
     {NULL,NULL}
 };
 
