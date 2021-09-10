@@ -350,7 +350,7 @@ end
 function Editor:newMap()
     gfx_option("RENDER_SKY", true)
     
-    navigation_reset()
+    gge_navigation_reset()
     
     -- no fog and a smooth background colour
     env_cycle = gge_include `editor_env_cycle.lua`
@@ -375,7 +375,7 @@ function Editor:openMap(map_file)
     -- you can create a new map and include a lua that cointains object placements
     gfx_option("RENDER_SKY", true)
     
-    navigation_reset()
+    gge_navigation_reset()
     
     self.mapFile:open(map_file)
     main.camPos, main.camQuat = self.mapFile:getEditorCamPosOrientation()
@@ -513,7 +513,7 @@ end
 
 function Editor:init()
     BaseGameMode.init(self)
-    navigation_reset()
+    gge_navigation_reset()
 
 
     self.debugMode = false
@@ -874,7 +874,7 @@ function Editor:destroy()
 
     editor_interface.map_editor_page:destroy()
     editor_interface:destroy()
-    navigation_reset()
+    gge_navigation_reset()
     BaseGameMode.destroy(self)
 end
 

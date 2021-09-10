@@ -38,7 +38,7 @@ function GameMode:playerRespawn()
 	env.clockRate = 0
 	
     -- TODO(dcunnin): Use disk I/O subsystem for this.
-    if navigation_load_navmesh("./navigation/navmap.navmesh") then
+    if gge_navigation_load_navmesh("./navigation/navmap.navmesh") then
         for i, aichar in ipairs(self.aicharacters) do
             if not aichar.destroyed then
                 aichar:activate()
@@ -56,10 +56,10 @@ end
 function GameMode:init()
     BaseGameMode.init(self)
 
-	navigation_reset()
+	gge_navigation_reset()
 
-	navigation_debug_option("navmesh_use_tile_colours", true)
-	navigation_debug_option("enabled", true)
+	gge_navigation_debug_option("navmesh_use_tile_colours", true)
+	gge_navigation_debug_option("enabled", true)
 
     self.aicharacters = { }
     for _, obj in ipairs(object_all_of_class(`RobotHeavy`)) do
@@ -78,7 +78,7 @@ function GameMode:init()
 
 	playing_binds:bind("right", function() playing_binds.mouseCapture = true end, function() playing_binds.mouseCapture = false end)
 	
-	playing_binds:bind("left", function() local pos = mouse_pick_pos() if pos then pos = navigation_nearest_point_on_navmesh(pos) end if pos then crowd_move(pos) end end)
+	playing_binds:bind("left", function() local pos = mouse_pick_pos() if pos then pos = gge_navigation_nearest_point_on_navmesh(pos) end if pos then crowd_move(pos) end end)
 
 	clock.enabled = false
 	compass.enabled = false
@@ -174,8 +174,8 @@ function GameMode:destroy()
 	playing_binds:unbind("right")
 	playing_binds:unbind("left")
 	
-	navigation_debug_option("enabled", false)	
-	navigation_reset()
+	gge_navigation_debug_option("enabled", false)	
+	gge_navigation_reset()
 end
 
 game_manager:register(GameMode)

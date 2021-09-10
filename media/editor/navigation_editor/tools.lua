@@ -27,8 +27,8 @@ hud_class `Tools` `/common/gui/Window` {
         self.tool.size = vec(self.tool.size.x, self.tool.button.size.y *2)
         self.size = self.size
         
-        --playing_binds:bind("middle", function() local pos = mouse_pick_pos() if pos then navigation_add_obstacle(pos) end end)
-        game_manager.currentMode.leftMouseClick = function() local pos = mouse_pick_pos() if pos then navigation_add_obstacle(pos) end end;
+        --playing_binds:bind("middle", function() local pos = mouse_pick_pos() if pos then gge_navigation_add_obstacle(pos) end end)
+        game_manager.currentMode.leftMouseClick = function() local pos = mouse_pick_pos() if pos then gge_navigation_add_obstacle(pos) end end;
     end;
     
     show_offmesh_tool = function(self)
@@ -49,7 +49,7 @@ hud_class `Tools` `/common/gui/Window` {
                 if pos then
                     editor_interface.navigation_editor.windows.tools.points[2] = pos
                 end
-                navigation_add_offmesh_connection(
+                gge_navigation_add_offmesh_connection(
                     editor_interface.navigation_editor.windows.tools.points[2],
                     editor_interface.navigation_editor.windows.tools.points[1],
                     (editor_interface.navigation_editor.windows.tools.tool.bxsz.radiobuttons.selected.caption == "Bidirecional" and true or false)

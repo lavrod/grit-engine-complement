@@ -206,7 +206,7 @@ function main:run (...)
         else
             physics__frame_step(step_size, elapsed_secs)
             -- NAVIGATION
-            navigation_update(elapsed_secs)				
+            gge_navigation_update(elapsed_secs)				
         end
 
         -- INTERPOLATED GRAPHICS and FRAME UPDATES
@@ -220,7 +220,7 @@ function main:run (...)
         object_do_frame_callbacks(elapsed_secs)
 
 		-- NAVIGATION DEBUG
-		navigation_update_debug(elapsed_secs)		
+		gge_navigation_update_debug(elapsed_secs)		
 
         -- AUDIO
         gge_audio_update(main.audioCentrePos, main.audioCentreVel, main.audioCentreQuat)

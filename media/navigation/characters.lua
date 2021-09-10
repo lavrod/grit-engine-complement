@@ -507,8 +507,8 @@ AICharacter =  double_extends(AnimMgr, BaseClass)
 			pos  = instance.gfx.localPosition
 		end
 		
-		if navigation_navmesh_loaded() then
-			self:setAgentID(gge_agent_make(navigation_nearest_point_on_navmesh(pos) or pos))
+		if gge_navigation_navmesh_loaded() then
+			self:setAgentID(gge_agent_make(gge_navigation_nearest_point_on_navmesh(pos) or pos))
 		end
 		
 		instance.destination = nil
@@ -614,7 +614,7 @@ AICharacter =  double_extends(AnimMgr, BaseClass)
 	end;
 	
 	restartAgent = function(self)
-		if navigation_navmesh_loaded() then
+		if gge_navigation_navmesh_loaded() then
 			if self.instance ~= nil and self:getAgentID() ~= -1 then
 				gge_agent_destroy(self:getAgentID())
 			end
@@ -633,7 +633,7 @@ AICharacter =  double_extends(AnimMgr, BaseClass)
 		local ins = self.instance
 		if not self.activated then return end
 		
-		local new_dest, target_ref = navigation_nearest_point_on_navmesh(position)
+		local new_dest, target_ref = gge_navigation_nearest_point_on_navmesh(position)
 		if not new_dest or target_ref == 0 then return end
 		
 		gge_agent_move_target(self:getAgentID(), new_dest, up_prev_path)
@@ -652,7 +652,7 @@ AICharacter =  double_extends(AnimMgr, BaseClass)
 	end;	
 	
 	teleport = function (self, position)
-		local new_dest = navigation_nearest_point_on_navmesh(position)
+		local new_dest = gge_navigation_nearest_point_on_navmesh(position)
 		if not new_dest then return end
 		
 		gge_agent_destroy(self:getAgentID())

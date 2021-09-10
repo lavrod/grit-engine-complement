@@ -11,7 +11,7 @@ local function open_navmesh_dialog()
         choices = { "Navmesh binary file (*.navmesh)"};
         callback = function(self, str)
             if gge_resource_exists("/"..str) then
-                if navigation_load_navmesh(str) then
+                if gge_navigation_load_navmesh(str) then
                     notify("Loaded!", vec(0, 0.5, 1), V_ID)
                     return true
                 else
@@ -40,7 +40,7 @@ local function save_navmesh_dialog()
             if gge_resource_exists("/"..str) then
                 local save_overwrite = function (boolean)
                     if boolean then
-                        if navigation_save_navmesh(str) then
+                        if gge_navigation_save_navmesh(str) then
                             notify("Saved!", vec(0, 1, 0), V_ID)
                             self:destroy()
                         else
@@ -51,7 +51,7 @@ local function save_navmesh_dialog()
                 create_dialog("SAVE", "Would you like to overwrite "..str.."?", "yesnocancel", save_overwrite)
                 return false
             else
-                if navigation_save_navmesh(str) then
+                if gge_navigation_save_navmesh(str) then
                     notify("Saved!", vec(0, 1, 0), V_ID)
                     return true
                 else
@@ -277,8 +277,8 @@ local navigation_editor = {
                 -- end                    
 
                 -- testnav22(build_list)
-                navigation_update_params()
-                navigation_build_nav_mesh()
+                gge_navigation_update_params()
+                gge_navigation_build_nav_mesh()
             end,
         })
         self.propertiesToolpanel.bxsz:addChild(self.propertiesToolpanel.buttons[3])

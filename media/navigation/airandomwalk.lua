@@ -19,7 +19,7 @@ airandomwalk = {
 			ins.gfx:setAnimationPos(ins.animName[id], ins.animPos[id])
 			
 			if ins.state_machine.idlet > math.random(6, 12) then
-				self:updateDestination(navigation_random_navmesh_point(), false)
+				self:updateDestination(gge_navigation_random_navmesh_point(), false)
 			end
 			
 			ins.state_machine.idlet = ins.state_machine.idlet + elapsed
@@ -59,7 +59,7 @@ airandomwalk = {
 				state_machine.stuckCheck = 0
 				-- print("stuck check: "..#(self:getPosition()-state_machine.stuckCheckPos).." "..self.className)
 				if #(self:getPosition()-state_machine.stuckCheckPos) <= 0.5 then
-					self:updateDestination(navigation_random_navmesh_point(), false)
+					self:updateDestination(gge_navigation_random_navmesh_point(), false)
 				end
 				state_machine.stuckCheckPos = self:getPosition()
 			end

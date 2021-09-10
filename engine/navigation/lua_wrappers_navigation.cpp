@@ -446,36 +446,36 @@ TRY_END
 }
 
 static const luaL_reg global_navigation[] = {
-    { "navigation_add_obj", global_navigation_add_obj },
-    { "navigation_add_gfx_body", global_navigation_add_gfx_body },
-    { "navigation_add_gfx_bodies", global_navigation_add_gfx_bodies },
-    { "navigation_add_rigid_body", global_navigation_add_rigid_body },
+    { "gge_navigation_add_obj", global_navigation_add_obj },
+    { "gge_navigation_add_gfx_body", global_navigation_add_gfx_body },
+    { "gge_navigation_add_gfx_bodies", global_navigation_add_gfx_bodies },
+    { "gge_navigation_add_rigid_body", global_navigation_add_rigid_body },
 
-    { "navigation_update", navigation_system_update },
-    { "navigation_update_debug", navigation_system_update_debug },
-    { "navigation_reset", navigation_system_reset },
+    { "gge_navigation_update", navigation_system_update },
+    { "gge_navigation_update_debug", navigation_system_update_debug },
+    { "gge_navigation_reset", navigation_system_reset },
 
-    { "navigation_navmesh_loaded", global_navigation_navmesh_loaded },
+    { "gge_navigation_navmesh_loaded", global_navigation_navmesh_loaded },
 
-    { "crowd_move_to", crowd_move_agents },
-    { "navigation_add_obstacle", global_add_temp_obstacle },
-    { "navigation_remove_obstacle", global_remove_temp_obstacle },
-    { "navigation_add_offmesh_connection", global_add_offmesh_connection },
+    { "gge_crowd_move_to", crowd_move_agents },
+    { "gge_navigation_add_obstacle", global_add_temp_obstacle },
+    { "gge_navigation_remove_obstacle", global_remove_temp_obstacle },
+    { "gge_navigation_add_offmesh_connection", global_add_offmesh_connection },
 
-    { "navigation_add_convex_volume_point", global_add_convex_volume_point },
-    { "navigation_remove_convex_volume", global_remove_convex_volume },
+    { "gge_navigation_add_convex_volume_point", global_add_convex_volume_point },
+    { "gge_navigation_remove_convex_volume", global_remove_convex_volume },
 
-    { "navigation_remove_offmesh_connection", global_remove_offmesh_connection },
-    { "navigation_build_nav_mesh", global_build_nav_mesh },
-    { "navigation_update_params", global_navigation_update_params },
-    { "navigation_nearest_point_on_navmesh", global_navigation_nearest_point_on_navmesh },
+    { "gge_navigation_remove_offmesh_connection", global_remove_offmesh_connection },
+    { "gge_navigation_build_nav_mesh", global_build_nav_mesh },
+    { "gge_navigation_update_params", global_navigation_update_params },
+    { "gge_navigation_nearest_point_on_navmesh", global_navigation_nearest_point_on_navmesh },
 
-    { "navigation_random_navmesh_point", global_navigation_random_navmesh_point },
-    { "navigation_random_navmesh_point_in_circle", global_navigation_random_navmesh_point_in_circle },
+    { "gge_navigation_random_navmesh_point", global_navigation_random_navmesh_point },
+    { "gge_navigation_random_navmesh_point_in_circle", global_navigation_random_navmesh_point_in_circle },
 
-    { "navigation_debug_option", global_navigation_debug_option },
-    { "navigation_save_navmesh", global_navigation_save_navmesh },
-    { "navigation_load_navmesh", global_navigation_load_navmesh },
+    { "gge_navigation_debug_option", global_navigation_debug_option },
+    { "gge_navigation_save_navmesh", global_navigation_save_navmesh },
+    { "gge_navigation_load_navmesh", global_navigation_load_navmesh },
 
     { NULL, NULL }
 };
