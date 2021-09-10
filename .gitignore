@@ -1,5 +1,7 @@
 # Put SVN in media
-media
+#media
+media/Grit.dat
+media/Grit.exe
 
 * Text editor temporary files
 *~
