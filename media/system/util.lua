@@ -1033,7 +1033,7 @@ end
 
 function mouse_pick_pos(bias, safe)
 	local cast_ray = 1000 * gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
-	local dist = physics_cast(main.camPos, cast_ray, true, 0)
+	local dist = gge_physics_cast(main.camPos, cast_ray, true, 0)
 	if dist then
 		return (main.camPos + cast_ray * dist)
 	end

@@ -41,10 +41,10 @@ class `Grenade` (BaseClass) {
         local dir = (instance.orientation * quat(3, random_vector3_sphere())) * V_FORWARDS
 
         local movement = self.velocity * elapsed_secs
-        self.velocity = self.velocity + physics_get_gravity() * elapsed_secs
+        self.velocity = self.velocity + gge_physics_get_gravity() * elapsed_secs
 
 
-        local fraction, hit_obj, wall_normal = physics_sweep_sphere(0.1, p, movement, true, 0)
+        local fraction, hit_obj, wall_normal = gge_physics_sweep_sphere(0.1, p, movement, true, 0)
 
 
         if fraction then

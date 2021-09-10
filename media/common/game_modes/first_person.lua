@@ -1,5 +1,5 @@
 local function actor_cast (pos, ray, radius, height, body)
-	return physics_sweep_cylinder(radius, height, quat(1,0,0,0), pos, ray, true, 0, body)
+	return gge_physics_sweep_cylinder(radius, height, quat(1,0,0,0), pos, ray, true, 0, body)
 end
 
 
@@ -209,7 +209,7 @@ local FpsPlayerClass = extends (ColClass) {
 
         -- VERTICAL MOTION
 		
-        local gravity = physics_get_gravity().z
+        local gravity = gge_physics_get_gravity().z
         instance.fallVelocity = clamp(instance.fallVelocity + elapsed_secs * gravity, -self.terminalVelocity, self.terminalVelocity)
 
         -- cast a thin disc down from the very top to the bottom + the fall distance
@@ -313,7 +313,7 @@ local FpsPlayerClass = extends (ColClass) {
             local cast_centre = cast_foot + vector3(0,0,height/2)
 
             -- we also need the normal from the ground to test hte gradient, but can only get the true normal with a ray
-            local _, _, floor_normal = physics_cast(cast_centre,  vector3(0,0,-height/2 - step_height), true, 0, body)
+            local _, _, floor_normal = gge_physics_cast(cast_centre,  vector3(0,0,-height/2 - step_height), true, 0, body)
             if floor_normal ~= nil then
                 instance.lastFloorNormal = floor_normal
             end

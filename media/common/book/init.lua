@@ -23,7 +23,7 @@ new_class `Turret` {
         instance.gfxBarrel = gfx_body_make(`Barrel.mesh`)
         --1.2 z offset
         --3 degrees angle up
-        instance.physicsBase = physics_body_make(`Base.gcol`)
+        instance.physicsBase = gge_physics_body_make(`Base.gcol`)
         instance.gfxLight = gfx_light_make()
     end;
 

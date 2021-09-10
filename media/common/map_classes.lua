@@ -370,7 +370,7 @@ ColClass = extends (BaseClass) {
                 local colMesh = self.colMesh or self.className..".gcol"
                 --gge_print("adding: "..tostring(self).." with "..colMesh)
                 local rot = self.rot or quat(1,0,0,0)
-                local body = physics_body_make(
+                local body = gge_physics_body_make(
                     colMesh,
                     self.spawnPos,
                     rot

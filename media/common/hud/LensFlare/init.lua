@@ -61,7 +61,7 @@ hud_class `.` {
 
             if not sun_obscured then
                 local ray = -1000 * gfx_sun_direction()
-                local obscurer = physics_sweep_sphere(0.0001, main.camPos, ray, true, 0)
+                local obscurer = gge_physics_sweep_sphere(0.0001, main.camPos, ray, true, 0)
                 if obscurer ~= nil then
                     sun_obscured = true
                 end

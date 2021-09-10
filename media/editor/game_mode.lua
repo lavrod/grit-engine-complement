@@ -174,7 +174,7 @@ function Editor:duplicateSelected()
 end
 
 local function ghost_cast (pos, ray, scale)
-    local fraction, _, n = physics_sweep_sphere(scale*.15, pos, ray, true, 1)
+    local fraction, _, n = gge_physics_sweep_sphere(scale*.15, pos, ray, true, 1)
     return fraction, n
 end
 
@@ -771,7 +771,7 @@ function Editor:receiveButton(button, state)
             end
         elseif button == "singleStepPhysics" then
             if state == '+' then
-                physics_step(physics_option("STEP_SIZE"))
+                physics__step(gge_physics_option("STEP_SIZE"))
             end
         else
             local pressed = state ~= '-'

@@ -36,7 +36,7 @@ local function flame_behaviour (particle, elapsed)
             local dir = random_vector3_sphere()
             local cast_origin = root+vector3(0,0,dim.x/2)
             local cast_ray = particle.spreadDist*dim.y/2 * dir
-            local dist, victim, normal, physmat = physics_cast(cast_origin, cast_ray, true, 0)
+            local dist, victim, normal, physmat = gge_physics_cast(cast_origin, cast_ray, true, 0)
             --emit_debug_marker(particle.position, vector3(1,0,0), 1, 0.3)
             if dist ~= nil then
                 local hit_pos = cast_origin + dist * cast_ray
@@ -134,7 +134,7 @@ local function engine_flame_behaviour (particle, elapsed)
             local dir = random_vector3_sphere()
             local cast_origin = root+vector3(0,0,dim.x/2)
             local cast_ray = particle.spreadDist*dim.y/2 * dir
-            local dist, victim, normal, physmat = physics_cast(cast_origin, cast_ray, true, 0)
+            local dist, victim, normal, physmat = gge_physics_cast(cast_origin, cast_ray, true, 0)
             --emit_debug_marker(particle.position, vector3(1,0,0), 1, 0.3)
             if dist ~= nil then
                 local hit_pos = cast_origin + dist * cast_ray

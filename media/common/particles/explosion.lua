@@ -110,7 +110,7 @@ function explosion (pos, radius, force, num_flames)
 
 
     -- physics
-    physics_test(radius, pos, true, function(body, num, lpos, wpos, norm, penetration, mat)
+    gge_physics_test(radius, pos, true, function(body, num, lpos, wpos, norm, penetration, mat)
         -- penetration is a number from 0 to radius
         local r = radius - penetration
         local impulse_scalar = force / r / r;
@@ -132,7 +132,7 @@ function explosion (pos, radius, force, num_flames)
     -- fire
     for i=1,num_flames do
         local dir = random_vector3_sphere()
-        local dist, victim, normal, physmat = physics_cast(pos, dir * radius/5, true, 0)
+        local dist, victim, normal, physmat = gge_physics_cast(pos, dir * radius/5, true, 0)
         if dist ~= nil then
             local hit_pos = pos + dist * (radius/5 * dir)
             victim = victim.owner -- from rbody to object

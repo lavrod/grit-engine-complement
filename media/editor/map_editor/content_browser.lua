@@ -173,9 +173,9 @@ hud_class `FloatingObject` {
             local dist
             if body ~= nil then
                 -- Avoid the object colliding with itself.
-                dist = physics_cast(main.camPos, cast_ray, true, 0, body)
+                dist = gge_physics_cast(main.camPos, cast_ray, true, 0, body)
             else
-                dist = physics_cast(main.camPos, cast_ray, true, 0)
+                dist = gge_physics_cast(main.camPos, cast_ray, true, 0)
             end
             
             local pos = (main.camPos + cast_ray * (dist or 0.02)) + vec(0, 0, (self.zOffset or 0))

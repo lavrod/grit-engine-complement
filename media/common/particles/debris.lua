@@ -32,7 +32,7 @@ particle `Debris` {
         particle.life = particle.life - elapsed
         if particle.life <= 0 then return false end
         particle.position = particle.position + particle.velocity * elapsed
-        particle.velocity = particle.velocity + physics_get_gravity() * elapsed
+        particle.velocity = particle.velocity + gge_physics_get_gravity() * elapsed
         particle.angle = particle.angle + particle.angleRate * elapsed
     end
 }   

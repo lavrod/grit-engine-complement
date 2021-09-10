@@ -105,7 +105,7 @@ WeaponEffectManager:set("Prod", {
     stepCallbackAux = function (self, elapsed_secs, src, quat, accel)
         local dir = quat * V_FORWARDS
         local ray = 8000 * dir
-        local dist, body = physics_cast(src, ray, true, 0)
+        local dist, body = gge_physics_cast(src, ray, true, 0)
         if dist~= nil then
             local pos = src + dist * ray
             body:impulse(elapsed_secs * accel * body.mass * dir, pos)
@@ -131,7 +131,7 @@ WeaponEffectManager:set("Prod", {
 
 
 function directed_ray(p, q)
-    local d,b,n,m = physics_cast(p, q * (8000 * V_FORWARDS), true, 0)
+    local d,b,n,m = gge_physics_cast(p, q * (8000 * V_FORWARDS), true, 0)
     if d == nil then return nil end
     return d * 8000, b, n, m
 end
@@ -251,7 +251,7 @@ WeaponEffectManager:set("Delete", {
     primaryEngage = function (self, src, quat)
         local dir = quat * V_FORWARDS
         local ray = 8000 * dir
-        local dist, body = physics_cast(src, ray, true, 0)
+        local dist, body = gge_physics_cast(src, ray, true, 0)
         if dist == nil then return end
         local o = body.owner
         if o.debugObject then
@@ -293,7 +293,7 @@ WeaponGrab = {
         local len = 8000
         local dir = quat * V_FORWARDS
         local ray = len * dir
-        local dist, body = physics_cast(src, ray, true, 0)
+        local dist, body = gge_physics_cast(src, ray, true, 0)
         if dist ~= nil then
             self.grabDist = dist * len
             self.object = body.owner

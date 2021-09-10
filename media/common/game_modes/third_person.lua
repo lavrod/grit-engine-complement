@@ -89,7 +89,7 @@ function ThirdPersonGameMode:scanForBoard()
     local player_pos = player_body.worldPosition
     local best_score = 0
     local best_found_vehicle = nil
-    physics_test(radius, player_pos, true, function(body, num, lpos, wpos, normal, penetration, mat)
+    gge_physics_test(radius, player_pos, true, function(body, num, lpos, wpos, normal, penetration, mat)
         local found_vehicle = body.owner
         if found_vehicle == nil then return end
         if found_vehicle.controllable ~= "VEHICLE" then return end

@@ -73,7 +73,7 @@ local user_cfg_spec = {
 local function commit(committed, proposed, force)
 
     gfx_option("AUTOUPDATE",false)
-    physics_option("AUTOUPDATE",false)
+    gge_physics_option("AUTOUPDATE",false)
     gge_core_option("AUTOUPDATE",false)
     gge_audio_option("AUTOUPDATE",false)
 
@@ -98,7 +98,7 @@ local function commit(committed, proposed, force)
 
             elseif k == "physicsWireFrame" then
                 gge_print("Physics wire frame: "..(v and "on" or "off"))
-                physics_option("DEBUG_WIREFRAME", v)
+                gge_physics_option("DEBUG_WIREFRAME", v)
             elseif k == "physicsDebugWorld" then
                 gge_print("Physics debug world: "..(v and "on" or "off"))
                 main.physicsDebugWorld = v
@@ -113,11 +113,11 @@ local function commit(committed, proposed, force)
             elseif k == "lowPowerMode" then
                 -- next frame render picks this up too
                 if v then
-                    physics_option("STEP_SIZE", 0.05)
-                    physics_option("SOLVER_ITERATIONS", 4)
+                    gge_physics_option("STEP_SIZE", 0.05)
+                    gge_physics_option("SOLVER_ITERATIONS", 4)
                 else
-                    physics_option("STEP_SIZE", 0.005)
-                    physics_option("SOLVER_ITERATIONS", 15)
+                    gge_physics_option("STEP_SIZE", 0.005)
+                    gge_physics_option("SOLVER_ITERATIONS", 15)
                 end
             elseif k == "metricUnits" then
                 --
@@ -131,7 +131,7 @@ local function commit(committed, proposed, force)
     end
 
     gfx_option("AUTOUPDATE",true)
-    physics_option("AUTOUPDATE",true)
+    gge_physics_option("AUTOUPDATE",true)
     gge_core_option("AUTOUPDATE",true)
     gge_audio_option("AUTOUPDATE",true)
 
@@ -142,7 +142,7 @@ make_active_table(user_cfg, user_cfg_spec,  commit)
 user_cfg.autoUpdate = true
 
 function configuration_reset()
-    physics_option_reset()
+    gge_physics_option_reset()
     gge_core_option_reset()
     gfx_option_reset()
     gge_audio_option_reset()

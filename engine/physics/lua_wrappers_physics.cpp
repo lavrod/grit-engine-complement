@@ -1052,24 +1052,24 @@ TRY_END
 
 
 static const luaL_reg global[] = {
-        {"physics_get_material", global_physics_get_material},
-        {"physics_set_material", global_physics_set_material},
-        {"physics_set_interaction_groups", global_physics_set_interaction_groups},
-        {"physics_draw", global_physics_draw},
-        {"physics_test", global_physics_test},
+        {"gge_physics_get_material", global_physics_get_material},
+        {"gge_physics_set_material", global_physics_set_material},
+        {"gge_physics_set_interaction_groups", global_physics_set_interaction_groups},
+        {"gge_physics_draw", global_physics_draw},
+        {"gge_physics_test", global_physics_test},
 
-        {"physics_update", global_physics_update},
-        {"physics_update_graphics", global_physics_update_graphics},
+        {"gge_physics_update", global_physics_update},
+        {"gge_physics_update_graphics", global_physics_update_graphics},
 
-        {"physics_body_make", global_physics_body_make},
-        {"physics_get_gravity", global_physics_get_gravity},
-        {"physics_option_reset", global_physics_option_reset},
-        {"physics_option", global_physics_option},
-        {"physics_cast", global_physics_cast_ray},
-        {"physics_sweep_sphere", global_physics_sweep_sphere},
-        {"physics_sweep_cylinder", global_physics_sweep_cylinder},
-        {"physics_sweep_box", global_physics_sweep_box},
-        {"physics_sweep_col_mesh", global_physics_sweep_col_mesh},
+        {"gge_physics_body_make", global_physics_body_make},
+        {"gge_physics_get_gravity", global_physics_get_gravity},
+        {"gge_physics_option_reset", global_physics_option_reset},
+        {"gge_physics_option", global_physics_option},
+        {"gge_physics_cast", global_physics_cast_ray},
+        {"gge_physics_sweep_sphere", global_physics_sweep_sphere},
+        {"gge_physics_sweep_cylinder", global_physics_sweep_cylinder},
+        {"gge_physics_sweep_box", global_physics_sweep_box},
+        {"gge_physics_sweep_col_mesh", global_physics_sweep_col_mesh},
         {NULL, NULL}
 };
 

@@ -99,7 +99,7 @@ function cam_box_ray(pos, cam_q, dist, dir, ...)
     local rect = gfx_window_size_in_scene()
     local tolerance = 0.05 -- this is the distance that we use to account for differences between colmesh and gfx mesh, as well as inaccuracies in the algorithm itself
     local box = vector3(rect.x + tolerance, tolerance, rect.y + tolerance) -- y is the direction of the ray
-    local fraction = physics_sweep_box(box, cam_q, pos, (dist-tolerance/2)*dir, true, 1, ...) or 1
+    local fraction = gge_physics_sweep_box(box, cam_q, pos, (dist-tolerance/2)*dir, true, 1, ...) or 1
     return dist * fraction + tolerance/2 + gfx_option("NEAR_CLIP")
 end
 
@@ -112,12 +112,12 @@ mouse_pos_rel = V_ZERO
 mouse_pos_abs = V_ZERO
 
 
-function physics_step (elapsed_secs)
+function physics__step (elapsed_secs)
     local _, initial_allocs = gge_get_alloc_stats()
 
     object_do_step_callbacks(elapsed_secs)
     game_manager:stepUpdate(elapsed_secs)
-    physics_update()
+    gge_physics_update()
 
     gfx_tracer_body_pump(elapsed_secs)
     gfx_particle_pump(elapsed_secs)
@@ -126,14 +126,14 @@ function physics_step (elapsed_secs)
     main.physicsAllocs = final_allocs - initial_allocs
 end
 
-function physics_maybe_step (elapsed_secs)
+function physics__maybe_step (elapsed_secs)
     if main.physicsEnabled then
-        physics_step(elapsed_secs)
+        physics__step(elapsed_secs)
     end
     gge_do_events(elapsed_secs)
 end
 
-function physics_frame_step (step_size, elapsed_secs)
+function physics__frame_step (step_size, elapsed_secs)
     local elapsed_secs = main.physicsLeftOver + elapsed_secs * main.physicsSpeed
     local iterations = 0
     while elapsed_secs >= step_size do
@@ -143,7 +143,7 @@ function physics_frame_step (step_size, elapsed_secs)
             break
         end
         elapsed_secs = elapsed_secs - step_size
-        physics_maybe_step(step_size)
+        physics__maybe_step(step_size)
         iterations = iterations + 1
     end
 
@@ -199,12 +199,12 @@ function main:run (...)
         end
 
         -- PHYSICS (and game logic)
-        local step_size = physics_option("STEP_SIZE")
+        local step_size = gge_physics_option("STEP_SIZE")
         if main.physicsOneToOne then
             main.physicsLeftOver = 0
-            physics_maybe_step(step_size)
+            physics__maybe_step(step_size)
         else
-            physics_frame_step(step_size, elapsed_secs)
+            physics__frame_step(step_size, elapsed_secs)
             -- NAVIGATION
             navigation_update(elapsed_secs)				
         end
@@ -212,9 +212,9 @@ function main:run (...)
         -- INTERPOLATED GRAPHICS and FRAME UPDATES
         if gfx_window_active() then
             local left_over_time = main.physicsEnabled and main.physicsLeftOver or 0
-            physics_update_graphics(left_over_time)
+            gge_physics_update_graphics(left_over_time)
             gfx_tracer_body_set_left_over_time(left_over_time)
-            physics_draw()
+            gge_physics_draw()
         end
         game_manager:frameUpdate(elapsed_secs)
         object_do_frame_callbacks(elapsed_secs)

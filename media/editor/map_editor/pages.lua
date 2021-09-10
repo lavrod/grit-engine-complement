@@ -368,7 +368,7 @@ local map_editor_page = {
         ), "Toggle Bloom")
         self.toolbar:addTool("Show collision", map_editor_icons.show_collision, (
             function()
-                physics_option("DEBUG_WIREFRAME", not physics_option("DEBUG_WIREFRAME"))
+                gge_physics_option("DEBUG_WIREFRAME", not gge_physics_option("DEBUG_WIREFRAME"))
             end
         ), "Show Collision")
         self.toolbar:addSeparator()

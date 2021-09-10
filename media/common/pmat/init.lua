@@ -36,7 +36,7 @@ local restitution = { 0.0, n_a, n_a, n_a, n_a, n_a, n_a,
                       0.0, 0.0, 0.0, 0.0, 0.0, 0.0, n_a,
                       0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
-physics_set_interaction_groups(friction, restitution)
+gge_physics_set_interaction_groups(friction, restitution)
 
 
 -- The user can add more of these if they want

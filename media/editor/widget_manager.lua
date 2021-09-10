@@ -112,7 +112,7 @@ function widget_manager:getObjectUnderCursor()
     local editor = game_manager.currentMode
 
     local ray = 1000 * gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
-    local _, b = physics_cast(main.camPos, ray, true, 0)
+    local _, b = gge_physics_cast(main.camPos, ray, true, 0)
     -- local b2 = self:selectNonPhysicalObjects()
     
     -- if b2 then

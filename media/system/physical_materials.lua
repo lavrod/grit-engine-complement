@@ -17,7 +17,7 @@ function physics:setMaterial(name, tab)
         for k,v in pairs(physics.defaultMaterial) do
                 tab[k] = tab[k] or v
         end
-        physics_set_material(name, tab.interactionGroup)
+        gge_physics_set_material(name, tab.interactionGroup)
         local mat = PhysicalMaterials[name]
         if mat == nil then
                 -- create material
