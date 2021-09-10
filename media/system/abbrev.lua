@@ -222,7 +222,7 @@ end
 local function material2(tab)
     local name = curried_name
     tab = tab or {}
-    register_material(name,tab)
+    gge_register_material(name,tab)
 end
 function material(name)
     curried_name = name

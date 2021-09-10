@@ -5320,9 +5320,9 @@ static const luaL_reg global[] = {
 
 static const luaL_reg global_ogre_debug[] = {
 
-    {"register_material", global_gfx_register_material},
+    {"gge_register_material", global_gfx_register_material},
 
-    {"resource_exists", global_resource_exists},
+    {"gge_resource_exists", global_resource_exists},
 
     {NULL, NULL}
 };

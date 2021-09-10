@@ -22,7 +22,7 @@ gfx_register_shader(`Money`, {
 })
 
 -- Used by Money.mesh.
-register_material(`Money`, {
+gge_register_material(`Money`, {
     shader = `Money`,
     tex = `Money_d.dds`,
     additionalLighting = false,

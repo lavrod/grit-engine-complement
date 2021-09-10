@@ -21,7 +21,7 @@ gfx_register_shader(`Ball`, {
     ]],
 })
 
-register_material(`Ball`, {
+gge_register_material(`Ball`, {
     shader = `Ball`,
     tex = `cube.dds`,
     additionalLighting = true,

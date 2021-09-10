@@ -10,7 +10,7 @@ local function open_navmesh_dialog()
         alpha = 1;
         choices = { "Navmesh binary file (*.navmesh)"};
         callback = function(self, str)
-            if resource_exists("/"..str) then
+            if gge_resource_exists("/"..str) then
                 if navigation_load_navmesh(str) then
                     notify("Loaded!", vec(0, 0.5, 1), V_ID)
                     return true
@@ -37,7 +37,7 @@ local function save_navmesh_dialog()
         alpha = 1;
         choices = { "Navmesh binary file (*.navmesh)"};
         callback = function(self, str)
-            if resource_exists("/"..str) then
+            if gge_resource_exists("/"..str) then
                 local save_overwrite = function (boolean)
                     if boolean then
                         if navigation_save_navmesh(str) then

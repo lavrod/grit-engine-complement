@@ -20,7 +20,7 @@ function open_map_dialog()
         choices = { "Grit Map (*.gmap)", "Lua Script (*.lua)" };
         callback = function(self, str)
             str = '/' .. str
-            if resource_exists(str) then
+            if gge_resource_exists(str) then
                 local status, msg = pcall(game_manager.currentMode.openMap, game_manager.currentMode, str)
                 if status then
                     notify("Loaded!", vec(0, 0.5, 1), V_ID)
@@ -51,7 +51,7 @@ function save_map_dialog()
         choices = { "Grit Map (*.gmap)", "Lua Script (*.lua)" };
         callback = function(self, str)
             str = '/' .. str
-            if resource_exists(str) then
+            if gge_resource_exists(str) then
                 local save_overwrite = function (number)
                     if number == 1 then
                         local status, msg = pcall(game_manager.currentMode.saveCurrentMapAs, game_manager.currentMode, str)

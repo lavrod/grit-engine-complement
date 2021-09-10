@@ -309,7 +309,7 @@ function create_flame_raw (pos, width, height, pname, fertile_life)
 
 end
 
-if resource_exists(`gta4_flames.png`) then
+if gge_resource_exists(`gta4_flames.png`) then
     particle `Flame2` {
         map = `gta4_flames.png`;
         frames = particle_grid_frames(73,73, 0,0, 6,6) ; frame = 0;

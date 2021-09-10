@@ -1,6 +1,6 @@
 
 -- Used by the meshes.
-register_material(`Small`, {
+gge_register_material(`Small`, {
 })
 
 gge_print("Loading Test.08.mesh")
