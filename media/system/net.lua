@@ -13,7 +13,7 @@ NetChannel = {}
 function NetChannel:send(message)
     self.sequenceOut = self.sequenceOut + 1
     
-    net_send_packet_sequenced(self.channel, self.address, message, self.sequenceOut)
+    gge_net_send_packet_sequenced(self.channel, self.address, message, self.sequenceOut)
     
     if net.showPackets then
         gge_print(string.format("sending %db, seq=%d", message.length, self.sequenceOut))
@@ -42,11 +42,11 @@ net.runningClient = true
 gge_include `server.lua`
 gge_include `client.lua`
 
-net.loopbackAddress = net_resolve_address("localhost:0")
+net.loopbackAddress = gge_net_resolve_address("localhost:0")
 
 net.process = function()
     -- process the code side of networking
-    net_process()
+    gge_net_process()
     
     -- handle loopback packets
     if net.runningClient then
@@ -59,18 +59,18 @@ net.process = function()
 end
 
 net.processLoopback = function(channel, handler, callback)
-    local packet = net_get_loopback_packet(channel)
+    local packet = gge_net_get_loopback_packet(channel)
     
     while packet ~= nil do
         if packet ~= nil then
             callback(handler, net.loopbackAddress, packet)
         end
         
-        packet = net_get_loopback_packet(channel)
+        packet = gge_net_get_loopback_packet(channel)
     end
 end
 
-net_register_callbacks({
+gge_net_register_callbacks({
     process_packet = function(address, message)
         -- listen clients will get handled by loopback channel 'client'
         if net.runningServer then

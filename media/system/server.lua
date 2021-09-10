@@ -142,25 +142,25 @@ net.server.processOutOfBand = function(self, address, message)
     
     -- get server info
     if oobType == 1 then
-        local response = net_make_message()
+        local response = gge_net_make_message()
         
         response:write_int(-1)
         response:write_int(1 + 128, 8) -- get info, response
         response:write_string("hello world!")
         
-        net_send_packet("client", address, response)
+        gge_net_send_packet("client", address, response)
     elseif oobType == 2 then -- get challenge
         local challenge = math.floor((self.serverTime + math.random()) * 1000)
     
         self.challenges[tostring(address)] = challenge
         
-        local response = net_make_message()
+        local response = gge_net_make_message()
         
         response:write_int(-1)
         response:write_int(2 + 128, 8) -- get challenge, response
         response:write_int(challenge)
         
-        net_send_packet("client", address, response)
+        gge_net_send_packet("client", address, response)
     elseif oobType == 3 then -- connect request
         local challenge = message:read_int()
         local challengeMatch = self.challenges[tostring(address)]
@@ -178,13 +178,13 @@ net.server.processOutOfBand = function(self, address, message)
                 self.clients[i].address = address
                 self.clients[i].lastMessageTime = self.serverTime
                 
-                local response = net_make_message()
+                local response = gge_net_make_message()
         
                 response:write_int(-1)
                 response:write_int(3 + 128, 8) -- connect to server, response
                 response:write_int(i, 8)
                 
-                net_send_packet("client", address, response)
+                gge_net_send_packet("client", address, response)
                 
                 break
             end

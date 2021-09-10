@@ -494,13 +494,13 @@ TRY_END
 }
 
 static const luaL_reg global[] = {
-    {"net_register_callbacks", global_net_register_callbacks},
-    {"net_process", global_net_process},
-    {"net_make_message", global_net_make_message},
-    {"net_get_loopback_packet", global_net_get_loopback_packet},
-    {"net_send_packet", global_net_send_packet},
-    {"net_send_packet_sequenced", global_net_send_packet_sequenced},
-    {"net_resolve_address", global_net_resolve_address},
+    {"gge_net_register_callbacks", global_net_register_callbacks},
+    {"gge_net_process", global_net_process},
+    {"gge_net_make_message", global_net_make_message},
+    {"gge_net_get_loopback_packet", global_net_get_loopback_packet},
+    {"gge_net_send_packet", global_net_send_packet},
+    {"gge_net_send_packet_sequenced", global_net_send_packet_sequenced},
+    {"gge_net_resolve_address", global_net_resolve_address},
     {NULL,NULL}
 };
 

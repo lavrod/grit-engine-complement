@@ -65,22 +65,22 @@ net.client.serverChallenge = 0
 net.client.checkConnectPacket = function(self)
     if self.state == STATE_CHALLENGING then
         if (self.clientTime - self.lastConnectTime) > 2 then
-            local message = net_make_message()
+            local message = gge_net_make_message()
             message:write_int(-1)
             message:write_int(2, 8)
             
-            net_send_packet("server", self.currentServer, message)
+            gge_net_send_packet("server", self.currentServer, message)
             
             self.lastConnectTime = self.clientTime
         end
     elseif self.state == STATE_CONNECTING then
         if (self.clientTime - self.lastConnectTime) > 2 then
-            local message = net_make_message()
+            local message = gge_net_make_message()
             message:write_int(-1)
             message:write_int(3, 8)
             message:write_int(self.serverChallenge)
             
-            net_send_packet("server", self.currentServer, message)
+            gge_net_send_packet("server", self.currentServer, message)
             
             self.lastConnectTime = self.clientTime
         end
@@ -107,7 +107,7 @@ net.client.lastServerMessage = 0
 net.client.commandSequence = 0
 
 net.client.sendCommandPacket = function(self)
-    local message = net_make_message()
+    local message = gge_net_make_message()
     
     message:write_int(self.lastServerMessage)
     message:write_int(self.lastReliableMessage)
@@ -206,7 +206,7 @@ function connect(host)
         return
     end
     
-    local server = net_resolve_address(host)
+    local server = gge_net_resolve_address(host)
     
     if server ~= net.client.currentServer then
         net.client.currentServer = server
