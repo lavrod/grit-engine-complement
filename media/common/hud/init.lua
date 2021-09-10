@@ -132,8 +132,8 @@ function common_hud_reset()
             mem = function()
                 return string.format(
                         "HRAM | GRAM || QI | HO | GO: %d/%dMB | %d/%dMB || I:%d | HO:%d | GO:%d",
-                        host_ram_used(),
-                        host_ram_available(),
+                        gge_host_ram_used(),
+                        gge_host_ram_available(),
                         gfx_gpu_ram_used(),
                         gfx_gpu_ram_available(),
                         gge_get_in_queue_size(),

@@ -29,9 +29,9 @@ gge_register_material(`Money`, {
 
 
 gge_print("Loading Money_d.dds")
-disk_resource_load(`Money_d.dds`)
+gge_disk_resource_load(`Money_d.dds`)
 gge_print("Loading Money.mesh")
-disk_resource_load(`Money.mesh`)
+gge_disk_resource_load(`Money.mesh`)
 
 
 gfx_sunlight_direction(vec(0, 0, -1))

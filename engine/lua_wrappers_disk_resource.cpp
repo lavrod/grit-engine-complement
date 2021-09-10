@@ -325,34 +325,34 @@ TRY_END
 static const luaL_reg global[] = {
 
     // global flags
-    {"disk_resource_get_gfx_verbose_loads", global_disk_resource_get_gfx_verbose_loads},
-    {"disk_resource_set_gfx_verbose_loads", global_disk_resource_set_gfx_verbose_loads},
-    {"disk_resource_get_verbose_loads", global_disk_resource_get_verbose_loads},
-    {"disk_resource_set_verbose_loads", global_disk_resource_set_verbose_loads},
-    {"disk_resource_get_verbose_incs", global_disk_resource_get_verbose_incs},
-    {"disk_resource_set_verbose_incs", global_disk_resource_set_verbose_incs},
+    {"gge_disk_resource_get_gfx_verbose_loads", global_disk_resource_get_gfx_verbose_loads},
+    {"gge_disk_resource_set_gfx_verbose_loads", global_disk_resource_set_gfx_verbose_loads},
+    {"gge_disk_resource_get_verbose_loads", global_disk_resource_get_verbose_loads},
+    {"gge_disk_resource_set_verbose_loads", global_disk_resource_set_verbose_loads},
+    {"gge_disk_resource_get_verbose_incs", global_disk_resource_get_verbose_incs},
+    {"gge_disk_resource_set_verbose_incs", global_disk_resource_set_verbose_incs},
 
     // querying
-    {"disk_resource_num", global_disk_resource_num},
-    {"disk_resource_num_loaded", global_disk_resource_num_loaded},
-    {"disk_resource_all", global_disk_resource_all},
-    {"disk_resource_all_loaded", global_disk_resource_all_loaded},
+    {"gge_disk_resource_num", global_disk_resource_num},
+    {"gge_disk_resource_num_loaded", global_disk_resource_num_loaded},
+    {"gge_disk_resource_all", global_disk_resource_all},
+    {"gge_disk_resource_all_loaded", global_disk_resource_all_loaded},
 
     // the resources themselves
-    {"disk_resource_add", global_disk_resource_add},
-    {"disk_resource_has", global_disk_resource_has},
-    {"disk_resource_users", global_disk_resource_users},
-    {"disk_resource_ensure_loaded", global_disk_resource_ensure_loaded},
-    {"disk_resource_loaded", global_disk_resource_loaded},
-    {"disk_resource_load", global_disk_resource_load},
-    {"disk_resource_unload", global_disk_resource_unload},
-    {"disk_resource_reload", global_disk_resource_reload},
-    {"disk_resource_hold_make", global_disk_resource_hold_make},
+    {"gge_disk_resource_add", global_disk_resource_add},
+    {"gge_disk_resource_has", global_disk_resource_has},
+    {"gge_disk_resource_users", global_disk_resource_users},
+    {"gge_disk_resource_ensure_loaded", global_disk_resource_ensure_loaded},
+    {"gge_disk_resource_loaded", global_disk_resource_loaded},
+    {"gge_disk_resource_load", global_disk_resource_load},
+    {"gge_disk_resource_unload", global_disk_resource_unload},
+    {"gge_disk_resource_reload", global_disk_resource_reload},
+    {"gge_disk_resource_hold_make", global_disk_resource_hold_make},
 
-    {"disk_resource_check", global_disk_resource_check},
+    {"gge_disk_resource_check", global_disk_resource_check},
 
-    {"host_ram_available", global_host_ram_available},
-    {"host_ram_used", global_host_ram_used},
+    {"gge_host_ram_available", global_host_ram_available},
+    {"gge_host_ram_used", global_host_ram_used},
 
     {NULL, NULL}
 };

@@ -1,7 +1,7 @@
 gge_physics_set_material(`/common/pmat/Stone`, 4)  -- RoughGroup
 gcol = `test.gcol`
-hold = disk_resource_hold_make(gcol)  -- Keep it from being unloaded
-disk_resource_ensure_loaded(gcol)  -- Load it (in rendering thread)
+hold = gge_disk_resource_hold_make(gcol)  -- Keep it from being unloaded
+gge_disk_resource_ensure_loaded(gcol)  -- Load it (in rendering thread)
 
 local body = gge_physics_body_make(gcol, vec(0, 0, 0), quat(1, 0, 0, 0))
 

@@ -23,8 +23,8 @@ function physics:setProceduralBatchClass(name, tab)
         default("castShadows", true)
 
         -- XXX HACK! this should be done by the background loader using resource dependencies
-        tab.hold = disk_resource_hold_make(tab.mesh)
-        disk_resource_ensure_loaded(tab.mesh)
+        tab.hold = gge_disk_resource_hold_make(tab.mesh)
+        gge_disk_resource_ensure_loaded(tab.mesh)
 
         local poc = ProceduralBatchClasses[name]
         if poc == nil then

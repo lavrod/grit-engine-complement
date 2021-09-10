@@ -3,9 +3,9 @@
 audio = audio or { }
 
  -- prevent it from being unloaded by anyone until we release it
-audio.collision = disk_resource_hold_make(`/common/sounds/collision.wav`)
+audio.collision = gge_disk_resource_hold_make(`/common/sounds/collision.wav`)
  -- force load it (in rendering thread)
-disk_resource_ensure_loaded(audio.collision.name)
+gge_disk_resource_ensure_loaded(audio.collision.name)
 
-audio.explosion = disk_resource_hold_make(`/common/sounds/explosion.wav`)
-disk_resource_ensure_loaded(audio.explosion.name)
+audio.explosion = gge_disk_resource_hold_make(`/common/sounds/explosion.wav`)
+gge_disk_resource_ensure_loaded(audio.explosion.name)
