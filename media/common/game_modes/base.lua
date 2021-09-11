@@ -44,6 +44,7 @@ end
 function BaseGameMode:loadMap()
     loading_screen:setMapName(self.name)
     loading_screen:setStatus('Loading resources...')
+    print(self.map)
     include_map(self.map)
 end
 

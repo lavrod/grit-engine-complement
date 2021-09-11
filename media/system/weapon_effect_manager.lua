@@ -190,7 +190,7 @@ WeaponEffectManager:set("Flame", WeaponFlame)
 
 -- Create objects
 WeaponCreate = {
-    class = `/vehicles/Scarman`;
+    class = `/games/assets/vehicles/Scarman`;
     rotation = 'ALIGNED';  -- Or 'FIXED' or 'RANDOM'
     fireSpeed = 40;
     fireSpin = 0;

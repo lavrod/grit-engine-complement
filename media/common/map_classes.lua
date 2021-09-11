@@ -343,7 +343,7 @@ ColClass = extends (BaseClass) {
             if self.health and self.impulseDamageThreshold then
                 --if impulse > 0 then
                 --        --gge_print(self.name, impulse, pos, poso)
-                --        if (not other.owner.destroyed) and other.owner.className == "/vehicles/Evo" then
+                --        if (not other.owner.destroyed) and other.owner.className == "/games/assets/vehicles/Evo" then
                 --                --gge_print("BOUNCE!", impulse, norm, poso)
                 --                --other:impulse(-impulse * norm, pos)
                 --                self:receiveDamage(20000)
