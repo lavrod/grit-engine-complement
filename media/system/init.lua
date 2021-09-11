@@ -351,6 +351,7 @@ gge_safe_include `/editor/init.lua`
 gge_safe_include `/navigation/init.lua`
 gge_safe_include `/games/assets/vehicles/init.lua`
 gge_safe_include `/games/playground/init.lua`
+gge_safe_include `/games/infinite/init.lua`
 --gge_safe_include `/detached/init.lua`
 --gge_safe_include `/wipeout/init.lua`
 
