@@ -233,7 +233,7 @@ hud_class `Window` {
     mouseMoveCallback = function(self, local_pos, screen_pos, inside)
         self.inside = inside
 
-        local max_size = self.maxSize or gfx_window_size()
+        local max_size = self.maxSize or gge_gfx_window_size()
 
         if self.right_resizer_dragging then
             local wsize = vec2(self.originalSize.x + (-self.draggingPos.x + mouse_pos_abs.x), self.originalSize.y - (-self.draggingPos.y + mouse_pos_abs.y))
@@ -259,7 +259,7 @@ hud_class `Window` {
     end,
 }
 
-WindowClass = hud_class_get(`Window`)
+WindowClass = gge_hud_class_get(`Window`)
 
 _windows = {}
 

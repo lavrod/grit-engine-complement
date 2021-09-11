@@ -43,7 +43,7 @@ hud_class `ToolPanel` (extends(_gui.class)
     mouseMoveCallback = function (self, local_pos, screen_pos, inside)
         self.inside = inside
 		if self.resizing then
-			self.size = vec(gfx_window_size().x-mouse_pos_abs.x, self.size.y)
+			self.size = vec(gge_gfx_window_size().x-mouse_pos_abs.x, self.size.y)
 			_gui.class.alignUpdate(self, self.parent.size)
 			self:updateIcon()
 		end

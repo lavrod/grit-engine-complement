@@ -234,7 +234,7 @@ function emit_engine_fire (pos)
 
     local l
     if  false and math.random() < 0.1 then
-        l = gfx_light_make()
+        l = gge_gfx_light_make()
         l.coronaColour = V_ZERO
         l.localPosition = pos + off
         l.range = 2
@@ -244,7 +244,7 @@ function emit_engine_fire (pos)
 
     local size = 0.7 + math.random()*0.1
 	if engine_fire_counter + 1 < engine_fire_max then
-    gfx_particle_emit(`EngineFire`, pos + off, {
+    gge_gfx_particle_emit(`EngineFire`, pos + off, {
                       velocity = vel;
                       light = l;
                       frame = math.random(5)-1,
@@ -298,12 +298,12 @@ function create_flame_raw (pos, width, height, pname, fertile_life)
 
     if flame_counter > flame_counter_max then return end
 
-    local l = gfx_light_make()
+    local l = gge_gfx_light_make()
     l.coronaColour = vector3(0,0,0)
 
     local centre = pos + vector3(0,0,height/2)
 
-    gfx_particle_emit(pname, pos, { fertileLife = fertile_life, life = 5 + 10*math.random(), dimensions=vector3(width,height,width), light = l })
+    gge_gfx_particle_emit(pname, pos, { fertileLife = fertile_life, life = 5 + 10*math.random(), dimensions=vector3(width,height,width), light = l })
 
     flame_counter = flame_counter + 1
 

@@ -18,7 +18,7 @@ hud_class `GuiText` (extends(_gui.class)
 	
 	init = function (self)
 		_gui.class.init(self)
-		self.text = hud_text_add(self.font)
+		self.text = gge_hud_text_add(self.font)
 		self.text.parent = self
 		self.text.colour = self.textColour
 		self:setValue(self.value)

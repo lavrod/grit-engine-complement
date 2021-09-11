@@ -95,7 +95,7 @@ local codepoints = {
     [0x007d] = {    0,   23,   11,   21 }, -- }
     [0x007e] = {   11,   23,   13,   21 }, -- ~
 }
-gfx_font_define(`VerdanaBold16`, `font_verdanab16.png`, 21, codepoints)
+gge_gfx_font_define(`VerdanaBold16`, `font_verdanab16.png`, 21, codepoints)
 
 material `VerdanaBold16` {
     shader = `Font`,

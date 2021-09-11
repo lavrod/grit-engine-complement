@@ -196,8 +196,8 @@ local map_editor_page = {
                 -- {},
                 {
                     callback = function(self)
-                        gfx_option("RENDER_SKY", not gfx_option("RENDER_SKY"))
-                        self.icon.enabled = gfx_option("RENDER_SKY")
+                        gge_gfx_option("RENDER_SKY", not gge_gfx_option("RENDER_SKY"))
+                        self.icon.enabled = gge_gfx_option("RENDER_SKY")
                     end;
                     name = "Render Sky";
                     tip = "Toggle render sky";
@@ -214,13 +214,13 @@ local map_editor_page = {
                 -- },
                 {
                     callback = function(self)
-                        gfx_option("FULLSCREEN", not gfx_option("FULLSCREEN"))
-                        self.icon.enabled = gfx_option("FULLSCREEN")
+                        gge_gfx_option("FULLSCREEN", not gge_gfx_option("FULLSCREEN"))
+                        self.icon.enabled = gge_gfx_option("FULLSCREEN")
                     end;
                     name = "Fullscreen";
                     tip = "Toggle fullscreen";
                     icon = _gui_textures.verify.v;
-                    icon_enabled = gfx_option("FULLSCREEN");
+                    icon_enabled = gge_gfx_option("FULLSCREEN");
                 },
             };
         })
@@ -359,11 +359,11 @@ local map_editor_page = {
         ), "Toggle Ghosting")
         self.toolbar:addTool("Bloom", map_editor_icons.bloom0, (
             function (self)
-                local curr = gfx_option("BLOOM_ITERATIONS")
+                local curr = gge_gfx_option("BLOOM_ITERATIONS")
                 local new = curr + 1
                 if new == 3 then new = 0 end
                 self.texture = map_editor_icons['bloom' .. new]
-                gfx_option("BLOOM_ITERATIONS", new)
+                gge_gfx_option("BLOOM_ITERATIONS", new)
             end
         ), "Toggle Bloom")
         self.toolbar:addTool("Show collision", map_editor_icons.show_collision, (

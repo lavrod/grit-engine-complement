@@ -7,7 +7,7 @@ function text_char_pos (font, text, x)
     local len = #text
     local last_char_pos = 0
     for i=1, len do
-        local this_char_pos = gfx_font_text_width(font, text:sub(1, i))
+        local this_char_pos = gge_gfx_font_text_width(font, text:sub(1, i))
         if this_char_pos > x then
             if math.abs(last_char_pos - x) < math.abs(this_char_pos - x) then
                 return i - 1
@@ -58,7 +58,7 @@ EditBoxClass = {
     init = function (self)
         self.needsInputCallbacks = true
         self.needsResizedCallbacks = true
-        self.text = hud_text_add(self.font)
+        self.text = gge_hud_text_add(self.font)
         self.text.parent = self
 
         if self.borderTexture then
@@ -312,7 +312,7 @@ EditBoxClass = {
         if self.border then
             self.border.size = self.size
         end
-        local tw = gfx_font_text_width(self.font, self.before)
+        local tw = gge_gfx_font_text_width(self.font, self.before)
         self.caret.position = vec(self.text.position.x -self.text.size.x/2 + tw, 0)
     end;
 
@@ -342,17 +342,17 @@ EditBoxClass = {
 		self:setFocus(false)
 		self.selectionBG.enabled = true
 		local tw
-		local crposx = self.text.position.x -self.text.size.x/2+gfx_font_text_width(self.font, self.before)
+		local crposx = self.text.position.x -self.text.size.x/2+gge_gfx_font_text_width(self.font, self.before)
 		
 		if a < b then
 			self.selectiontype = 'r'
 			self.selection = vec(a, b)
-			tw = gfx_font_text_width(self.font, self:getSelectedText())
+			tw = gge_gfx_font_text_width(self.font, self:getSelectedText())
 			self.selectionBG.position = vec(crposx+tw/2, 0)
 		else
 			self.selectiontype = 'l'
 			self.selection = vec(b, a)
-			tw = gfx_font_text_width(self.font, self:getSelectedText())
+			tw = gge_gfx_font_text_width(self.font, self:getSelectedText())
 			self.selectionBG.position = vec(crposx-tw/2, 0)
 		end
 		self.selectionBG.size = vec(tw, self.text.size.y)

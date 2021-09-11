@@ -31,7 +31,7 @@ hud_class `ColourWheel` {
 			onChange = function(self)
 				self.parent.hsv = vec(self.parent.hsv.x, self.parent.hsv.y, math.abs(self.value-1))
 				local hsv = self.parent.hsv
-				self.sliderBackground.colour = HSVtoRGB(vec(hsv.x, hsv.y, 1))
+				self.sliderBackground.colour = gge_HSVtoRGB(vec(hsv.x, hsv.y, 1))
 				self.parent.debug_rect.colour = self.parent:getColour()
 			end,
 			size = vec(200, 20),
@@ -66,7 +66,7 @@ hud_class `ColourWheel` {
 			self.debug_rect.colour = self:getColour()
 
 			local hsv = self.hsv
-			self.controlv.sliderBackground.colour = HSVtoRGB(vec(hsv.x, hsv.y, 1))			
+			self.controlv.sliderBackground.colour = gge_HSVtoRGB(vec(hsv.x, hsv.y, 1))			
 		end		
 	end;
 	
@@ -88,7 +88,7 @@ hud_class `ColourWheel` {
     end;	
 	
 	getColour = function(self)
-		return HSVtoRGB(self.hsv)
+		return gge_HSVtoRGB(self.hsv)
 	end;
 }
 

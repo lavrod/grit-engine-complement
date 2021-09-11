@@ -6,13 +6,13 @@ gge_include `debug_mode/init.lua`
 hud_class `EditorInterface` `/common/gui/windownotebook` {
     init = function(self)
         self.needsInputCallbacks = true
-        hud_class_get(`/common/gui/windownotebook`).init(self)
+        gge_hud_class_get(`/common/gui/windownotebook`).init(self)
     end,
     mouseMoveCallback = function (self)
     end,
     buttonCallback = function (self, event)
         if event == '+left' then
-            if hud_ray(mouse_pos_abs) == nil then
+            if gge_hud_ray(mouse_pos_abs) == nil then
                 game_manager.currentMode:leftMouseClick()
             end
         elseif event == '-left' then

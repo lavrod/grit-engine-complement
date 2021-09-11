@@ -68,7 +68,7 @@ BaseClass = {
                     mm[k] = v
                 end
             end
-            instance.gfx = gfx_body_make(gfxMesh, mm)
+            instance.gfx = gge_gfx_body_make(gfxMesh, mm)
             instance.gfx.castShadows = not (self.castShadows == false)
             if instance.gfx.numBones > 0 and instance.gfx:getAllAnimations() == nil then instance.gfx:setAllBonesManuallyControlled(true) end
             instance.gfx.localPosition = self.spawnPos
@@ -81,7 +81,7 @@ BaseClass = {
                 instance.lightFlickedOff = {}
                 instance.lightTimeOff = {}
                 for k,tab in ipairs(lights) do
-                    local l = light_from_table(gfx_light_make(), tab)
+                    local l = light_from_table(gge_gfx_light_make(), tab)
                     instance.lights[k] = l
                     l.parent = instance.gfx
                     if tab.flickering then
@@ -443,7 +443,7 @@ ColClass = extends (BaseClass) {
                             local pbat = pbats[proc_bat_name]
                             local proc_bat = physics:getProceduralBatchClass(proc_bat_name)
                             if pbat == nil then
-                                pbat = gfx_ranged_instances_make(proc_bat.mesh)
+                                pbat = gge_gfx_ranged_instances_make(proc_bat.mesh)
                                 pbat.castShadows = proc_bat.castShadows
                                 pbats[proc_bat_name] = pbat
                             end

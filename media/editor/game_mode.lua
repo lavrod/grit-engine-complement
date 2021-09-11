@@ -348,7 +348,7 @@ function Editor:generateEnvCube(pos)
 end
 
 function Editor:newMap()
-    gfx_option("RENDER_SKY", true)
+    gge_gfx_option("RENDER_SKY", true)
     
     gge_navigation_reset()
     
@@ -373,7 +373,7 @@ function Editor:openMap(map_file)
     widget_manager:unselectAll()
 
     -- you can create a new map and include a lua that cointains object placements
-    gfx_option("RENDER_SKY", true)
+    gge_gfx_option("RENDER_SKY", true)
     
     gge_navigation_reset()
     
@@ -451,7 +451,7 @@ function Editor:saveEditorInterface()
         position = { editor_interface.map_editor_page.windows.settings.position.x, editor_interface.map_editor_page.windows.settings.position.y };
         size     = { editor_interface.map_editor_page.windows.settings.size.x, editor_interface.map_editor_page.windows.settings.size.y };
       };
-      size              = { gfx_window_size().x, gfx_window_size().y };
+      size              = { gge_gfx_window_size().x, gge_gfx_window_size().y };
       theme             = editor_interface.map_editor_page.windows.settings.content.themes_panel.theme_selectbox.selected.name;
     }    
 
@@ -553,13 +553,13 @@ function Editor:init()
     self.speedo.position = vec(-64, -128 - self.speedo.size.y/2)
     self.speedo.enabled = false
 
-    gfx_option("WIREFRAME_SOLID", true) -- i don't know why but when selecting a object it just shows wireframe, so TEMPORARY?
+    gge_gfx_option("WIREFRAME_SOLID", true) -- i don't know why but when selecting a object it just shows wireframe, so TEMPORARY?
 
     -- Turn bloom off as it can be distracting.
-    gfx_option("BLOOM_THRESHOLD", 0)
-    gfx_option("BLOOM_ITERATIONS", 0)
+    gge_gfx_option("BLOOM_THRESHOLD", 0)
+    gge_gfx_option("BLOOM_ITERATIONS", 0)
 
-    self.debug_mode_text = hud_text_add(`/common/fonts/Verdana12`)
+    self.debug_mode_text = gge_hud_text_add(`/common/fonts/Verdana12`)
     self.debug_mode_text.parent = hud_bottom_left
     self.debug_mode_text.text = "Mouse left: Use Weapon\nMouse Scroll: Change Weapon\nF: Control Object\nTab: Console\nF1: Open debug mode menu (TODO)\nF5: Return Editor"
     self.debug_mode_text.position = vec(self.debug_mode_text.size.x/2+10, self.debug_mode_text.size.y)
@@ -727,7 +727,7 @@ function Editor:receiveButton(button, state)
 
         elseif button == "mouseCapture" then
             if state == '+' then
-                if hud_ray(mouse_pos_abs) == nil then
+                if gge_hud_ray(mouse_pos_abs) == nil then
                     self:setMouseCapture(true)
                 end
             elseif state == '-' then

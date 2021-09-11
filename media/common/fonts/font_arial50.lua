@@ -95,7 +95,7 @@ local codepoints = {
     [0x007d] = {  446,  227,   17,   57 }, -- }
     [0x007e] = {  463,  227,   29,   57 }, -- ~
 }
-gfx_font_define(`Arial50`, `font_arial50.png`, 57, codepoints)
+gge_gfx_font_define(`Arial50`, `font_arial50.png`, 57, codepoints)
 
 material `Arial50` {
     shader = `Font`,

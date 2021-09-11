@@ -22,7 +22,7 @@ hud_class `BrowserIcon` {
     init = function (self)
         self.needsInputCallbacks = true;
         self.icon = create_rect({ texture=self.icon_texture, size=vec2(64, 64), parent=self, position=vec(0, 8)})
-        self.text = hud_text_add(`/common/fonts/TinyFont`)
+        self.text = gge_hud_text_add(`/common/fonts/TinyFont`)
         self.text.text = self.name
         if self.text.size.x >= self.size.x then
             -- gge_print("long name: "..self.name)
@@ -118,7 +118,7 @@ end
 local function mouse_over_game_world(avoid_obj)
     local old_enabled = avoid_obj.enabled
     avoid_obj.enabled = false
-    local r = hud_ray(mouse_pos_abs) == nil
+    local r = gge_hud_ray(mouse_pos_abs) == nil
     avoid_obj.enabled = old_enabled
     return r
 end
@@ -161,7 +161,7 @@ hud_class `FloatingObject` {
         local editor = game_manager.currentMode
 
         if mouse_over_game_world(self) then
-            local cast_ray = 1000 * gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
+            local cast_ray = 1000 * gge_gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
             
             local body = nil
             if self.newObjectName ~= nil then

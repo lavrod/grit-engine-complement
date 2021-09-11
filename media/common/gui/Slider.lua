@@ -122,7 +122,7 @@ hud_class `Slider` {
 		self.needsParentResizedCallbacks = true
 		self.needsInputCallbacks = true
 		
-		self.text = hud_text_add(`/common/fonts/Verdana12`)
+		self.text = gge_hud_text_add(`/common/fonts/Verdana12`)
 		self.text.parent = self
 		self.text.text = self.caption
 		self.text.colour = self.textColour
@@ -135,7 +135,7 @@ hud_class `Slider` {
 		self.slidebar.position = vec(-self.size.x/2 + ((self.value-self.minValue) / (self.maxValue-self.minValue)) * self.size.x, 0)
 		--self.slidebar.zOrder = 1
 
-		self.val = hud_text_add(`/common/fonts/Verdana12`)
+		self.val = gge_hud_text_add(`/common/fonts/Verdana12`)
 		self.val.parent = self
 		self.val.text = tostring(self.value)
 		self.val.colour = self.textColour

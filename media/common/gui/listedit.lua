@@ -37,7 +37,7 @@ hud_class `listedit` {
 	
 	addItem = function(self, name, defaultvalue)
 		self.items[#self.items + 1] = {
-			title = hud_text_add(``, { text = name, parent = itemPositioner, position = vec2(size.x / 2, position.y) });
+			title = gge_hud_text_add(``, { text = name, parent = itemPositioner, position = vec2(size.x / 2, position.y) });
 			
 			value = hud_object `/common/hud/EditBox` {
 				value = defaultvalue;

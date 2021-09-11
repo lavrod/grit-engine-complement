@@ -38,7 +38,7 @@ hud_class `RadioButton` (extends(_gui.class)
 		})
 		self.icon_check.enabled = false
 		
-		self.text = hud_text_add(self.font or _current_theme.fonts.radiobutton)
+		self.text = gge_hud_text_add(self.font or _current_theme.fonts.radiobutton)
 		self.text.parent = self
 		self.text.text = self.caption
 		self.text.colour = self.textColour		

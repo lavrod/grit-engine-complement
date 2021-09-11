@@ -262,7 +262,7 @@ hud_class `DraggingTreeViewObject` {
 			size = vec(20, 20)
 		})
 		
-		self.text = hud_text_add(`/common/fonts/Verdana12`)
+		self.text = gge_hud_text_add(`/common/fonts/Verdana12`)
 		self.text.parent = self
 		self.text.text = self.caption
 		self.text.position = vec(self.text.size.x/2+self.iconx.size.x/2+4, 0)

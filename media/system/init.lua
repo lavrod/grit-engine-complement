@@ -25,9 +25,9 @@ io.stdout:setvbuf("no") -- no output buffering
 collectgarbage("setpause",110) -- begin a gc cycle after blah% increase in ram use
 collectgarbage("setstepmul",150) -- collect at blah% the rate of new object creation
 
-gfx_shadow_pcf_noise_map `HiFreqNoiseGauss.64.png`
-gfx_fade_dither_map `stipple.png`
-gfx_env_cube(0, `env_cube_noon.envcube.tiff`)
+gge_gfx_shadow_pcf_noise_map `HiFreqNoiseGauss.64.png`
+gge_gfx_fade_dither_map `stipple.png`
+gge_gfx_env_cube(0, `env_cube_noon.envcube.tiff`)
 
 gge_include `strict.lua` 
 
@@ -96,11 +96,11 @@ function cam_yaw_quat()
 end
 
 function cam_box_ray(pos, cam_q, dist, dir, ...)
-    local rect = gfx_window_size_in_scene()
+    local rect = gge_gfx_window_size_in_scene()
     local tolerance = 0.05 -- this is the distance that we use to account for differences between colmesh and gfx mesh, as well as inaccuracies in the algorithm itself
     local box = vector3(rect.x + tolerance, tolerance, rect.y + tolerance) -- y is the direction of the ray
     local fraction = gge_physics_sweep_box(box, cam_q, pos, (dist-tolerance/2)*dir, true, 1, ...) or 1
-    return dist * fraction + tolerance/2 + gfx_option("NEAR_CLIP")
+    return dist * fraction + tolerance/2 + gge_gfx_option("NEAR_CLIP")
 end
 
 
@@ -119,8 +119,8 @@ function physics__step (elapsed_secs)
     game_manager:stepUpdate(elapsed_secs)
     gge_physics_update()
 
-    gfx_tracer_body_pump(elapsed_secs)
-    gfx_particle_pump(elapsed_secs)
+    gge_gfx_tracer_body_pump(elapsed_secs)
+    gge_gfx_particle_pump(elapsed_secs)
 
     local _, final_allocs = gge_get_alloc_stats()
     main.physicsAllocs = final_allocs - initial_allocs
@@ -210,10 +210,10 @@ function main:run (...)
         end
 
         -- INTERPOLATED GRAPHICS and FRAME UPDATES
-        if gfx_window_active() then
+        if gge_gfx_window_active() then
             local left_over_time = main.physicsEnabled and main.physicsLeftOver or 0
             gge_physics_update_graphics(left_over_time)
-            gfx_tracer_body_set_left_over_time(left_over_time)
+            gge_gfx_tracer_body_set_left_over_time(left_over_time)
             gge_physics_draw()
         end
         game_manager:frameUpdate(elapsed_secs)
@@ -231,7 +231,7 @@ function main:run (...)
         streamer_centre(main.streamerCentre)
 
 
-        if gfx_window_active() then
+        if gge_gfx_window_active() then
             main.gfxFrameTime:add(elapsed_secs)
         end
 
@@ -243,7 +243,7 @@ function main:run (...)
             end
             main.gfxCount, main.gfxUnacctAllocs = gge_get_alloc_stats()
             gge_reset_alloc_stats()
-            gfx_render(elapsed_secs, main.camPos, main.camQuat)
+            gge_gfx_render(elapsed_secs, main.camPos, main.camQuat)
             main.gfxCount, main.gfxAllocs = gge_get_alloc_stats()
             gge_reset_alloc_stats()
         end
@@ -256,7 +256,7 @@ function main:run (...)
         main.gfxLeft.gbuffer[1], main.gfxLeft.gbuffer[2], main.gfxLeft.gbuffer[3],
         main.gfxLeft.deferred[1], main.gfxLeft.deferred[2], main.gfxLeft.deferred[3],
         main.gfxRight.gbuffer[1], main.gfxRight.gbuffer[2], main.gfxRight.gbuffer[3],
-        main.gfxRight.deferred[1], main.gfxRight.deferred[2], main.gfxRight.deferred[3] = gfx_last_frame_stats()
+        main.gfxRight.deferred[1], main.gfxRight.deferred[2], main.gfxRight.deferred[3] = gge_gfx_last_frame_stats()
 
 
         xpcall(function ()
@@ -284,7 +284,7 @@ function main:run (...)
             main.frameCallbacks:removeByName(failName.name)
         end
 
-        if not gfx_window_active() then
+        if not gge_gfx_window_active() then
             --gge_sleep_seconds(0.2)
             gge_sleep(200000)
         end

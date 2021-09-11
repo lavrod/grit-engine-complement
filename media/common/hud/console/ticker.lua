@@ -12,7 +12,7 @@ hud_class `Ticker` {
     init = function (self)
         self.buffer = self.buffer or {}
         self.timeBuffer = self.timeBuffer or {}
-        self.text = hud_text_add(self.font)
+        self.text = gge_hud_text_add(self.font)
         self.text.parent = self
         self.text.shadow = self.shadow
         self.text.letterTopColour = self.textColour
@@ -75,7 +75,7 @@ hud_class `Ticker` {
     recomputeSize = function (self)
         local psize 
         if self.parent == nil then
-            psize = gfx_window_size()
+            psize = gge_gfx_window_size()
         else
             psize = self.parent.size
         end

@@ -95,4 +95,4 @@ local codepoints = {
     [0x007d] = {  126,  202,   18,   62 }, -- }
     [0x007e] = {  144,  202,   26,   62 }, -- ~
 }
-gfx_font_define(`Impact50`, `font_impact50.png`, 62, codepoints)
+gge_gfx_font_define(`Impact50`, `font_impact50.png`, 62, codepoints)

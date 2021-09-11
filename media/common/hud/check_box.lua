@@ -1,6 +1,6 @@
 -- (c) The Grit Game Engine authors 2016, Licensed under the MIT license (https://goo.gl/YVVx3L).
 
-local super = hud_class_get(`/common/hud/Button`)
+local super = gge_hud_class_get(`/common/hud/Button`)
 hud_class `CheckBox` (super) {
     caption = 'X',
     size = vec(32, 32),

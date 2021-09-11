@@ -126,13 +126,13 @@ function colour_desaturate (r,g,b, amt)
 end
 
 function tone_map (v)
-    v = v * gfx_global_exposure()
-    return gfx_colour_grade_look_up(gamma_encode(v / (1 + v)))
+    v = v * gge_gfx_global_exposure()
+    return gge_gfx_colour_grade_look_up(gamma_encode(v / (1 + v)))
 end
 
 function tone_map_val (v)
-    local c = RGBtoHSV(v)
-    return HSVtoRGB(vector3(c.x, c.y, c.z/(1+c.z)))
+    local c = gge_RGBtoHSV(v)
+    return gge_HSVtoRGB(vector3(c.x, c.y, c.z/(1+c.z)))
 end
 
 function colour_ensure_vector3 (t) 
@@ -1032,7 +1032,7 @@ function quatPitch(q)
 end
 
 function mouse_pick_pos(bias, safe)
-	local cast_ray = 1000 * gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
+	local cast_ray = 1000 * gge_gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
 	local dist = gge_physics_cast(main.camPos, cast_ray, true, 0)
 	if dist then
 		return (main.camPos + cast_ray * dist)

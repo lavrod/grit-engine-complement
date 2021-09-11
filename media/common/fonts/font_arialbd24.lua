@@ -95,7 +95,7 @@ local codepoints = {
     [0x007d] = {  212,   44,    9,   28 }, -- }
     [0x007e] = {  221,   44,   14,   28 }, -- ~
 }
-gfx_font_define(`ArialBold24`, `font_arialbd24.png`, 28, codepoints)
+gge_gfx_font_define(`ArialBold24`, `font_arialbd24.png`, 28, codepoints)
 
 material `ArialBold24` {
     shader = `Font`,

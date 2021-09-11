@@ -22,7 +22,7 @@ hud_class `.` {
         self.trackID = 1; --start with a first track in a playlist
         self.isplayng = false; --don't play by default
         --currenty playing audio source will be stored here
-        self.trackname = hud_text_add(self.font)
+        self.trackname = gge_hud_text_add(self.font)
         self.trackname.parent = self
         self.trackname.position = vec(0, self.size.y/2-64)
         self.trackname.colour = vec(0, 0, 0)

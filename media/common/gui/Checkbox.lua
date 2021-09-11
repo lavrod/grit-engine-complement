@@ -39,7 +39,7 @@ hud_class `Checkbox` (extends(_gui.class)
 		self.icon_checked.enabled = false
 		
 		if self.caption then
-			self.text = hud_text_add(self.font or _current_theme.fonts.checkbox)
+			self.text = gge_hud_text_add(self.font or _current_theme.fonts.checkbox)
 			self.text.parent = self
 			self.text.text = self.caption
 			self.text.colour = self.textColour

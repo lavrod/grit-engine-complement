@@ -17,7 +17,7 @@ function emit_lamp_icon (pos, colour, size)
     colour = colour or vector3(3,3,3)
 
     size = size or 1
-    gfx_particle_emit(`LampIcon`, pos, {
+    gge_gfx_particle_emit(`LampIcon`, pos, {
         emissive = colour;
         diffuse = vec(0, 0, 0);
         dimensions = size*V_ID;

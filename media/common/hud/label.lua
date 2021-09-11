@@ -19,7 +19,7 @@ hud_class `Label` {
 
     init = function (self)
         self.needsResizedCallbacks = true
-        self.text = hud_text_add(self.font)
+        self.text = gge_hud_text_add(self.font)
         self.text.colour = self.textColour
         self.text.parent = self
         self.text.shadow = self.shadow

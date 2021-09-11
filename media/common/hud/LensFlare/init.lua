@@ -47,10 +47,10 @@ hud_class `.` {
     end;
     frameCallback = function (self, elapsed)
 
-        -- gfx_sun_direction points towards the sun
-		local sun_pos = main.camPos + (gfx_sun_falloff_distance() * gfx_sun_direction())
+        -- gge_gfx_sun_direction points towards the sun
+		local sun_pos = main.camPos + (gge_gfx_sun_falloff_distance() * gge_gfx_sun_direction())
 
-        local screen_pos = gfx_world_to_screen(main.camPos, main.camQuat, sun_pos) - vec(gfx_window_size().x/2, gfx_window_size().y/2, 0)
+        local screen_pos = gge_gfx_world_to_screen(main.camPos, main.camQuat, sun_pos) - vec(gge_gfx_window_size().x/2, gge_gfx_window_size().y/2, 0)
 
 		local s_pos = screen_pos.xy
 		
@@ -60,7 +60,7 @@ hud_class `.` {
             local sun_obscured = env.secondsSinceMidnight < 4 * 60 * 60 + 40 * 60 or env.secondsSinceMidnight > 19 * 60 * 60 + 15 * 60
 
             if not sun_obscured then
-                local ray = -1000 * gfx_sun_direction()
+                local ray = -1000 * gge_gfx_sun_direction()
                 local obscurer = gge_physics_sweep_sphere(0.0001, main.camPos, ray, true, 0)
                 if obscurer ~= nil then
                     sun_obscured = true
@@ -76,8 +76,8 @@ hud_class `.` {
 			end
 			
 			-- colours
-			self.flare[8].colour = gfx_sun_colour()*2
-			self.flare[7].colour = gfx_sun_colour()*2
+			self.flare[8].colour = gge_gfx_sun_colour()*2
+			self.flare[7].colour = gge_gfx_sun_colour()*2
 			
 			-- positions
 			self.flare[0].position =  s_pos  * vec(0.5, 0.5)

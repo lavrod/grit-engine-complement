@@ -13,7 +13,7 @@ ClockHandsClass = {
             
     activate = function (self,instance)
 
-        instance.gfx = gfx_body_make()
+        instance.gfx = gge_gfx_body_make()
         instance.gfx.localPosition = self.spawnPos
         instance.gfx.localOrientation = self.rot or quat(1,0,0,0)
         

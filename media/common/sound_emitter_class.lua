@@ -40,7 +40,7 @@ SoundEmitterClass = {
         end
         instance.audio:play()
         if self.editorVisualisation then
-            instance.editorVisualisationSprite = gfx_sprite_body_make(`SoundIcon`)
+            instance.editorVisualisationSprite = gge_gfx_sprite_body_make(`SoundIcon`)
             instance.editorVisualisationSprite.localPosition = self.spawnPos
             instance.editorVisualisationSprite.diffuse = vec3(0, 0, 0)
             instance.editorVisualisationSprite.emissive = vec3(0.5, 0.5, 0.5)

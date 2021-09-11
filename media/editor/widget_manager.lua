@@ -111,7 +111,7 @@ end
 function widget_manager:getObjectUnderCursor()
     local editor = game_manager.currentMode
 
-    local ray = 1000 * gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
+    local ray = 1000 * gge_gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs)
     local _, b = gge_physics_cast(main.camPos, ray, true, 0)
     -- local b2 = self:selectNonPhysicalObjects()
     
@@ -298,7 +298,7 @@ function widget_manager:bbMouseSelect(pos, rot, scale)
     -- new camera orientation rotated by the widget orientation
     local rrot =  iq * main.camQuat
 
-    local dir = 1000 * gfx_screen_to_world(ppos, rrot, mouse_pos_abs)
+    local dir = 1000 * gge_gfx_screen_to_world(ppos, rrot, mouse_pos_abs)
     local bmin, bmax = pos -scale/2, pos+scale/2
     return intersectRayAABoxV(ppos, dir, bmin, bmax)
 end
@@ -389,7 +389,7 @@ function widget_manager:frameCallback(elapsed_secs)
 
     -- Dragging implemented here.
 
-    local component_gfx_body = self.widget[self.dragComponent]
+    local component_gge_gfx_body = self.widget[self.dragComponent]
 
     if self.mode == "translate" then
 
@@ -402,22 +402,22 @@ function widget_manager:frameCallback(elapsed_secs)
 
         local initial_mouse_on_plane = isect_line_plane(
             main.camPos,
-            main.camPos + gfx_screen_to_world(main.camPos, main.camQuat, self.absMouseBeforeDrag),
+            main.camPos + gge_gfx_screen_to_world(main.camPos, main.camQuat, self.absMouseBeforeDrag),
             self.widgetPos,
-            component_gfx_body.localOrientation * V_UP
+            component_gge_gfx_body.localOrientation * V_UP
         )
         
         local current_mouse_on_plane = isect_line_plane(
             main.camPos,
-            main.camPos + gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs),
+            main.camPos + gge_gfx_screen_to_world(main.camPos, main.camQuat, mouse_pos_abs),
             self.widgetPos,
-            component_gfx_body.localOrientation * V_UP
+            component_gge_gfx_body.localOrientation * V_UP
         )
 
         local translation = current_mouse_on_plane - initial_mouse_on_plane
         if #self.dragComponent == 1 then
             -- Constrain to the line.
-            local dir = component_gfx_body.localOrientation * V_NORTH
+            local dir = component_gge_gfx_body.localOrientation * V_NORTH
             translation = dot(dir, translation) * dir
         end
 

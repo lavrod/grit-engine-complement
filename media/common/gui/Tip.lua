@@ -18,7 +18,7 @@ hud_class `Tip` {
 	colour = _current_theme.colours.tip.background;
 	
 	init = function (self)
-		self.text = hud_text_add(`/common/fonts/Verdana12`)
+		self.text = gge_hud_text_add(`/common/fonts/Verdana12`)
 		self.text.parent = self
 		self.text.colour = _current_theme.colours.tip.text
 		self.text.text = self.caption

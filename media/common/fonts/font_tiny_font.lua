@@ -1,5 +1,5 @@
 
-gfx_font_define(`TinyFont`, `TinyFont.png`, 6, {
+gge_gfx_font_define(`TinyFont`, `TinyFont.png`, 6, {
 
     [0x30] = {  0,  0, 5, 6 };
     [0x31] = {  5,  0, 5, 6 };

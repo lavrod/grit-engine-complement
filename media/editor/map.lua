@@ -210,7 +210,7 @@ function EditorMap:applyEnvironment()
         env_cycle = gge_include(self.currentState.environment.env_cycle_file)
     end
     for name, def in pairs(self.currentState.environment.sky) do
-        env_sky[name] = gfx_sky_body_make(def[1], def[2])
+        env_sky[name] = gge_gfx_sky_body_make(def[1], def[2])
     end 
     self:applyEnvCube()
     env_recompute()
@@ -237,7 +237,7 @@ function EditorMap:generateEnvCube(pos, filename, hours)
     for name, hour in pairs(hours) do
         env.secondsSinceMidnight = hour * 60 * 60
         tex = ("%s.%s.envcube.tiff"):format(filename, name)
-        gfx_bake_env_cube(tex, 128, pos, 0.7, vec(0, 0, 0))
+        gge_gfx_bake_env_cube(tex, 128, pos, 0.7, vec(0, 0, 0))
         self.currentState.env_cubes['env_cube_'..name] = "/"..tex
     end
     env.secondsSinceMidnight = current_time

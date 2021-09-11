@@ -22,19 +22,19 @@ hud_class `Console` {
         self.pinToBottom = true
 
 
-        self.text = hud_text_add(self.font)
+        self.text = gge_hud_text_add(self.font)
         self.text.shadow = self.shadow
         self.text.parent = self
         self.text.letterTopColour = self.textColour
         self.text.letterBottomColour = self.textColour
 
-        self.prompt = hud_text_add(self.font)
+        self.prompt = gge_hud_text_add(self.font)
         self.prompt.shadow = self.shadow
         self.prompt.parent = self
         self.prompt.colour = self.textColour
         self.prompt.text = self.promptPrefix
 
-        self.cursor = hud_text_add(self.font)
+        self.cursor = gge_hud_text_add(self.font)
         self.cursor.shadow = self.shadow
         self.cursor.parent = self
         self.cursor.colour = self.textColour
@@ -118,7 +118,7 @@ hud_class `Console` {
 
     resizedCallback = function (self)
 
-        local font_height = gfx_font_line_height(self.font)
+        local font_height = gge_gfx_font_line_height(self.font)
 
         self.text.textWrap = self.size - self.border * vec(2,2) - vec(0,font_height)
         self.text.position = vec(0,font_height/2)
@@ -269,7 +269,7 @@ hud_class `Console` {
     end;
 
     positionCursor = function (self)
-        local tw = gfx_font_text_width(self.font, self.promptPrefix .. self.promptBefore)
+        local tw = gge_gfx_font_text_width(self.font, self.promptPrefix .. self.promptBefore)
         self.cursor.position = vec(-self.size.x/2 + self.border + tw, self.prompt.position.y)
     end;
 

@@ -11,7 +11,7 @@ hud_class `DragIcon` {
     buttonCallback = function (self, ev)
         if control_being_dragged == nil then return end
         if ev == "-left" then
-            local c = hud_ray(self.position)
+            local c = gge_hud_ray(self.position)
             if c ~= nil and c.receiveDrag ~= nil then
                 c:receiveDrag(control_being_dragged)
             end

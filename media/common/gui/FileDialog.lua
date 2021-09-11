@@ -78,7 +78,7 @@ hud_class `BrowserIcon` {
             parent = self,
             position = vec(0, 8),
         })
-		self.text = hud_text_add(`/common/fonts/TinyFont`)
+		self.text = gge_hud_text_add(`/common/fonts/TinyFont`)
 		self.text.text = self.name
 		if self.text.size.x >= self.size.x then
 			-- gge_print("long name: "..self.name)

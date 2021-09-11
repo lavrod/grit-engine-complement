@@ -28,7 +28,7 @@ end
 function ed_object_editor_page:select()
     self.camPos = main.camPos
     self.camQuat = main.camQuat
-    gfx_option("RENDER_SKY", false)
+    gge_gfx_option("RENDER_SKY", false)
     lens_flare.enabled = false
     
     local objs = object_all()
@@ -86,7 +86,7 @@ function ed_object_editor_page:unselect()
     
     --safe_destroy(self.object)
     --self.object = nil
-    gfx_option("RENDER_SKY", true)
+    gge_gfx_option("RENDER_SKY", true)
     lens_flare.enabled = true
     main.camPos = self.camPos
     main.camQuat = self.camQuat

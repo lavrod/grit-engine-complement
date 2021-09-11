@@ -65,9 +65,9 @@ hud_class `.` {
             self.valScale:setBackgroundColour(vec(1,1,1))
             self.aScale:setBackgroundColour(vec(1,1,1))
         else
-            self.satScale:setBackgroundColour(HSVtoRGB(vec(hsv.x, 1, 1)))
-            self.valScale:setBackgroundColour(HSVtoRGB(vec3(hsv.xy, 1)))
-            self.aScale:setBackgroundColour(HSVtoRGB(vec3(hsv.xy, math.min(1,hsv.z))))
+            self.satScale:setBackgroundColour(gge_HSVtoRGB(vec(hsv.x, 1, 1)))
+            self.valScale:setBackgroundColour(gge_HSVtoRGB(vec3(hsv.xy, 1)))
+            self.aScale:setBackgroundColour(gge_HSVtoRGB(vec3(hsv.xy, math.min(1,hsv.z))))
         end
     end;
     
@@ -83,7 +83,7 @@ hud_class `.` {
     end;
     getColourRGB = function (self)
         if self.hGreyed or self.sGreyed or self.vGreyed then return nil end
-        return HSVtoRGB(self:getColourHSV())
+        return gge_HSVtoRGB(self:getColourHSV())
     end;
     setColourRGB = function (self, c)
         self.valScale.maxValue = 10
@@ -97,7 +97,7 @@ hud_class `.` {
             self.satScale:setValue(0)
             self.valScale:setValue(1)
         else
-            local hsv = RGBtoHSV(c)
+            local hsv = gge_RGBtoHSV(c)
             self.hGreyed = false
             self.sGreyed = false
             self.vGreyed = false

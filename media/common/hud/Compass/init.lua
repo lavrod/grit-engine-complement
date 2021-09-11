@@ -23,7 +23,7 @@ hud_class `.` {
 
 
         --bearing displayed in degrees
-        self.text = hud_text_add(`/common/fonts/TinyFont`)
+        self.text = gge_hud_text_add(`/common/fonts/TinyFont`)
         self.text.text = "XXX"
         self.text.parent = self
         self.text.position = vec(48, -50)
@@ -33,28 +33,28 @@ hud_class `.` {
 
         --the cardinal directions
         local cardinalLettersFont = `/common/fonts/misc.fixed`
-        self.N = hud_text_add(cardinalLettersFont)
+        self.N = gge_hud_text_add(cardinalLettersFont)
         self.N.text = "N"
         self.N.parent = self.ring
         self.N.colour = vec(0.8, 0, 0)
         self.N.position = inner_sz * vec (0, 0.5)
         self.N.inheritOrientation = false
 
-        self.S = hud_text_add(cardinalLettersFont)
+        self.S = gge_hud_text_add(cardinalLettersFont)
         self.S.text = "S"
         self.S.parent = self.ring
         self.S.colour = vec(0, 0, 0)
         self.S.position = inner_sz * vec (0, -0.5)
         self.S.inheritOrientation = false
 
-        self.W = hud_text_add(cardinalLettersFont)
+        self.W = gge_hud_text_add(cardinalLettersFont)
         self.W.text = "W"
         self.W.parent = self.ring
         self.W.colour = vec(0, 0, 0)
         self.W.position = inner_sz * vec (-0.5, 0)
         self.W.inheritOrientation = false
 
-        self.E = hud_text_add(cardinalLettersFont)
+        self.E = gge_hud_text_add(cardinalLettersFont)
         self.E.text = "E"
         self.E.parent = self.ring
         self.E.colour = vec(0, 0, 0)

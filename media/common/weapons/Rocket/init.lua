@@ -65,7 +65,7 @@ class `Rocket` (BaseClass) {
             local grey = 1
 
             if math.floor(instance.lifeSecs * 200) % 2 == 0 and instance.lifeSecs > 0.05 then
-                gfx_particle_emit(`/common/particles/TexturedSmoke`, p - dir, {
+                gge_gfx_particle_emit(`/common/particles/TexturedSmoke`, p - dir, {
                     angle = 360*math.random();
                     velocity = 0.3 * random_vector3_sphere() + vec(0,0,2);
                     initialVolume = 4/3 * math.pi * r1*r1*r1; -- volume of sphere

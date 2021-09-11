@@ -45,7 +45,7 @@ hud_class `Button` {
             self.texture = self.backgroundTexture
         end
 
-        self.text = hud_text_add(self.captionFont)
+        self.text = gge_hud_text_add(self.captionFont)
         self.text.parent = self
         self:setCaption(self.caption)
 

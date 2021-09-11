@@ -153,7 +153,7 @@ function include_map(mapfile)
     env.secondsSinceMidnight = map.environment.time
     env_cycle = gge_include(map.environment.env_cycle_file or `/system/env_cycle.lua`)
     for name, def in pairs(map.environment.sky) do
-        env_sky[name] = gfx_sky_body_make(def[1], def[2])
+        env_sky[name] = gge_gfx_sky_body_make(def[1], def[2])
     end
     env_recompute()
 end

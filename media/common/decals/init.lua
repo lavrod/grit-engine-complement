@@ -71,7 +71,7 @@ function WeaponScorch:scorch(mat, src, q)
     local dist, _, normal = directed_ray(src, q)
     if dist == nil then return nil end
     local hit_pos = src + q * (dist * V_FORWARDS)
-    local decal = gfx_decal_make(mat)
+    local decal = gge_gfx_decal_make(mat)
     decal.localPosition = hit_pos
     decal.localOrientation = quat(q * V_FORWARDS, normal) * q
     decal.localScale = vec(20, 2, 20)

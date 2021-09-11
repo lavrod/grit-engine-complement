@@ -72,7 +72,7 @@ local user_cfg_spec = {
             
 local function commit(committed, proposed, force)
 
-    gfx_option("AUTOUPDATE",false)
+    gge_gfx_option("AUTOUPDATE",false)
     gge_physics_option("AUTOUPDATE",false)
     gge_core_option("AUTOUPDATE",false)
     gge_audio_option("AUTOUPDATE",false)
@@ -82,15 +82,15 @@ local function commit(committed, proposed, force)
             committed[k] = v
     
             if k == "res" then
-                gfx_option("FULLSCREEN_WIDTH",v.x)
-                gfx_option("FULLSCREEN_HEIGHT",v.y)
+                gge_gfx_option("FULLSCREEN_WIDTH",v.x)
+                gge_gfx_option("FULLSCREEN_HEIGHT",v.y)
             elseif k == "fullscreen" then
-                gfx_option("FULLSCREEN",v)
+                gge_gfx_option("FULLSCREEN",v)
             elseif k == "visibility" then
                 gge_core_option("VISIBILITY",v)
         
             elseif k == "graphicsRAM" then
-                gfx_option("RAM",v)
+                gge_gfx_option("RAM",v)
                 --set_texture_budget(v*1024*1024)
                 --set_mesh_budget(0)
             elseif k == "lockMemory" then
@@ -107,7 +107,7 @@ local function commit(committed, proposed, force)
             elseif k == "mouseInvert" then
                 -- next mouse movement picks this up
             elseif k == "vsync" then
-                gfx_option("VSYNC",v)
+                gge_gfx_option("VSYNC",v)
             elseif k == "screenshotFormat" then
                 -- nothing to do, next screenshot will pick this up
             elseif k == "lowPowerMode" then
@@ -130,7 +130,7 @@ local function commit(committed, proposed, force)
         end
     end
 
-    gfx_option("AUTOUPDATE",true)
+    gge_gfx_option("AUTOUPDATE",true)
     gge_physics_option("AUTOUPDATE",true)
     gge_core_option("AUTOUPDATE",true)
     gge_audio_option("AUTOUPDATE",true)
@@ -144,7 +144,7 @@ user_cfg.autoUpdate = true
 function configuration_reset()
     gge_physics_option_reset()
     gge_core_option_reset()
-    gfx_option_reset()
+    gge_gfx_option_reset()
     gge_audio_option_reset()
     user_cfg:reset()
 end

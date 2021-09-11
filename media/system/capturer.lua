@@ -33,7 +33,7 @@ function Capturer:singleScreenShot(movie)
                 end
                 fd:close()
         end
-        gfx_screenshot(name)
+        gge_gfx_screenshot(name)
         gge_print("Wrote: "..name)
 end
 
@@ -46,7 +46,7 @@ function Capturer:frameCallback()
         -- record the frame
         local name = string.format("%smovie-%05d.%s",self.moviePrefix,self.frameCounter,"tga")
         self.frameCounter = self.frameCounter + 1
-        gfx_screenshot(name)
+        gge_gfx_screenshot(name)
         self.frameTimer = secs
 end
 

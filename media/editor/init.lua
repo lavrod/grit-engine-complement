@@ -17,7 +17,7 @@ gge_include `game_mode.lua`
 -- Temporary
 -- Test navmesh
 test = function()
-    gge_navigation_add_gfx_body(pick_obj().instance.gfx)
+    gge_navigation_add_gge_gfx_body(pick_obj().instance.gfx)
     gge_navigation_update_params()
     gge_navigation_build_nav_mesh()
 end
@@ -31,7 +31,7 @@ test2 = function()
         end
     end
     
-    gge_navigation_add_gfx_bodies(gfxobjs)
+    gge_navigation_add_gge_gfx_bodies(gfxobjs)
     gge_navigation_update_params()
     gge_navigation_build_nav_mesh()
 end

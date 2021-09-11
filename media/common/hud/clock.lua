@@ -7,7 +7,7 @@ hud_class `Clock` {
         self.needsFrameCallbacks = true
         self.needsInputCallbacks = true
         local font = `/common/fonts/Impact50`
-        self.label = hud_text_add(font)
+        self.label = gge_hud_text_add(font)
         self.label.parent = self
         self.label.letterTopColour=vec(0.6,0.6,0.6)
         self.label.letterBottomColour=vec(0.0,0.0,0)

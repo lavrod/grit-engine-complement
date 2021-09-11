@@ -12,7 +12,7 @@ class `JengaBrick` (ColClass) {
         if ColClass.activate(self, instance) then
             return true
         end
-        instance.textBody = gfx_text_body_make(self.font, self.fontMaterial)
+        instance.textBody = gge_gfx_text_body_make(self.font, self.fontMaterial)
         instance.textBody.text = 'Sn: %06d' % (math.random(1000000) - 1)
         instance.textBody.parent = instance.gfx
         instance.textBody.localPosition = vec(-0.42, .1294, 0.1213)

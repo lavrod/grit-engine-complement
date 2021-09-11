@@ -40,16 +40,16 @@ class = old_class
 local function hud_class2 (tab)
     local super = nil
     if type(tab) == 'string' then
-        super = hud_class_get(tab)
+        super = gge_hud_class_get(tab)
     elseif type(tab) == 'userdata' then
         super = tab
     end
     if super ~= nil then
         return function (tab)
-            return hud_class_add(curried_name, extends(super.dump)(tab))
+            return gge_hud_class_add(curried_name, extends(super.dump)(tab))
         end
     else
-        return hud_class_add(curried_name, tab)
+        return gge_hud_class_add(curried_name, tab)
     end
 end
 function hud_class (name)
@@ -147,7 +147,7 @@ end
 
 local function sky_material2(tab)
     local name = curried_name
-    gfx_register_sky_material(name,tab)
+    gge_gfx_register_sky_material(name,tab)
 end
 function sky_material(name)
     curried_name = name
@@ -157,7 +157,7 @@ end
 local function shader2(tab)
     local name = curried_name
     tab = tab or {}
-    gfx_register_shader(name, tab)
+    gge_gfx_register_shader(name, tab)
 end
 function shader(name)
     curried_name = name
@@ -235,7 +235,7 @@ local function particle2(tab)
     for k,v in pairs(tab) do
         tab2[k] = v
     end
-    gfx_particle_define(name,tab2)
+    gge_gfx_particle_define(name,tab2)
 end
 function particle(name)
     curried_name = name
@@ -245,6 +245,6 @@ end
 function hud_object(name)
     -- Has to support nesting, so do not use curried_name global.
     return function (tab)
-        return hud_object_add(name, tab)
+        return gge_hud_object_add(name, tab)
     end
 end

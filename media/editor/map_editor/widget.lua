@@ -113,7 +113,7 @@ Widget = {
 
         for _, component in ipairs{'x', 'y', 'z'} do
             safe_destroy(self[component])
-            self[component] = gfx_body_make((`arrow_%s.mesh`):format(widget_manager.mode))
+            self[component] = gge_gfx_body_make((`arrow_%s.mesh`):format(widget_manager.mode))
             self[component].castShadows = false
             self[component].localOrientation = pivot_or * orientations[component]
             self[component]:setMaterial(`arrow`, self.axisColours[component])
@@ -128,7 +128,7 @@ Widget = {
         for _, component in ipairs{'xy', 'xz', 'yz'} do
             safe_destroy(self[component])
             if widget_manager.mode == "translate" or widget_manager.mode == "scale" then
-                self[component] = gfx_body_make(`dummy_plane.mesh`)
+                self[component] = gge_gfx_body_make(`dummy_plane.mesh`)
                 self[component].castShadows = false
                 self[component].localOrientation = pivot_or * plane_orientations[component]
             else
@@ -150,7 +150,7 @@ Widget = {
     -- Call whenever the camera moves or self.widgetPosition is updated.
     updatePivotScale = function(self)
 
-        local scale = ((2 * math.tan(math.rad(gfx_option("FOV")) / 2)) * #(main.camPos - self.widgetPosition))*0.025
+        local scale = ((2 * math.tan(math.rad(gge_gfx_option("FOV")) / 2)) * #(main.camPos - self.widgetPosition))*0.025
         local scale3 = scale * vec(1, 1, 1)
         self.scale = scale
         self.x.localScale = scale3

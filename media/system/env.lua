@@ -8,21 +8,21 @@ function env_recompute()
     local secs = env.secondsSinceMidnight
     
     if secs < env_cube_dawn_time then
-        gfx_env_cube(0, env_cube_dark)
-        gfx_env_cube(1, env_cube_dawn)
-        gfx_env_cube_cross_fade(invlerp(0, env_cube_dawn_time, secs))
+        gge_gfx_env_cube(0, env_cube_dark)
+        gge_gfx_env_cube(1, env_cube_dawn)
+        gge_gfx_env_cube_cross_fade(invlerp(0, env_cube_dawn_time, secs))
     elseif secs < env_cube_noon_time then
-        gfx_env_cube(0, env_cube_dawn)
-        gfx_env_cube(1, env_cube_noon)
-        gfx_env_cube_cross_fade(invlerp(env_cube_dawn_time, env_cube_noon_time, secs))
+        gge_gfx_env_cube(0, env_cube_dawn)
+        gge_gfx_env_cube(1, env_cube_noon)
+        gge_gfx_env_cube_cross_fade(invlerp(env_cube_dawn_time, env_cube_noon_time, secs))
     elseif secs < env_cube_dusk_time then
-        gfx_env_cube(0, env_cube_noon)
-        gfx_env_cube(1, env_cube_dusk)
-        gfx_env_cube_cross_fade(invlerp(env_cube_noon_time, env_cube_dusk_time, secs))
+        gge_gfx_env_cube(0, env_cube_noon)
+        gge_gfx_env_cube(1, env_cube_dusk)
+        gge_gfx_env_cube_cross_fade(invlerp(env_cube_noon_time, env_cube_dusk_time, secs))
     elseif secs < env_cube_dark_time then
-        gfx_env_cube(0, env_cube_dusk)
-        gfx_env_cube(1, env_cube_dark)
-        gfx_env_cube_cross_fade(invlerp(env_cube_dusk_time, env_cube_dark_time, secs))
+        gge_gfx_env_cube(0, env_cube_dusk)
+        gge_gfx_env_cube(1, env_cube_dark)
+        gge_gfx_env_cube_cross_fade(invlerp(env_cube_dusk_time, env_cube_dark_time, secs))
     end
     
     -- We need to manage the:
@@ -106,9 +106,9 @@ function env_recompute()
     -- sunlight_direction is the parameter to the lighting equation that is used to light the scene
     local sunlight_direction
     if current_env.lightSource == "MOON" then
-        gfx_sunlight_direction(-norm(moon_direction))
+        gge_gfx_sunlight_direction(-norm(moon_direction))
     elseif current_env.lightSource == "SUN" then
-        gfx_sunlight_direction(-norm(sun_direction))
+        gge_gfx_sunlight_direction(-norm(sun_direction))
     end
 
     -- interpolated from env_cycle
@@ -128,43 +128,43 @@ function env_recompute()
     local fog_colour = lerp(current_env.fogColour, next_env.fogColour, slider)
 
     -- sky
-    gfx_sun_direction(sun_direction)
-    gfx_hell_colour(fog_colour)
-    gfx_sun_size(lerp(current_env.sunSize, next_env.sunSize, slider))
-    gfx_sun_falloff_distance(lerp(current_env.sunFalloff, next_env.sunFalloff, slider))
+    gge_gfx_sun_direction(sun_direction)
+    gge_gfx_hell_colour(fog_colour)
+    gge_gfx_sun_size(lerp(current_env.sunSize, next_env.sunSize, slider))
+    gge_gfx_sun_falloff_distance(lerp(current_env.sunFalloff, next_env.sunFalloff, slider))
 
     local mixed_sun_colour = lerp(current_env.sunColour, next_env.sunColour, slider)
-    gfx_sun_colour(mixed_sun_colour.xyz)
-    gfx_sun_alpha(mixed_sun_colour.w)
+    gge_gfx_sun_colour(mixed_sun_colour.xyz)
+    gge_gfx_sun_alpha(mixed_sun_colour.w)
 
-    gfx_sky_cloud_colour(lerp(current_env.cloudColour, next_env.cloudColour, slider))
-    gfx_sky_cloud_coverage(lerp(current_env.cloudCoverage, next_env.cloudCoverage, slider))
+    gge_gfx_sky_cloud_colour(lerp(current_env.cloudColour, next_env.cloudColour, slider))
+    gge_gfx_sky_cloud_coverage(lerp(current_env.cloudCoverage, next_env.cloudCoverage, slider))
 
-    gfx_sky_divider(0, 5)
-    gfx_sky_divider(1, 10)
-    gfx_sky_divider(2, 15)
-    gfx_sky_divider(3, 25)
+    gge_gfx_sky_divider(0, 5)
+    gge_gfx_sky_divider(1, 10)
+    gge_gfx_sky_divider(2, 15)
+    gge_gfx_sky_divider(3, 25)
 
-    gfx_sky_glare_sun_distance(lerp(current_env.sunGlare, next_env.sunGlare, slider))
-    gfx_sky_glare_horizon_elevation(lerp(current_env.horizonGlare, next_env.horizonGlare, slider))
+    gge_gfx_sky_glare_sun_distance(lerp(current_env.sunGlare, next_env.sunGlare, slider))
+    gge_gfx_sky_glare_horizon_elevation(lerp(current_env.horizonGlare, next_env.horizonGlare, slider))
     for i=1,6 do
         local mixed_gradient = lerp(current_env["grad"..i], next_env["grad"..i], slider)
-        gfx_sky_colour(i-1, mixed_gradient.xyz)
-        gfx_sky_alpha(i-1, mixed_gradient.w)
+        gge_gfx_sky_colour(i-1, mixed_gradient.xyz)
+        gge_gfx_sky_alpha(i-1, mixed_gradient.w)
     end
     for i=1,5 do
         local mixed_gradient = lerp(current_env["sunGrad"..i], next_env["sunGrad"..i], slider)
-        gfx_sky_sun_colour(i-1, mixed_gradient.xyz)
-        gfx_sky_sun_alpha(i-1, mixed_gradient.w)
+        gge_gfx_sky_sun_colour(i-1, mixed_gradient.xyz)
+        gge_gfx_sky_sun_alpha(i-1, mixed_gradient.w)
     end
 
     -- environment properties
-    gfx_particle_ambient(vector3(lerp(current_env.particleLight, next_env.particleLight, slider)))
-    gfx_global_saturation(env_saturation_mask * lerp(current_env.saturation, next_env.saturation, slider))
-    gfx_fog_colour(fog_colour)
-    gfx_fog_density(lerp(current_env.fogDensity, next_env.fogDensity, slider))
-    gfx_sunlight_diffuse(lerp(current_env.diffuseLight, next_env.diffuseLight, slider))
-    gfx_sunlight_specular(lerp(current_env.specularLight, next_env.specularLight, slider))
+    gge_gfx_particle_ambient(vector3(lerp(current_env.particleLight, next_env.particleLight, slider)))
+    gge_gfx_global_saturation(env_saturation_mask * lerp(current_env.saturation, next_env.saturation, slider))
+    gge_gfx_fog_colour(fog_colour)
+    gge_gfx_fog_density(lerp(current_env.fogDensity, next_env.fogDensity, slider))
+    gge_gfx_sunlight_diffuse(lerp(current_env.diffuseLight, next_env.diffuseLight, slider))
+    gge_gfx_sunlight_specular(lerp(current_env.specularLight, next_env.specularLight, slider))
 
 end
 
@@ -290,11 +290,11 @@ function env_reset()
     env_cube_dusk = nil
     env_cube_dark = nil
 
-    gfx_env_cube(0, env_cube_noon)
-    gfx_env_cube(1, env_cube_noon)
-    gfx_global_exposure(1)
-    gfx_option("BLOOM_ITERATIONS",1)
-    gfx_colour_grade(`standard.lut.png`)
+    gge_gfx_env_cube(0, env_cube_noon)
+    gge_gfx_env_cube(1, env_cube_noon)
+    gge_gfx_global_exposure(1)
+    gge_gfx_option("BLOOM_ITERATIONS",1)
+    gge_gfx_colour_grade(`standard.lut.png`)
 
     if env_sky then
         for name, body in pairs(env_sky) do

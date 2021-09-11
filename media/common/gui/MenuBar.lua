@@ -230,7 +230,7 @@ hud_class `MenuBarButton` {
     init = function (self)
         self.needsInputCallbacks = true
 
-        self.text = hud_text_add(self.font)
+        self.text = gge_hud_text_add(self.font)
         self.text.parent = self
         self:setCaption(self.caption)
 

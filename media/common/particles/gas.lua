@@ -123,7 +123,7 @@ function emit_debug_marker (pos, colour, life, size)
     colour = colour or vector3(1,0,0)
     life = life or 10
     size = size or 1
-    gfx_particle_emit(`DebugMarker`, pos, {
+    gge_gfx_particle_emit(`DebugMarker`, pos, {
         life = life;
         emissive = colour;
         diffuse = vec(0, 0, 0);

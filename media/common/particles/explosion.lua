@@ -67,7 +67,7 @@ function explosion (pos, radius, force, num_flames)
     local volume = radius * radius * radius * 4/3 * math.pi
     local num_sprites1 = 4
     local num_debris = 4
-    local l = gfx_light_make()
+    local l = gge_gfx_light_make()
     l.coronaColour = V_ZERO
     l.localPosition = pos + V_UP*radius
     l.range = radius * 5
@@ -75,7 +75,7 @@ function explosion (pos, radius, force, num_flames)
         local offset = random_vector3_plane_z()
         local position = pos + offset
         local velocity = radius*(1*offset + vector3(0,0,1.5));
-        gfx_particle_emit(`Explosion`, position, {
+        gge_gfx_particle_emit(`Explosion`, position, {
             velocity = velocity,
             light = l,
             angle = (i+math.random())/num_sprites1*360,

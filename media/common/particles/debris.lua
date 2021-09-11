@@ -38,7 +38,7 @@ particle `Debris` {
 }   
 
 function emit_debris (pos, vel, frame, life)
-    gfx_particle_emit(`Debris`, pos, {
+    gge_gfx_particle_emit(`Debris`, pos, {
         angle = math.random(360),
         velocity = vel,
         angleRate = math.random(-300,300),

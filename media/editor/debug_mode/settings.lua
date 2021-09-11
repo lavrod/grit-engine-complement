@@ -122,10 +122,10 @@ hud_class `Settings` `/common/gui/Window` {
             align = vec(-1, 1);
             offset = vec(10, -5);        
         })        
-        local fovcb = function(self) gfx_option("FOV", tonumber(self.value)) end
+        local fovcb = function(self) gge_gfx_option("FOV", tonumber(self.value)) end
         self.content.debug_panel.foved = hud_object `/common/gui/window_editbox` {
             parent = self.content.debug_panel;
-            value = tostring(gfx_option("FOV"));
+            value = tostring(gge_gfx_option("FOV"));
             alignment = "LEFT";
             enterCallback = fovcb;
             onStopEditing = fovcb;
@@ -141,10 +141,10 @@ hud_class `Settings` `/common/gui/Window` {
             offset = vec(10, -95);        
         })        
         
-        local fccb =  function(self) gfx_option("FAR_CLIP", tonumber(self.value)) end
+        local fccb =  function(self) gge_gfx_option("FAR_CLIP", tonumber(self.value)) end
         self.content.debug_panel.farced = hud_object `/common/gui/window_editbox` {
             parent = self.content.debug_panel;
-            value = tostring(gfx_option("FAR_CLIP"));
+            value = tostring(gge_gfx_option("FAR_CLIP"));
             alignment = "LEFT";
             enterCallback = fccb;
             onStopEditing = fccb;

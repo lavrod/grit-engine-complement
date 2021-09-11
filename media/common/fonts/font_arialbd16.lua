@@ -95,7 +95,7 @@ local codepoints = {
     [0x007d] = {  318,   90,    6,   19 }, -- }
     [0x007e] = {  324,   90,    9,   19 }, -- ~
 }
-gfx_font_define(`ArialBold16`, `font_arialbd16.png`, 19, codepoints)
+gge_gfx_font_define(`ArialBold16`, `font_arialbd16.png`, 19, codepoints)
 
 material `ArialBold16` {
     shader = `Font`,

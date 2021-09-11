@@ -19,12 +19,12 @@ new_class `Turret` {
         gge_print("Activating " + self)
         self.needsStepCallbacks = true
         instance.barrelAngle = self.initialBarrelAngle
-        instance.gfxBase = gfx_body_make(`Base.mesh`)
-        instance.gfxBarrel = gfx_body_make(`Barrel.mesh`)
+        instance.gfxBase = gge_gfx_body_make(`Base.mesh`)
+        instance.gfxBarrel = gge_gfx_body_make(`Barrel.mesh`)
         --1.2 z offset
         --3 degrees angle up
         instance.physicsBase = gge_physics_body_make(`Base.gcol`)
-        instance.gfxLight = gfx_light_make()
+        instance.gfxLight = gge_gfx_light_make()
     end;
 
     deactivate = function (self)

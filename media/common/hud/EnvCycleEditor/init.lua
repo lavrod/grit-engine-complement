@@ -194,7 +194,7 @@ hud_class `.` {
             return o
         end
         
-        self.title = hud_text_add(`/common/fonts/ArialBold18`)
+        self.title = gge_hud_text_add(`/common/fonts/ArialBold18`)
         self.title.text = "Environment Cycle Editor"
 
         self.colourPicker = hud_object `/common/hud/ColourPicker` { onChange = function () self:colourPickerChanged() end }

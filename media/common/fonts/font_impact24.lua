@@ -95,7 +95,7 @@ local codepoints = {
     [0x007d] = {    0,  163,    9,   31 }, -- }
     [0x007e] = {    9,  163,   13,   31 }, -- ~
 }
-gfx_font_define(`Impact24`, `font_impact24.png`, 31, codepoints)
+gge_gfx_font_define(`Impact24`, `font_impact24.png`, 31, codepoints)
 
 material `Impact24` {
     shader = `Font`,

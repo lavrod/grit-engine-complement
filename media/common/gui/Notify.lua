@@ -21,7 +21,7 @@ hud_class `ntfmessage` {
 	currenttime = 0;
 	
 	init = function (self)
-		self.text = hud_text_add(`/common/fonts/Verdana12`)
+		self.text = gge_hud_text_add(`/common/fonts/Verdana12`)
 		self.text.parent = self
 		self.text.text = self.value
 		

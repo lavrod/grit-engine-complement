@@ -15,7 +15,7 @@ function ThirdPersonGameMode:init()
     self.speedo = hud_object `/common/hud/Speedo` { parent = hud_top_right }
     self.speedo.position = vec(-64, -128 - self.speedo.size.y/2)
 
-    self.centreNotify = hud_text_add(`/common/fonts/Impact50`)
+    self.centreNotify = gge_hud_text_add(`/common/fonts/Impact50`)
     self.centreNotify.text = ''
     self.centreNotify.position = vec(0, 100)
     self.centreNotify.parent = hud_centre

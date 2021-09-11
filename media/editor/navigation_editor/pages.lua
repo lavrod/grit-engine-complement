@@ -376,8 +376,8 @@ local navigation_editor = {
                 {},
                 {
                     callback = function(self)
-                        gfx_option("RENDER_SKY", not gfx_option("RENDER_SKY"))
-                        self.icon.enabled = gfx_option("RENDER_SKY")
+                        gge_gfx_option("RENDER_SKY", not gge_gfx_option("RENDER_SKY"))
+                        self.icon.enabled = gge_gfx_option("RENDER_SKY")
                     end;
                     name = "Render Sky";
                     tip = "Toggle render sky";
@@ -394,13 +394,13 @@ local navigation_editor = {
                 -- },
                 {
                     callback = function(self)
-                        gfx_option("FULLSCREEN", not gfx_option("FULLSCREEN"))
-                        self.icon.enabled = gfx_option("FULLSCREEN")
+                        gge_gfx_option("FULLSCREEN", not gge_gfx_option("FULLSCREEN"))
+                        self.icon.enabled = gge_gfx_option("FULLSCREEN")
                     end;
                     name = "Fullscreen";
                     tip = "Toggle fullscreen";
                     icon = _gui_textures.verify.v;
-                    icon_enabled = gfx_option("FULLSCREEN");
+                    icon_enabled = gge_gfx_option("FULLSCREEN");
                 },
             };
         })

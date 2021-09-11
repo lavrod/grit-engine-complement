@@ -86,9 +86,9 @@ function GameMode:init()
 
     self:playerRespawn()
 
-	gfx_option("RENDER_SKY", false)
+	gge_gfx_option("RENDER_SKY", false)
 	
-	gfx_option("BLOOM_THRESHOLD", 1.5)
+	gge_gfx_option("BLOOM_THRESHOLD", 1.5)
 
 	self.info = gui.text({value = "=== Compagnion's ===\nMouse:\n<Left-Click> Move Crowd\n\n=== Yourself: First Person Viewer ===\nMouse:\n<Right-Click> Rotate\n\nKeyboard:\n<space> Ascend\n<c>Descend\n<a> Move Left\n<d> Move Right\n<w>Zoom In\n<s>Zoom out\n<shift> Faster\n<esc> Pause Menu", parent = hud_bottom_left, position = vec(200, 200)})
 	

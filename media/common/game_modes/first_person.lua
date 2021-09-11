@@ -666,7 +666,7 @@ function FirstPersonGameMode:init()
     self.lastMouseMoveTime = gge_seconds()
 	notify("WASD = move, X = toggle third/first person camera", rgb(0, 0, 0))
 	
-	gfx_option("FOV", 60)
+	gge_gfx_option("FOV", 60)
 
 	self.controlledObj = nil,
 
