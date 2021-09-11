@@ -105,6 +105,23 @@ TRY_START
 TRY_END
 }
 
+static int netmessage_read_buffer(lua_State *L)
+{
+TRY_START
+    check_args_min(L, 1);
+    check_args_max(L, 2);
+
+    GET_UD_MACRO_OFFSET(NetMessagePtr,self,1,NETMESSAGE_TAG,0);
+
+    int length = (lua_gettop(L) == 2) ? check_int(L, 2, 1, 4096) : 32;
+    std::string str = (*self)->readBuffer(length);
+
+    lua_pushstring(L, str.c_str());
+    
+    return 1;
+TRY_END
+}
+
 static int netmessage_read_string(lua_State *L)
 {
 TRY_START
@@ -203,6 +220,21 @@ TRY_START
 TRY_END
 }
 
+static int netmessage_write_buffer(lua_State *L)
+{
+TRY_START
+    check_args(L,2);
+    GET_UD_MACRO_OFFSET(NetMessagePtr,self,1,NETMESSAGE_TAG,0);
+
+    std::string str = check_string(L, 2);
+    std::string data = str.substr(2);
+    //skip 16bits length
+    (*self)->writeString(data);
+    
+    return 0;
+TRY_END
+}
+
 static int netmessage_write_delta_integer(lua_State *L)
 {
 TRY_START
@@ -259,6 +291,10 @@ TRY_START
     {
         push_cfunction(L, netmessage_read_integer);
     }
+    else if (key == "read_buffer")
+    {
+        push_cfunction(L, netmessage_read_buffer);
+    }
     else if (key == "read_float")
     {
         push_cfunction(L, netmessage_read_float);
@@ -288,6 +324,10 @@ TRY_START
         push_cfunction(L, netmessage_write_float);
     }
     else if (key == "write_string")
+    {
+        push_cfunction(L, netmessage_write_string);
+    }
+    else if (key == "write_buffer")
     {
         push_cfunction(L, netmessage_write_string);
     }
@@ -355,6 +395,54 @@ TRY_START
 TRY_END
 }
 
+static int global_net_process_poll_server(lua_State* L)
+{
+TRY_START
+    char buffer[16384];
+    int length;
+        std::string data(buffer, 16384);
+        NetAddress* from;
+
+    check_args(L, 0);
+
+    length = net_process_poll_server(L,&from,data);
+
+    if( length > 0 ) {
+        push_netmessage(L, NetMessagePtr(new NetMessage(data.c_str(), data.size())));
+        push_netaddress(L, NetAddressPtr(new NetAddress(*from)));
+    } else {
+        lua_pushnil(L);
+    lua_pushnil(L);
+    }
+
+    return 2;
+TRY_END
+}
+
+static int global_net_process_poll_client(lua_State* L)
+{
+TRY_START
+    char buffer[16384];
+    int length;
+        std::string data(buffer, 16384);
+        NetAddress* from;
+
+    check_args(L, 0);
+
+    length = net_process_poll_client(L,&from,data);
+
+    if( length > 0 ) {
+        push_netmessage(L, NetMessagePtr(new NetMessage(data.c_str(), data.size())));
+        push_netaddress(L, NetAddressPtr(new NetAddress(*from)));
+    } else {
+        lua_pushnil(L);
+        lua_pushnil(L);
+    }
+
+    return 2;
+TRY_END
+}
+
 static int global_net_make_message(lua_State* L)
 {
 TRY_START
@@ -365,6 +453,32 @@ TRY_START
 
     return 1;
 
+TRY_END
+}
+
+static int global_net_process_poll_remote_tcp_server(lua_State* L)
+{
+TRY_START
+    char buffer[16384];
+    int length;
+        std::string data(buffer, 16384);
+        NetAddress* from;
+
+    check_args(L, 0);
+
+    length = net_process_poll_remote_tcp_server(L,&from,data);
+
+    if( length > 0 ) {
+        lua_pushinteger(L, length);
+        push_netmessage(L, NetMessagePtr(new NetMessage(data.c_str(), data.size())));
+        push_netaddress(L, NetAddressPtr(new NetAddress(*from)));
+    } else {
+         lua_pushinteger(L, 0);
+        lua_pushnil(L);
+    lua_pushnil(L);
+    }
+
+    return 3;
 TRY_END
 }
 
@@ -384,6 +498,10 @@ TRY_START
     else if (str == "client")
     {
         channel = NetChan_ServerToClient;
+    }
+    else if (str == "tcpserver")
+    {
+        channel = NetChan_TcpServer;
     }
     else
     {
@@ -424,6 +542,10 @@ TRY_START
     {
         channel = NetChan_ServerToClient;
     }
+    else if (str == "tcpserver")
+    {
+        channel = NetChan_TcpServer;
+    }
     else
     {
         my_lua_error(L, "invalid network channel: " + str);
@@ -458,6 +580,10 @@ TRY_START
     {
         channel = NetChan_ServerToClient;
     }
+    else if (str == "tcpserver")
+    {
+        channel = NetChan_TcpServer;
+    }    
     else
     {
         my_lua_error(L, "invalid network channel: " + str);
@@ -493,14 +619,34 @@ TRY_START
 TRY_END
 }
 
+static int global_net_tcp_connect(lua_State* L)
+{
+TRY_START
+
+    check_args(L, 1);
+
+    std::string str = check_string(L, 1);
+
+    NetAddress address = NetAddress::resolve(str.c_str(), NetAddress_IPv4);
+    push_netaddress(L, NetAddressPtr(new NetAddress(address)));
+
+    return 1;
+
+TRY_END
+}
+
 static const luaL_reg global[] = {
     {"gge_net_register_callbacks", global_net_register_callbacks},
     {"gge_net_process", global_net_process},
+    {"gge_net_process_poll_server", global_net_process_poll_server},
+    {"gge_net_process_poll_client", global_net_process_poll_client},
     {"gge_net_make_message", global_net_make_message},
     {"gge_net_get_loopback_packet", global_net_get_loopback_packet},
     {"gge_net_send_packet", global_net_send_packet},
     {"gge_net_send_packet_sequenced", global_net_send_packet_sequenced},
     {"gge_net_resolve_address", global_net_resolve_address},
+    {"gge_net_tcp_connect", global_net_tcp_connect},
+    {"gge_net_process_poll_remote_tcp_server", global_net_process_poll_remote_tcp_server},
     {NULL,NULL}
 };
 
