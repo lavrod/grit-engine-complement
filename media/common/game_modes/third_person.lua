@@ -33,7 +33,7 @@ function ThirdPersonGameMode:playerRespawn()
 
     self.centreNotify.text = ''
 
-    for _, obj in ipairs(object_all()) do
+    for _, obj in ipairs(gge_object_all()) do
         obj:deactivate()
         obj.skipNextActivation = false
     end

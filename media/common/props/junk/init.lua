@@ -64,7 +64,7 @@ class `BrickWall` (ProcPileClass) {
                 x_min_, x_max_ =x_min+1, x_max-1
             end
             for x=x_min_,x_max_,2 do
-                local pos = vector3(.105*x, 0, 0.06*z+class_get(brick_class).placementZOffset)
+                local pos = vector3(.105*x, 0, 0.06*z+gge_class_get(brick_class).placementZOffset)
                 spawn(brick_class, pos, {rot=Q_EAST})
             end
         end

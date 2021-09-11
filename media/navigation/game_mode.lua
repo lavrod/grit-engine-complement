@@ -62,13 +62,13 @@ function GameMode:init()
 	gge_navigation_debug_option("enabled", true)
 
     self.aicharacters = { }
-    for _, obj in ipairs(object_all_of_class(`RobotHeavy`)) do
+    for _, obj in ipairs(gge_object_all_of_class(`RobotHeavy`)) do
         self.aicharacters[#self.aicharacters+1] = obj
     end
-    for _, obj in ipairs(object_all_of_class(`RobotMed`)) do
+    for _, obj in ipairs(gge_object_all_of_class(`RobotMed`)) do
         self.aicharacters[#self.aicharacters+1] = obj
     end
-    for _, obj in ipairs(object_all_of_class(`RobotScout`)) do
+    for _, obj in ipairs(gge_object_all_of_class(`RobotScout`)) do
         self.aicharacters[#self.aicharacters+1] = obj
     end
 	

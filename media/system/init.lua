@@ -115,7 +115,7 @@ mouse_pos_abs = V_ZERO
 function physics__step (elapsed_secs)
     local _, initial_allocs = gge_get_alloc_stats()
 
-    object_do_step_callbacks(elapsed_secs)
+    gge_object_do_step_callbacks(elapsed_secs)
     game_manager:stepUpdate(elapsed_secs)
     gge_physics_update()
 
@@ -217,7 +217,7 @@ function main:run (...)
             gge_physics_draw()
         end
         game_manager:frameUpdate(elapsed_secs)
-        object_do_frame_callbacks(elapsed_secs)
+        gge_object_do_frame_callbacks(elapsed_secs)
 
 		-- NAVIGATION DEBUG
 		gge_navigation_update_debug(elapsed_secs)		
@@ -228,7 +228,7 @@ function main:run (...)
 
         -- STREAMING
         gge_give_queue_allowance(1 + 1*gge_get_in_queue_size())
-        streamer_centre(main.streamerCentre)
+        gge_streamer_centre(main.streamerCentre)
 
 
         if gge_gfx_window_active() then

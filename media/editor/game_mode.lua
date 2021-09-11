@@ -321,7 +321,7 @@ function Editor:setDebugMode(v)
         editor_debug_play_binds.enabled = false
         self:setMouseCapture(false)
 
-        for _, obj in ipairs(object_all()) do
+        for _, obj in ipairs(gge_object_all()) do
             -- TODO(dcunnin):  This does not reset persistent state.  Put code in map.lua to do
             -- a full reset by destroying and recreating all objects.
             if obj.destroyed then 

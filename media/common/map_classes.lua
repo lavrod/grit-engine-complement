@@ -418,7 +418,7 @@ ColClass = extends (BaseClass) {
                             )
                             local n = #t
                             if n > 0 then pobjs = pobjs or { } end -- create a table only if we have to
-                            local ocl = class_get(proc_obj.class)
+                            local ocl = gge_class_get(proc_obj.class)
                             local zoff = ocl.placementZOffset or 0
                             for k=0,(n/7-1) do    
                                 local x,y,z       = t[k*7+1], t[k*7+2], t[k*7+3]
@@ -592,7 +592,7 @@ PileClass = {
             end
             otab.temporary = true
             opos = self.spawnPos + opos
-            instance.children[k] = object_add(oclass,opos,otab)
+            instance.children[k] = gge_object_add(oclass,opos,otab)
         end
     end;
     deactivate=function(self)
@@ -625,7 +625,7 @@ ProcPileClass = {
             end
             otab.temporary = true
             opos = self.spawnPos + opos
-            instance.children[counter] = object_add(oclass,opos,otab)
+            instance.children[counter] = gge_object_add(oclass,opos,otab)
             counter = counter + 1
         end)
     end;

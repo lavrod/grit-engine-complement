@@ -248,7 +248,7 @@ hud_class `Settings` `/common/gui/Window` {
         ]]
 
         local function clearAllPlaced()
-            for _, obj in ipairs(object_all()) do
+            for _, obj in ipairs(gge_object_all()) do
                 if obj.destroyed then 
                     -- Skip
                 elseif obj.debugObject == true then

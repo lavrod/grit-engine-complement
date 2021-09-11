@@ -6,11 +6,11 @@ local pile_curried_name
 
 local class_ext
 local function new_class3 (tab)
-    return class_add(curried_name, class_ext or {}, tab)
+    return gge_class_add(curried_name, class_ext or {}, tab)
 end
 local function new_class2 (ext)
     if type(ext) == "table" then
-        return class_add(curried_name, {}, ext)
+        return gge_class_add(curried_name, {}, ext)
     else
         class_ext = ext
         return new_class3
@@ -23,7 +23,7 @@ end
         
 -- Deprecated
 local function old_class3 (tab)
-    return class_add(curried_name, class_ext or {}, tab)
+    return gge_class_add(curried_name, class_ext or {}, tab)
 end
 local function old_class2 (ext)
     class_ext = ext
@@ -60,7 +60,7 @@ end
 local inside_pile = false
 local function pile2 (tab)
     inside_pile = false
-    return class_add(pile_curried_name,PileClass,tab)
+    return gge_class_add(pile_curried_name,PileClass,tab)
 end
 function pile (name)
     pile_curried_name = name
@@ -71,14 +71,14 @@ end
 local obj_off = vec(0, 0, 0)
 local obj_pos
 local function object3 (tab)
-    if not class_has(curried_name) then
+    if not gge_class_has(curried_name) then
         gge_error("Trying to create an object using non-existent class \""..curried_name.."\"",2)
     end
     if inside_pile then
         return { curried_name, obj_pos, tab }
     end
-    local hid = object_add(curried_name, obj_pos, tab)
-    local lod = class_get(curried_name).lod
+    local hid = gge_object_add(curried_name, obj_pos, tab)
+    local lod = gge_class_get(curried_name).lod
     if lod == true then
         if curried_name:find("/") then
             lod = curried_name:reverse():gsub("/","_dol/",1):reverse()
@@ -87,10 +87,10 @@ local function object3 (tab)
         end
     end
     if lod then
-        if class_get(lod) then
+        if gge_class_get(lod) then
             tab.near = hid
             if tab.name then tab.name = tab.name.."_lod" end
-            object_add(lod, obj_pos, tab)
+            gge_object_add(lod, obj_pos, tab)
         else
             gge_error("Class \""..curried_name.."\" referred to a lod class \""..lod.."\" that does not exist.")
         end

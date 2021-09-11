@@ -24,7 +24,7 @@ function emit_lamp_icon (pos, colour, size)
     })
 end 
 
--- for k, v in ipairs(object_all()) do
+-- for k, v in ipairs(gge_object_all()) do
     -- if v and not v.destroyed and v.instance and v.instance.audio then
         -- qw = v
     -- end

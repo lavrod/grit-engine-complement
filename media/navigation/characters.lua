@@ -415,7 +415,7 @@ AnimMgr =
 
 
 -- aichars = {}
--- aichars[#aichars+1] = object (`/navigation/aichar`) (pick_pos()+vec(0, 0, class_get(`/navigation/aichar`).placementZOffset)) {}
+-- aichars[#aichars+1] = object (`/navigation/aichar`) (pick_pos()+vec(0, 0, gge_class_get(`/navigation/aichar`).placementZOffset)) {}
 
 -- for i = 1, #current_map.aicharacters do
 	-- if not current_map.aicharacters[i].destroyed then

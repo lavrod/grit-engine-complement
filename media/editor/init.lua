@@ -23,7 +23,7 @@ test = function()
 end
 -- Test navmesh
 test2 = function()
-    local objal = object_all()
+    local objal = gge_object_all()
     local gfxobjs = {}
     for i = 1, #objal do
         if not objal[i].destroyed and objal[i].instance ~= nil and objal[i].instance.gfx ~= nil then

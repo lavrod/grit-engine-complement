@@ -93,7 +93,7 @@ game_manager = {
             
             self.currentMode:destroy();
             self.currentMode = nil
-            object_all_del()
+            gge_object_all_del()
             reset_everything()
             -- A lot of objects should now be unreachable, a good time to garbage collect.
             gc()

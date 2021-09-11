@@ -307,7 +307,7 @@ end
 function widget_manager:selectNonPhysicalObjects()
     local obj = nil
 
-    for k, v in ipairs(object_all()) do
+    for k, v in ipairs(gge_object_all()) do
         if v and v.instance and not v.destroyed()  then
             if v.instance.body == nil then
                 local found = nil

@@ -31,7 +31,7 @@ function ed_object_editor_page:select()
     gge_gfx_option("RENDER_SKY", false)
     lens_flare.enabled = false
     
-    local objs = object_all()
+    local objs = gge_object_all()
     
     for i = 1, #objs do
         -- activate all object editor objects to hide them
@@ -74,7 +74,7 @@ function ed_object_editor_page:unselect()
         game_manager.currentMode:toggleBoard()
     end
     
-    local objs = object_all()
+    local objs = gge_object_all()
     for i = 1, #objs do
         if objs[i] ~= nil and not objs[i].destroyed and objs[i].instance ~= nil and objs[i].instance.gfx ~= nil and not objs[i].objectEditor then
             objs[i].instance.gfx.enabled = true

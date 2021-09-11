@@ -104,7 +104,7 @@ hud_class `BrowserIcon` {
 -- Return all the classes defined in the given dir.
 local function get_class_dir(dir)
     local classes = {}
-    for i, cls in ipairs(class_all()) do
+    for i, cls in ipairs(gge_class_all()) do
         local class_dir, class_name = cls.name:match('^(.*/)([^/]*)$')
         if class_dir == dir then
             classes[#classes + 1] = class_name
@@ -134,7 +134,7 @@ hud_class `FloatingObject` {
     
     init = function (self)
         self.needsInputCallbacks = true
-        local cl = class_get(self.objectClass)
+        local cl = gge_class_get(self.objectClass)
         self.zOffset = cl.placementZOffset or 0
 
         -- Will store the name of the object, after we have created it and while we continue to

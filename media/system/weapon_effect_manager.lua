@@ -212,7 +212,7 @@ WeaponCreate = {
 
     primaryEngage = function (self, src, q)
 
-        local cl = class_get(self.class)
+        local cl = gge_class_get(self.class)
         local height = cl.placementZOffset or 0
         local p = pick_pos(src, q)
         if p == nil then return end

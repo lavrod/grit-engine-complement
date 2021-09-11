@@ -123,8 +123,8 @@ function include_map(mapfile)
     for name, object in pairs(objects) do
         local class_name, obj_pos, tab = object[1], object[2], object[3] or {}
         tab.name = name
-        local hid = object_add(class_name, obj_pos, tab)
-        local lod = class_get(class_name).lod
+        local hid = gge_object_add(class_name, obj_pos, tab)
+        local lod = gge_class_get(class_name).lod
         if lod == true then
             if class_name:find("/") then
                 -- Insert at the beginning of the filename (ignoring the dir path).
@@ -134,10 +134,10 @@ function include_map(mapfile)
             end
         end
         if lod then
-            if class_get(lod) then
+            if gge_class_get(lod) then
                 tab.near = hid
                 if tab.name then tab.name = tab.name .. "_lod" end
-                object_add(lod, obj_pos, tab)
+                gge_object_add(lod, obj_pos, tab)
             else
                 gge_error(('Class "%s" referred to a lod class "%s" that does not exist.'):format(class_name, lod))
             end

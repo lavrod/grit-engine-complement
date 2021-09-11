@@ -19,7 +19,7 @@ class `Wall` (ProcPileClass) {
                 x_min_, x_max_ =x_min+1, x_max-1
             end
             for x = x_min_,x_max_,2 do
-                local pos = 0.6 * vec(x, 0, z+class_get(self.brickClass).placementZOffset)
+                local pos = 0.6 * vec(x, 0, z+gge_class_get(self.brickClass).placementZOffset)
                 spawn(self.brickClass, pos, {})
             end
         end
@@ -34,7 +34,7 @@ class `Wall` (ProcPileClass) {
 class `Stack` (ProcPileClass) {
     spawnObjects = function(self, spawn)
         local height = self.height
-        local dim = 2 * class_get(self.brickClass).placementZOffset
+        local dim = 2 * gge_class_get(self.brickClass).placementZOffset
         for i = 0.5, height - 0.5 do
             spawn(self.brickClass, vec(0, 0, dim * i), {})
         end

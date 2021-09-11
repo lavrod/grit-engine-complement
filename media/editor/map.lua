@@ -83,14 +83,14 @@ function EditorMap:populateOne(name, object)
     body.name = name
     body.editorVisualisation = true
     -- TODO(dcunnin): Must catch exception here to add the name of the object being added.
-    local obj_actual = object_add(object[1], object[2], body)
+    local obj_actual = gge_object_add(object[1], object[2], body)
     self:updateObjectSelectedVisualisation(name, obj_actual)
     return obj_actual
 end
 
 function EditorMap:depopulateOne(name)
-    if object_has(name) then
-        object_get(name):destroy()
+    if gge_object_has(name) then
+        gge_object_get(name):destroy()
     end
 end
 
@@ -273,7 +273,7 @@ function EditorMap:setSelected(name, v)
     end
 
     -- Now update the visual representation.
-    self:updateObjectSelectedVisualisation(name, object_get(name))
+    self:updateObjectSelectedVisualisation(name, gge_object_get(name))
 end
 
 function EditorMap:isSelected(name)
@@ -300,7 +300,7 @@ function EditorMap:getProposedObject(name)
 end
 
 function EditorMap:getPhysicalRepresentation(name)
-    local obj_actual = object_get(name)
+    local obj_actual = gge_object_get(name)
     if obj_actual.activated then
         return obj_actual.instance.body
     else
@@ -323,7 +323,7 @@ function EditorMap:unselectAll()
     local old_set = self.selected
     self.selected = {}
     for _, name in ipairs(old_set) do
-        self:updateObjectSelectedVisualisation(name, object_get(name))
+        self:updateObjectSelectedVisualisation(name, gge_object_get(name))
     end
 end
 
@@ -344,7 +344,7 @@ end
 -- Internal function to make the object match the current / proposed state of the map.  This need
 -- not be called for brand new objects.
 function EditorMap:updateObjectVisualisation(name, obj)
-    local obj_actual = object_get(name)
+    local obj_actual = gge_object_get(name)
     if obj == nil then
         obj_actual:destroy()
         return

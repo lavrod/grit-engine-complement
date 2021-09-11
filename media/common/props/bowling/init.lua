@@ -23,7 +23,7 @@ class `Deck` (extends(ProcPileClass) {
         local spacey = space * .8645
         for y=1,rows do
                 for x=-y+1,y,2 do
-                        spawn(self.pinClass, vector3(x*spacex/2, (y-1)*spacey, class_get(self.pinClass).placementZOffset), {})
+                        spawn(self.pinClass, vector3(x*spacex/2, (y-1)*spacey, gge_class_get(self.pinClass).placementZOffset), {})
                 end
         end
     end;

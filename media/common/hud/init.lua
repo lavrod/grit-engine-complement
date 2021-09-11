@@ -126,7 +126,7 @@ function common_hud_reset()
             end;
 
             streamer = function()
-                return string.format("Classes / Objects / Activated: %6.0f / %6.0f / %6.0f", class_count(), object_count(), object_count_activated())
+                return string.format("Classes / Objects / Activated: %6.0f / %6.0f / %6.0f", gge_class_count(), gge_object_count(), gge_object_count_activated())
             end;
 
             mem = function()

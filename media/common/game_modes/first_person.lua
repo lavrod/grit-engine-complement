@@ -652,7 +652,7 @@ function FirstPersonGameMode:init()
     self:loadAtLocation(self.spawnPos)
 
     -- player1 means local player
-	self.player1 = object_add(`FpsPlayer`, self.spawnPos, {
+	self.player1 = gge_object_add(`FpsPlayer`, self.spawnPos, {
         rot = self.spawnRot,
         gfxMesh = self.playerGfxMesh,
         colMesh = self.playerColMesh,

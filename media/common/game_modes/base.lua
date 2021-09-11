@@ -49,7 +49,7 @@ function BaseGameMode:loadMap()
 end
 
 function BaseGameMode:loadAtLocation()
-    streamer_centre_full(self.spawnPos)
+    gge_streamer_centre_full(self.spawnPos)
 
     if gge_get_in_queue_size() == 0 then
         -- Everything loaded so don't bother with the loading screen.
@@ -73,7 +73,7 @@ function BaseGameMode:loadAtLocation()
     loading_screen:setProgress(1)
     loading_screen:setStatus('Activating objects')
     loading_screen:pump()
-    streamer_centre_full(self.spawnPos)
+    gge_streamer_centre_full(self.spawnPos)
 
     loading_screen:setStatus('All done')
     loading_screen:pump()

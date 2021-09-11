@@ -80,7 +80,7 @@ class `LampFlickering` (ColClass) {
 }
 
 function reset_street_lamps()
-    foreach(object_all_activated(), function(o)
+    foreach(gge_object_all_activated(), function(o)
         if o.className == `/common/props/street/Lamp` or o.className == `/common/props/street/LampFlickering` then
             local l = o.instance.lights[1];
             light_from_table(o.instance.lights[1], lamp_light)
