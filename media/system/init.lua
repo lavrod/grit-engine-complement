@@ -366,9 +366,13 @@ function debug_mode(map)
     menu_show(nil)
 end
 
+
+
+
 menu_show('main')
 
 gge_safe_include `/user_script.lua`
+
 
 -- Re-enable now we're in the rendering loop.
 gge_core_option("FOREGROUND_WARNINGS", true)
