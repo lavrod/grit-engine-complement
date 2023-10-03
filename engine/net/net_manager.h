@@ -23,7 +23,9 @@ private:
         NetPacket(NetAddress& from, std::string& data_);
     };
 
-    SOCKET netSocket;
+    SOCKET netSocketServer;
+    SOCKET netSocketClient;
+    SOCKET netTcpSocket;
 
     int forcedLatency;
 
@@ -41,6 +43,9 @@ private:
 public:
     NetManager();
     virtual ~NetManager();
+     int process_poll_server(lua_State* L, NetAddress **from, std::string& data);
+     int process_poll_client(lua_State* L, NetAddress **from, std::string& data);
+     int process_poll_remote_tcp_server(lua_State* L, NetAddress **from, std::string& data);
 
     void process(lua_State* L);
     void processPacket(lua_State* L, NetAddress& from, std::string& data);
@@ -51,6 +56,7 @@ public:
     ExternalTable& getCBTable();
 
     bool getLoopbackPacket(NetChannel channel, std::string& packet);
+    void netTcpConnect();
 };
 
 #endif

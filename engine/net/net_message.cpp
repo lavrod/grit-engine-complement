@@ -23,7 +23,10 @@ NetMessage::NetMessage(const char* data, uint32_t length)
     this->maxBit = length * 8;
     this->bufferManaged = true;
 
-    memcpy(buffer, data, length);
+    memcpy(this->buffer, data, length);
+       //        char hex[256];
+          //      sprintf(hex,"%02x%02x%02x%02x%02x%02x",(unsigned char)this->buffer[0],(unsigned char)this->buffer[1],(unsigned char)this->buffer[2],(unsigned char)this->buffer[3],(unsigned char)this->buffer[4],(unsigned char)this->buffer[5]);
+          //CLOG << hex << std::endl;
 }
 
 NetMessage::~NetMessage()
@@ -69,6 +72,16 @@ float NetMessage::readFloat()
     return data;
 }
 
+std::string NetMessage::readBuffer(int length)
+{
+    char str[4097];
+    readBits(length * 8, str);
+
+    str[length] = '\0';
+
+    return std::string(str);
+}
+
 std::string NetMessage::readString()
 {
     short length;
@@ -77,7 +90,7 @@ std::string NetMessage::readString()
     char str[4097];
     readBits(length * 8, str);
 
-    str[sizeof(str) - 1] = '\0';
+    str[length] = '\0';
 
     return std::string(str);
 }

@@ -33,7 +33,8 @@ class ExternalTable;
 enum NetChannel
 {
     NetChan_ClientToServer,
-    NetChan_ServerToClient
+    NetChan_ServerToClient,
+    NetChan_TcpServer
 };
 
 enum NetAddressType
@@ -100,6 +101,7 @@ public:
     float readFloat();
 
     std::string readString();
+    std::string readBuffer(int length);
 
     // delta readers
     int32_t readDeltaInteger(int32_t old);
@@ -135,6 +137,10 @@ void net_shutdown(lua_State *L);
 
 // processes network packets and sends them off to wherever they need to go
 void net_process(lua_State* L);
+
+int net_process_poll_server(lua_State* L, NetAddress **from, std::string& data);
+int net_process_poll_client(lua_State* L, NetAddress **from, std::string& data);
+int net_process_poll_remote_tcp_server(lua_State* L, NetAddress **from, std::string& data);
 
 // sends an out-of-band packet to a specified network address
 void net_send_oob(NetChannel channel, NetAddress& address, const char* format, ...);
