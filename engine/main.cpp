@@ -50,6 +50,7 @@
 #include "audio/audio.h"
 #include "net/net.h"
 #include"navigation/navigation_system.h"
+#include <xinput.h>
 
 CentralisedLog clog;
 bool clicked_close = false;
@@ -132,6 +133,25 @@ int main (int argc, const char **argv)
         #ifdef WIN32
         mouse = new MouseDirectInput8(winid);
         bool use_dinput = getenv("GRIT_DINPUT")!=NULL;
+        DWORD dwResult;
+        for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+        {
+            XINPUT_STATE state;
+            ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+            // Simply get the state of the controller from XInput.
+            dwResult = XInputGetState(i, &state);
+
+            if (dwResult == ERROR_SUCCESS)
+            {
+                CVERB << " Controller is connected..." << std::endl;
+            }
+            else
+            {
+                CVERB << " Controller is not connected..." << std::endl;
+            }
+        }
+
         keyboard = use_dinput ? (Keyboard *)new KeyboardDirectInput8(winid)
                       : (Keyboard *)new KeyboardWinAPI(winid);
         joystick = new JoystickDirectInput8(winid);

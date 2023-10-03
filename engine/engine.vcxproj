@@ -69,6 +69,7 @@
     <ClCompile />
     <Link>
       <AdditionalDependencies>$(ProjectDir)\win32\Resources.res;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>xinput.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
