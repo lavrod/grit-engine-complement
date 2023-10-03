@@ -1,7 +1,7 @@
-gfx_colour_grade(`neutral.lut.png`)
-gfx_fade_dither_map `stipple.png`
+gge_gfx_colour_grade(`neutral.lut.png`)
+gge_gfx_fade_dither_map `stipple.png`
 
-gfx_register_shader(`Ball`, {
+gge_gfx_register_shader(`Ball`, {
     tex = {
         uniformKind = "TEXTURE_CUBE",
     },
@@ -21,23 +21,23 @@ gfx_register_shader(`Ball`, {
     ]],
 })
 
-register_material(`Ball`, {
+gge_register_material(`Ball`, {
     shader = `Ball`,
     tex = `cube.dds`,
     additionalLighting = true,
 })
 
-b1 = gfx_body_make(`Ball.mesh`)
+b1 = gge_gfx_body_make(`Ball.mesh`)
 b1.localPosition = vec(-2, 5, 0)
 b1.localScale = vec(10, 10, 10)
 
-b2 = gfx_body_make(`Ball.mesh`)
+b2 = gge_gfx_body_make(`Ball.mesh`)
 b2.localPosition = vec(0, 5, 0)
 b2.localScale = vec(10, 10, 10)
 
-b3 = gfx_body_make(`Ball.mesh`)
+b3 = gge_gfx_body_make(`Ball.mesh`)
 b3.localPosition = vec(2, 5, 0)
 b3.localScale = vec(10, 10, 10)
 
-gfx_render(0.1, vec(0, 0, 0), quat(1, 0, 0, 0))
-gfx_screenshot('output-cubemap.png')
+gge_gfx_render(0.1, vec(0, 0, 0), quat(1, 0, 0, 0))
+gge_gfx_screenshot('output-cubemap.png')

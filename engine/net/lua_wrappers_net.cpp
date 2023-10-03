@@ -636,17 +636,17 @@ TRY_END
 }
 
 static const luaL_reg global[] = {
-    {"net_register_callbacks", global_net_register_callbacks},
-    {"net_process", global_net_process},
-    {"net_process_poll_server", global_net_process_poll_server},
-    {"net_process_poll_client", global_net_process_poll_client},
-    {"net_make_message", global_net_make_message},
-    {"net_get_loopback_packet", global_net_get_loopback_packet},
-    {"net_send_packet", global_net_send_packet},
-    {"net_send_packet_sequenced", global_net_send_packet_sequenced},
-    {"net_resolve_address", global_net_resolve_address},
-    {"net_tcp_connect", global_net_tcp_connect},
-    {"net_process_poll_remote_tcp_server", global_net_process_poll_remote_tcp_server},
+    {"gge_net_register_callbacks", global_net_register_callbacks},
+    {"gge_net_process", global_net_process},
+    {"gge_net_process_poll_server", global_net_process_poll_server},
+    {"gge_net_process_poll_client", global_net_process_poll_client},
+    {"gge_net_make_message", global_net_make_message},
+    {"gge_net_get_loopback_packet", global_net_get_loopback_packet},
+    {"gge_net_send_packet", global_net_send_packet},
+    {"gge_net_send_packet_sequenced", global_net_send_packet_sequenced},
+    {"gge_net_resolve_address", global_net_resolve_address},
+    {"gge_net_tcp_connect", global_net_tcp_connect},
+    {"gge_net_process_poll_remote_tcp_server", global_net_process_poll_remote_tcp_server},
     {NULL,NULL}
 };
 

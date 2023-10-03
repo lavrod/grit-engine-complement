@@ -1,11 +1,11 @@
-gfx_colour_grade(`neutral.lut.png`)
-gfx_option('POST_PROCESSING', false)
+gge_gfx_colour_grade(`neutral.lut.png`)
+gge_gfx_option('POST_PROCESSING', false)
 
-gfx_hud_class_add(`Rect`, {
+gge_gfx_hud_class_add(`Rect`, {
 })
 
 function rect(coord, fmt)
-    obj = gfx_hud_object_add(`Rect`)
+    obj = gge_gfx_hud_object_add(`Rect`)
     obj.position = vec(128, 128) * (coord + vec(0.5, 0.5))
     obj.texture = `all_dds.` .. fmt .. ".dds"
     obj.size = vec(128, 128)
@@ -30,5 +30,5 @@ rect(vec(3, 3), "BC3")
 --rect(vec(4, 0), "BC4")
 --rect(vec(4, 1), "BC5")
 
-gfx_render(0.1, vec(0, 0, 0), quat(1, 0, 0, 0))
-gfx_screenshot('output-all-dds.png')
+gge_gfx_render(0.1, vec(0, 0, 0), quat(1, 0, 0, 0))
+gge_gfx_screenshot('output-all-dds.png')
